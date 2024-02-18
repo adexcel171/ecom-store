@@ -1,0 +1,32 @@
+.annoucement{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    
+    background-color:black;
+    color: white;
+    height: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 100000000;
+    margin-top: 32px;
+    
+    }
+    .annocement-text{
+        display: flex;
+        align-items: center;
+        margin-right: 2rem;
+    }
+    .text1 span {
+        margin-right: 2rem;
+        
+    }
+    .text2 span:not(:last-child){
+        margin-right: 2rem;
+    }
+    .text2 span:last-child{
+        margin-right: 1rem;
+    }
+    
