@@ -46,7 +46,7 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-gradient-to-r from-black to-blue-800
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-black bg-gradient-to-r from-white to-gray
       w-full h-[50px] fixed top-0`}
       
     >

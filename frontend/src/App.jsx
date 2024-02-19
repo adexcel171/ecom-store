@@ -7,8 +7,8 @@ import Announcement from "./components/announce/Announcement";
 const App = () => {
   return (
     <>
-      <ToastContainer />
       <Navigation />
+      <ToastContainer />
 
       <main className="py-3">
       <Announcement/>
