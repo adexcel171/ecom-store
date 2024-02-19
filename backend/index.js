@@ -18,6 +18,14 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
+app.use(cors({
+  origin: 'https://excel-ecom.onrender.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // enable cookies
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization'
+}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
