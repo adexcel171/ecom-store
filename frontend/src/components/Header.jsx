@@ -16,9 +16,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-center p-4">
+      <div className="flex flex-col md:flex-row justify-center p-3">
   <div className="w-full md:w lg:w-full md:w-full sm:w-full max-w-screen-md">
-    <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-1 gap-1">
     <div className="w-full">
     <ProductCarousel />
   </div>
