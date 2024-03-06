@@ -46,7 +46,7 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-black bg-gradient-to-r from-white to-gray
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-black bg-white
       w-full h-[50px] fixed top-0`}
       
     >
@@ -198,7 +198,7 @@ const Navigation = () => {
                 to="/login"
                 className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
               >
-                <AiOutlineLogin className="mr-2 mt-[4px]" size={26} />
+                <AiOutlineLogin className="mr-2 mt-5" size={30} />
                 <span className="hidden nav-item-name">LOGIN</span>
               </Link>
             </li>
@@ -207,7 +207,7 @@ const Navigation = () => {
                 to="/register"
                 className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
               >
-                <AiOutlineUserAdd size={26} />
+                <AiOutlineUserAdd size={30} />
                 <span className="hidden nav-item-name">REGISTER</span>
               </Link>
             </li>
