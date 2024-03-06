@@ -27,7 +27,7 @@ const ProductCarousel = () => {
   };
 
   return (
-    <div className="mb-4 lg:block xl:block md:block sm:block mx-5 p-4">
+    <div className="mb-4 lg:w-full xl:w-full md:w-full sm:flex flex-col mx-4 w-[100%] overflow-x-hidden p-4">
   {isLoading ? null : error ? (
     <Message variant="danger">
       {error?.data?.message || error.error}
@@ -48,11 +48,11 @@ const ProductCarousel = () => {
           quantity,
           countInStock,
         }) => (
-          <div key={_id} className="p-4">
+          <div key={_id} className="sm: flex flex-col justify-center mx-auto">
             <img
               src={image}
               alt={name}
-              className="w-full rounded-lg object-cover h-[30rem]"
+              className="w-full rounded-lg object-cover h-[25rem]"
             />
 
             <div className="mt-4 flex flex-col lg:flex-row justify-between">
