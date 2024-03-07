@@ -21,7 +21,7 @@ const ProductCarousel = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // arrows: true,
+    arrows: false,
     autoplay: true,
     autoplaySpeed: 2000,
   };
@@ -33,7 +33,7 @@ const ProductCarousel = () => {
       {error?.data?.message || error.error}
     </Message>
   ) : (
-    <Slider {...settings} className="xl:w-[99%] lg:w-[99%] md:w-[99%] sm:w-[95%] sm:mx-2">
+    <Slider {...settings} className="xl:w-[99%] lg:w-[99%] md:w-[99%] sm:w-[95%] sm:mx">
       {products.map(
         ({
           image,
