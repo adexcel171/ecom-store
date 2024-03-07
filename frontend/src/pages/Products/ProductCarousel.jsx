@@ -48,7 +48,7 @@ const ProductCarousel = () => {
           quantity,
           countInStock,
         }) => (
-          <div key={_id} className="sm: flex flex-col justify-center mx-auto">
+          <div key={_id} className="sm: flex flex-col justify-center px-2">
             <img
               src={image}
               alt={name}
