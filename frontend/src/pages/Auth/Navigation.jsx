@@ -56,7 +56,7 @@ const Navigation = () => {
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
           <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">HOME</span>{" "}
+          <span className="nav-item-name mt-[]">HOME</span>{" "}
         </Link>
 
         <Link
@@ -64,13 +64,13 @@ const Navigation = () => {
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
           <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">SHOP</span>{" "}
+          <span className="nav-item-name mt-[]">SHOP</span>{" "}
         </Link>
 
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
             <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={26} />
-            <span className="hidden nav-item-name mt-[3rem]">Cart</span>{" "}
+            <span className="nav-item-name mt-[]">Cart</span>{" "}
           </div>
 
           <div className="absolute top-0">

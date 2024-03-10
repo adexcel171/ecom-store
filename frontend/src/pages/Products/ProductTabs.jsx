@@ -28,8 +28,8 @@ const ProductTabs = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <section className="mr-[5rem]">
+    <div className="flex flex-col md:flex-row px-2">
+      <section className="mx-[5rem]">
         <div
           className={`flex-1 p-4 cursor-pointer text-lg ${
             activeTab === 1 ? "font-bold" : ""
@@ -59,7 +59,7 @@ const ProductTabs = ({
       {/* Second Part */}
       <section>
         {activeTab === 1 && (
-          <div className="mt-4">
+          <div className="mt-4 mx-2">
             {userInfo ? (
               <form onSubmit={submitHandler}>
                 <div className="my-2">
@@ -72,7 +72,7 @@ const ProductTabs = ({
                     required
                     value={rating}
                     onChange={(e) => setRating(e.target.value)}
-                    className="p-2 border rounded-lg xl:w-[40rem] text-black"
+                    className="p-2 border rounded-lg xl:w-[40rem] text-black sm:w-[25rem]"
                   >
                     <option value="">Select</option>
                     <option value="1">Inferior</option>
@@ -143,7 +143,7 @@ const ProductTabs = ({
 
       <section>
         {activeTab === 3 && (
-          <section className="ml-[4rem] flex flex-wrap">
+          <section className="ml-[4rem] m-1 flex flex-wrap">
             {!data ? (
               <Loader />
             ) : (
