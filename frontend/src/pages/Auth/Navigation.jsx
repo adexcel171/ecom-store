@@ -46,31 +46,36 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-black bg-gradient-to-r from-white to-gray
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-black
       w-full h-[50px] fixed top-0`}
       
     >
+      <div>
+        <img src="" alt="" />
+      </div>
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link
           to="/"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={26} />
-          <span className="nav-item-name mt-[]">HOME</span>{" "}
+          <span className="nav-item-name mt-[]">Home</span>
+
+          {/* <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} /> */}
         </Link>
 
         <Link
           to="/shop"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={26} />
-          <span className="nav-item-name mt-[]">SHOP</span>{" "}
+          <span className="nav-item-name text-white">Shop</span>
+
+          {/* <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={20} /> */}
         </Link>
 
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={26} />
-            <span className="nav-item-name mt-[]">Cart</span>{" "}
+            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={20} />
+            {/* <span className="nav-item-name mt-[]">Cart</span>{" "} */}
           </div>
 
           <div className="absolute top-0">
@@ -87,15 +92,15 @@ const Navigation = () => {
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
             <FaHeart className="mb-[3px] mt-[10px] mr-2" size={20} />
-            <span className="hidden nav-item-name mt-[3rem]">
+            {/* <span className="hidden nav-item-name mt-[3rem]">
               Favorites
-            </span>{" "}
+            </span>{" "} */}
             <FavoritesCount />
           </div>
         </Link>
       </div>
 
-      <div className="relative">
+      <div className="">
         <button
           onClick={toggleDropdown}
           className="flex items-center text-gray-800 focus:outline-none"

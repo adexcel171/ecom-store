@@ -91,7 +91,7 @@ const Product = () => {
               <HeartIcon product={product} />
             </div>
             <div className="flex flex-col justify-between">
-              <h2 className="text-2xl font-semibold">{product.name}</h2>
+              <h2 className="text-2xlb font-semibold">{product.name}</h2>
 
               <p className="my-4 xl:w-[35rem] lg:w-[35] md:w-[30rem] text-[#B0B0B0]">
                 {product.description}

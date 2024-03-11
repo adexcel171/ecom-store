@@ -27,7 +27,7 @@ const ProductCard = ({ p }) => {
             className="cursor-pointer w-full"
             src={p.image}
             alt={p.name}
-            style={{ height: "170px", objectFit: "cover" }}
+            style={{ width: "300px", height: "300px", objectFit: "cover" }}
           />
         </Link>
         <HeartIcon product={p} />
@@ -35,9 +35,9 @@ const ProductCard = ({ p }) => {
 
       <div className="p-5">
         <div className="flex justify-between">
-          <h5 className="mb-2 text-xl text-whiet dark:text-white">{p?.name}</h5>
+          <h5 className="mb-2 text-xl text-white">{p?.name}</h5>
 
-          <p className="text-black font-semibold text-pink-500">
+          <p className="font-semibold text-pink-500">
             {p?.price?.toLocaleString("en-US", {
               style: "currency",
               currency: "USD",

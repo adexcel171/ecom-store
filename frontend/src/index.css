@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-  background: linear-gradient(to right, #1d84b5, #825ebc);
-  color: #fff;
+  background-color: white;
+  color:black;
 }
 
 input,
