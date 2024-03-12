@@ -46,7 +46,7 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-pink-800
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-gray-600
       w-full h-[50px] fixed top-0`}
       
     >
@@ -111,12 +111,12 @@ const Navigation = () => {
           {userInfo && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`h-4 mt-3 w-4 ml-1 ${
+              className={`h-4 mt-1 mb-3 w-4 ml-1 ${
                 dropdownOpen ? "transform rotate-180" : ""
               }`}
               fill="none"
               viewBox="0 0 24 24"
-              stroke="white"
+              stroke="pink"
             >
               <path
                 strokeLinecap="round"
@@ -130,7 +130,7 @@ const Navigation = () => {
 
         {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 top-6 mt-2  space-y-2 bg-white text-gray-600 ${
+            className={`absolute right-0 top-6 mt-3  space-y-2 bg-white text-gray-600 ${
               !userInfo.isAdmin ? "-top-20" : "buttom-80"
             } `}
           >
@@ -139,7 +139,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 pt-3 py-2 hover:bg-gray-100"
                   >
                     Dashboard
                   </Link>
@@ -180,14 +180,14 @@ const Navigation = () => {
             )}
 
             <li>
-              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+              <Link to="/profile" className="block px-4 py-4 hover:bg-gray-100">
                 Profile
               </Link>
             </li>
             <li>
               <button
                 onClick={logoutHandler}
-                className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                className="block w-full px-4 py-4 text-left hover:bg-gray-100"
               >
                 Logout
               </button>
@@ -195,23 +195,23 @@ const Navigation = () => {
           </ul>
         )}
         {!userInfo && (
-          <ul className="flex justify-between items-center px-2">
+          <ul className="flex justify-between items-center px-5">
             <li>
               <Link
                 to="/login"
-                className="flex flex-row align-center px-3 justify-between transition-transform transform hover:translate-x-1"
+                className="flex flex-row align-center px-3 mb-[3px] justify-between transition-transform transform hover:translate-x-1"
               >
                 <AiOutlineLogin className="mr-2" size={18} />
-                <span className="text-">LOGIN</span>
+                {/* <span className="text-">LOGIN</span> */}
               </Link>
             </li>
             <li>
               <Link
                 to="/register"
-                className="flex items-center  transition-transform transform hover:translate-x-2"
+                className="flex items-center mb-[3px]  transition-transform transform hover:translate-x-2"
               >
-                <AiOutlineUserAdd size={18} />
-                <span className="text-red">REGISTER</span>
+                <AiOutlineUserAdd className=" mr-2" size={18}  />
+                {/* <span className="text-red">REGISTER</span> */}
               </Link>
             </li>
           </ul>
