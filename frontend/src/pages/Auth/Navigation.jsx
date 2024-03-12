@@ -46,35 +46,33 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-black
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-pink-800
       w-full h-[50px] fixed top-0`}
       
     >
-      <div>
-        <img src="" alt="" />
-      </div>
+      
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link
           to="/"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <span className="nav-item-name mt-[]">Home</span>
+          {/* <span className="nav-item-name mt-[]">Home</span> */}
 
-          {/* <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} /> */}
+          <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={18} />
         </Link>
 
         <Link
           to="/shop"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <span className="nav-item-name text-white">Shop</span>
+          {/* <span className="nav-item-name text-white">Shop</span> */}
 
-          {/* <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={20} /> */}
+          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={18} />
         </Link>
 
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={20} />
+            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={18} />
             {/* <span className="nav-item-name mt-[]">Cart</span>{" "} */}
           </div>
 
@@ -91,7 +89,7 @@ const Navigation = () => {
 
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
-            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={20} />
+            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={18} />
             {/* <span className="hidden nav-item-name mt-[3rem]">
               Favorites
             </span>{" "} */}
@@ -103,10 +101,10 @@ const Navigation = () => {
       <div className="">
         <button
           onClick={toggleDropdown}
-          className="flex items-center text-gray-800 focus:outline-none"
+          className="flex items-center text-gray-800 mb-[3px] focus:outline-none"
         >
           {userInfo ? (
-            <span className="text-white">{userInfo.username}</span>
+            <span className="text-white mb-[6px] mr-2">{userInfo.username}</span>
           ) : (
             <></>
           )}
@@ -197,23 +195,23 @@ const Navigation = () => {
           </ul>
         )}
         {!userInfo && (
-          <ul>
+          <ul className="flex justify-between items-center px-2">
             <li>
               <Link
                 to="/login"
-                className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
+                className="flex flex-row align-center px-3 justify-between transition-transform transform hover:translate-x-1"
               >
-                <AiOutlineLogin className="mr-2 mt-5" size={30} />
-                <span className="hidden nav-item-name">LOGIN</span>
+                <AiOutlineLogin className="mr-2" size={18} />
+                <span className="text-">LOGIN</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/register"
-                className="flex items-center mt-5 transition-transform transform hover:translate-x-2"
+                className="flex items-center  transition-transform transform hover:translate-x-2"
               >
-                <AiOutlineUserAdd size={30} />
-                <span className="hidden nav-item-name">REGISTER</span>
+                <AiOutlineUserAdd size={18} />
+                <span className="text-red">REGISTER</span>
               </Link>
             </li>
           </ul>
