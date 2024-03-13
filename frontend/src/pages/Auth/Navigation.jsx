@@ -57,12 +57,16 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-2 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-800
       w-full h-[50px] fixed top-0`}
       
     >
       <div className="flex items-center transition-transform transform hover:translate-x-2">
-        <Link to='/' className="font-semibold cursor-pointer">ShOp- X</Link>
+        <Link to='/'
+         className="font-semibold cursor-pointer">
+        < AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
+        
+        </Link>
       </div>
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link
@@ -71,12 +75,12 @@ const Navigation = () => {
         >
           {/* <span className="nav-item-name text-white">Shop</span> */}
 
-          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={18} />
+          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={20} />
         </Link>
 
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={18} />
+            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={20} />
             {/* <span className="nav-item-name mt-[]">Cart</span>{" "} */}
           </div>
 
@@ -93,7 +97,7 @@ const Navigation = () => {
 
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
-            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={18} />
+            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={20} />
             {/* <span className="hidden nav-item-name mt-[3rem]">
               Favorites
             </span>{" "} */}
