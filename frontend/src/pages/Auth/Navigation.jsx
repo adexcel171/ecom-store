@@ -71,12 +71,12 @@ const Navigation = () => {
         >
           {/* <span className="nav-item-name text-white">Shop</span> */}
 
-          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={18} />
+          <AiOutlineShopping className="mr-2 mb-[3px]" size={18} />
         </Link>
 
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={18} />
+            <AiOutlineShoppingCart className="mb-[3px]  mr-2" size={18} />
             {/* <span className="nav-item-name mt-[]">Cart</span>{" "} */}
           </div>
 
@@ -93,7 +93,7 @@ const Navigation = () => {
 
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
-            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={18} />
+            <FaHeart className="mb-[3px] mr-2" size={18} />
             {/* <span className="hidden nav-item-name mt-[3rem]">
               Favorites
             </span>{" "} */}
