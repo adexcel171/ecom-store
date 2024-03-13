@@ -61,14 +61,13 @@ const Navigation = () => {
       w-full h-[50px] fixed top-0`}
       
     >
-      <div className="flex items-center transition-transform transform hover:translate-x-2">
+     
+      <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link to='/'
-         className="font-semibold cursor-pointer">
+         className="flex items-center transition-transform transform hover:translate-x-2">
         < AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
         
         </Link>
-      </div>
-      <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link
           to="/shop"
           className="flex items-center transition-transform transform hover:translate-x-2"
