@@ -54,15 +54,15 @@ const Navigation = () => {
   }, []);
   return (
     <div
-      style={{ zIndex: 9999 }}
-      className={`${
-        showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
-      w-full h-[50px] fixed top-0`}
+    style={{ zIndex: 9999 }}
+    className={`${
+      showSidebar ? "hidden" : "flex"
+    } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
+    w-full h-[50px] fixed top-0`}
       
     >
       <div className="flex items-center transition-transform transform hover:translate-x-2">
-        <Link to='/' className="font-semibold cursor-pointer">ShOp- X</Link>
+        <Link to='/' className="font-semibold cursor-pointer">shop- X</Link>
       </div>
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link
