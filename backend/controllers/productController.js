@@ -82,8 +82,8 @@ const fetchProducts = asyncHandler(async (req, res) => {
     const keyword = req.query.keyword
       ? {
           name: {
-            &#x20a6;regex: req.query.keyword,
-            &#x20a6;options: "i",
+            $regex: req.query.keyword,
+            $options: "i",
           },
         }
       : {};
@@ -200,7 +200,7 @@ const filterProducts = asyncHandler(async (req, res) => {
 
     let args = {};
     if (checked.length > 0) args.category = checked;
-    if (radio.length) args.price = { &#x20a6;gte: radio[0], &#x20a6;lte: radio[1] };
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
 
     const products = await Product.find(args);
     res.json(products);

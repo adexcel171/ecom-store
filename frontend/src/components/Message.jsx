@@ -10,7 +10,7 @@ const Message = ({ variant, children }) => {
     }
   };
 
-  return <div className={`p-4 mt-8 rounded &#x20a6;{getVariantClass()}`}>{children}</div>;
+  return <div className={`p-4 mt-8 rounded ${getVariantClass()}`}>{children}</div>;
 };
 
 export default Message;

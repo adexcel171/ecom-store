@@ -45,4 +45,4 @@ app.get("/api/config/paypal", (req, res) => {
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
-app.listen(port, () => console.log(`Server running on port: &#x20a6;{port}`));
+app.listen(port, () => console.log(`Server running on port: ${port}`));

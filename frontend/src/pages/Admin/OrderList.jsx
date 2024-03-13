@@ -50,7 +50,7 @@ const OrderList = () => {
                   {order.createdAt ? order.createdAt.substring(0, 10) : "N/A"}
                 </td>
 
-                <td>&#x20a6; {order.totalPrice}</td>
+                <td>$ {order.totalPrice}</td>
 
                 <td className="py-2">
                   {order.isPaid ? (
@@ -77,7 +77,7 @@ const OrderList = () => {
                 </td>
 
                 <td>
-                  <Link to={`/order/&#x20a6;{order._id}`}>
+                  <Link to={`/order/${order._id}`}>
                     <button>More</button>
                   </Link>
                 </td>

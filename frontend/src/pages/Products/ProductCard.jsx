@@ -19,7 +19,7 @@ const ProductCard = ({ p }) => {
   return (
     <div className="max-w-sm relative bg-[#1A1A1A] rounded-lg shaodw dark:bg-gray-800 dark:border-gray-700">
       <section className="relative">
-        <Link to={`/product/&#x20a6;{p._id}`}>
+        <Link to={`/product/${p._id}`}>
           <span className="absolute bottom-3 right-3 bg-teal-100 text-teal-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-teal-900 dark:text-teal-300">
             {p?.brand}
           </span>
@@ -51,7 +51,7 @@ const ProductCard = ({ p }) => {
 
         <section className="flex justify-between items-center">
           <Link
-            to={`/product/&#x20a6;{p._id}`}
+            to={`/product/${p._id}`}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
           >
             Read More

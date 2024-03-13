@@ -5,7 +5,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCategory: builder.mutation({
       query: (newCategory) => ({
-        url: `&#x20a6;{CATEGORY_URL}`,
+        url: `${CATEGORY_URL}`,
         method: "POST",
         body: newCategory,
       }),
@@ -13,7 +13,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
 
     updateCategory: builder.mutation({
       query: ({ categoryId, updatedCategory }) => ({
-        url: `&#x20a6;{CATEGORY_URL}/&#x20a6;{categoryId}`,
+        url: `${CATEGORY_URL}/${categoryId}`,
         method: "PUT",
         body: updatedCategory,
       }),
@@ -21,13 +21,13 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
 
     deleteCategory: builder.mutation({
       query: (categoryId) => ({
-        url: `&#x20a6;{CATEGORY_URL}/&#x20a6;{categoryId}`,
+        url: `${CATEGORY_URL}/${categoryId}`,
         method: "DELETE",
       }),
     }),
 
     fetchCategories: builder.query({
-      query: () => `&#x20a6;{CATEGORY_URL}/categories`,
+      query: () => `${CATEGORY_URL}/categories`,
     }),
   }),
 });

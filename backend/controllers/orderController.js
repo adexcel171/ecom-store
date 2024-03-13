@@ -36,7 +36,7 @@ const createOrder = async (req, res) => {
     }
 
     const itemsFromDB = await Product.find({
-      _id: { &#x20a6;in: orderItems.map((x) => x._id) },
+      _id: { $in: orderItems.map((x) => x._id) },
     });
 
     const dbOrderItems = orderItems.map((itemFromClient) => {
@@ -46,7 +46,7 @@ const createOrder = async (req, res) => {
 
       if (!matchingItemFromDB) {
         res.status(404);
-        throw new Error(`Product not found: &#x20a6;{itemFromClient._id}`);
+        throw new Error(`Product not found: ${itemFromClient._id}`);
       }
 
       return {
@@ -119,16 +119,16 @@ const calcualteTotalSalesByDate = async (req, res) => {
   try {
     const salesByDate = await Order.aggregate([
       {
-        &#x20a6;match: {
+        $match: {
           isPaid: true,
         },
       },
       {
-        &#x20a6;group: {
+        $group: {
           _id: {
-            &#x20a6;dateToString: { format: "%Y-%m-%d", date: "&#x20a6;paidAt" },
+            $dateToString: { format: "%Y-%m-%d", date: "$paidAt" },
           },
-          totalSales: { &#x20a6;sum: "&#x20a6;totalPrice" },
+          totalSales: { $sum: "$totalPrice" },
         },
       },
     ]);

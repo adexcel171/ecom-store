@@ -54,15 +54,15 @@ const Navigation = () => {
   }, []);
   return (
     <div
-    style={{ zIndex: 9999 }}
-    className={`&#x20a6;{
-      showSidebar ? "hidden" : "flex"
-    } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
-    w-full h-[50px] fixed top-0`}
+      style={{ zIndex: 9999 }}
+      className={`${
+        showSidebar ? "hidden" : "flex"
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
+      w-full h-[50px] fixed top-0`}
       
     >
       <div className="flex items-center transition-transform transform hover:translate-x-2">
-        <Link to='/' className="font-semibold cursor-pointer">shop- X</Link>
+        <Link to='/' className="font-semibold cursor-pointer">ShOp- X</Link>
       </div>
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link
@@ -71,12 +71,12 @@ const Navigation = () => {
         >
           {/* <span className="nav-item-name text-white">Shop</span> */}
 
-          <AiOutlineShopping className="mr-2 mb-[3px]" size={18} />
+          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={18} />
         </Link>
 
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <AiOutlineShoppingCart className="mb-[3px]  mr-2" size={18} />
+            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={18} />
             {/* <span className="nav-item-name mt-[]">Cart</span>{" "} */}
           </div>
 
@@ -93,7 +93,7 @@ const Navigation = () => {
 
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
-            <FaHeart className="mb-[3px] mr-2" size={18} />
+            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={18} />
             {/* <span className="hidden nav-item-name mt-[3rem]">
               Favorites
             </span>{" "} */}
@@ -115,7 +115,7 @@ const Navigation = () => {
           {userInfo && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`h-4 mt-1 mb-3 w-4 ml-1 &#x20a6;{
+              className={`h-4 mt-1 mb-3 w-4 ml-1 ${
                 dropdownOpen ? "transform rotate-180" : ""
               }`}
               fill="none"
@@ -134,7 +134,7 @@ const Navigation = () => {
 
         {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 top-6 mt-3  space-y-2 bg-white text-gray-600 &#x20a6;{
+            className={`absolute right-0 top-6 mt-3  space-y-2 bg-white text-gray-600 ${
               !userInfo.isAdmin ? "-top-20" : "buttom-80"
             } `}
           >

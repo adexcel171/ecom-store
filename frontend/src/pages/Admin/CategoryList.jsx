@@ -36,7 +36,7 @@ const CategoryList = () => {
         toast.error(result.error);
       } else {
         setName("");
-        toast.success(`&#x20a6;{result.name} is created.`);
+        toast.success(`${result.name} is created.`);
       }
     } catch (error) {
       console.error(error);
@@ -63,7 +63,7 @@ const CategoryList = () => {
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success(`&#x20a6;{result.name} is updated`);
+        toast.success(`${result.name} is updated`);
         setSelectedCategory(null);
         setUpdatingName("");
         setModalVisible(false);
@@ -80,7 +80,7 @@ const CategoryList = () => {
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success(`&#x20a6;{result.name} is deleted.`);
+        toast.success(`${result.name} is deleted.`);
         setSelectedCategory(null);
         setModalVisible(false);
       }

@@ -99,7 +99,7 @@ const ProductDetails = () => {
       {product.description}
     </p>
 
-    <p className="text-5xl my-4 font-extrabold">&#x20a6; {product.price}</p>
+    <p className="text-5xl my-4 font-extrabold">$ {product.price}</p>
 
     <div className="flex items-center justify-between w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
       <div className="one">
@@ -130,7 +130,7 @@ const ProductDetails = () => {
     </div>
 
     <div className="flex justify-between flex-wrap">
-      <Ratings value={product.rating} text={`&#x20a6;{product.numReviews} reviews`} />
+      <Ratings value={product.rating} text={`${product.numReviews} reviews`} />
 
       {product.countInStock > 0 && (
         <div>

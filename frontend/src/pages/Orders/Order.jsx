@@ -122,13 +122,13 @@ const Order = () => {
                     </td>
   
                     <td className="p-2">
-                      <Link to={`/product/&#x20a6;{item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </td>
   
                     <td className="p-2 text-center">{item.qty}</td>
                     <td className="p-2 text-center">{item.price}</td>
                     <td className="p-2 text-center">
-                      &#x20a6; {(item.qty * item.price).toFixed(2)}
+                      $ {(item.qty * item.price).toFixed(2)}
                     </td>
                   </tr>
                 ))}
@@ -174,19 +174,19 @@ const Order = () => {
       <h2 className="text-xl mx-2 font-bold mb-2 mt-3 md:mt-0">Order Summary</h2>
       <div className="flex flex-col md:flex-row mx-2 justify-between mb-2">
         <span>Items</span>
-        <span>&#x20a6; {order.itemsPrice}</span>
+        <span>$ {order.itemsPrice}</span>
       </div>
       <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
         <span>Shipping</span>
-        <span>&#x20a6; {order.shippingPrice}</span>
+        <span>$ {order.shippingPrice}</span>
       </div>
       <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
         <span>Tax</span>
-        <span>&#x20a6; {order.taxPrice}</span>
+        <span>$ {order.taxPrice}</span>
       </div>
       <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
         <span>Total</span>
-        <span>&#x20a6; {order.totalPrice}</span>
+        <span>$ {order.totalPrice}</span>
       </div>
   
       {!order.isPaid && (

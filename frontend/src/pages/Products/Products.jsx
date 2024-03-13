@@ -96,7 +96,7 @@ const Product = () => {
               <p className="my-4 xl:w-[35rem] lg:w-[35] md:w-[30rem] text-[#B0B0B0]">
                 {product.description}
               </p>
-              <p className="text-5xl my-4 font-extrabold">&#x20a6;{product.price}</p>
+              <p className="text-5xl my-4 font-extrabold">${product.price}</p>
               {/* --------------------------------------------------- */}
 
               <div className="flex items-center justify-between w-[20rem]">
@@ -133,7 +133,7 @@ const Product = () => {
               <div className="flex justify-between flex-wrap">
                 <Rating
                   value={product.rating}
-                  text={`&#x20a6;{product.numReviews} reviews`}
+                  text={`${product.numReviews} reviews`}
                 />
 
                 {product.countInStock > 0 && (
