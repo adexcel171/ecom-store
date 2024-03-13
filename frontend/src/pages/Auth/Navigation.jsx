@@ -55,7 +55,7 @@ const Navigation = () => {
   return (
     <div
     style={{ zIndex: 9999 }}
-    className={`${
+    className={`&#x20a6;{
       showSidebar ? "hidden" : "flex"
     } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
     w-full h-[50px] fixed top-0`}
@@ -115,7 +115,7 @@ const Navigation = () => {
           {userInfo && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`h-4 mt-1 mb-3 w-4 ml-1 ${
+              className={`h-4 mt-1 mb-3 w-4 ml-1 &#x20a6;{
                 dropdownOpen ? "transform rotate-180" : ""
               }`}
               fill="none"
@@ -134,7 +134,7 @@ const Navigation = () => {
 
         {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 top-6 mt-3  space-y-2 bg-white text-gray-600 ${
+            className={`absolute right-0 top-6 mt-3  space-y-2 bg-white text-gray-600 &#x20a6;{
               !userInfo.isAdmin ? "-top-20" : "buttom-80"
             } `}
           >

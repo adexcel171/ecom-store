@@ -130,7 +130,7 @@ const UserList = () => {
                   </div>
                 ) : (
                   <div className="flex items-center">
-                    <a href={`mailto:${user.email}`}>{user.email}</a>{" "}
+                    <a href={`mailto:&#x20a6;{user.email}`}>{user.email}</a>{" "}
                     <button
                       onClick={() =>
                         toggleEdit(user._id, user.name, user.email)

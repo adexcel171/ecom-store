@@ -5,27 +5,27 @@ export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}/auth`,
+        url: `&#x20a6;{USERS_URL}/auth`,
         method: "POST",
         body: data,
       }),
     }),
     register: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}`,
+        url: `&#x20a6;{USERS_URL}`,
         method: "POST",
         body: data,
       }),
     }),
     logout: builder.mutation({
       query: () => ({
-        url: `${USERS_URL}/logout`,
+        url: `&#x20a6;{USERS_URL}/logout`,
         method: "POST",
       }),
     }),
     profile: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}/profile`,
+        url: `&#x20a6;{USERS_URL}/profile`,
         method: "PUT",
         body: data,
       }),
@@ -39,19 +39,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
     deleteUser: builder.mutation({
       query: (userId) => ({
-        url: `${USERS_URL}/${userId}`,
+        url: `&#x20a6;{USERS_URL}/&#x20a6;{userId}`,
         method: "DELETE",
       }),
     }),
     getUserDetails: builder.query({
       query: (id) => ({
-        url: `${USERS_URL}/${id}`,
+        url: `&#x20a6;{USERS_URL}/&#x20a6;{id}`,
       }),
       keepUnusedDataFor: 5,
     }),
     updateUser: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}/${data.userId}`,
+        url: `&#x20a6;{USERS_URL}/&#x20a6;{data.userId}`,
         method: "PUT",
         body: data,
       }),

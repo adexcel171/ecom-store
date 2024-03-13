@@ -35,7 +35,7 @@ const PlaceOrder = () => {
         totalPrice: cart.totalPrice,
       }).unwrap();
       dispatch(clearCartItems());
-      navigate(`/order/${res._id}`);
+      navigate(`/order/&#x20a6;{res._id}`);
     } catch (error) {
       toast.error(error);
     }
@@ -73,11 +73,11 @@ const PlaceOrder = () => {
               </td>
 
               <td className="p-2">
-                <Link to={`/product/${item.product}`}>{item.name}</Link>
+                <Link to={`/product/&#x20a6;{item.product}`}>{item.name}</Link>
               </td>
               <td className="p-2">{item.qty}</td>
               <td className="p-2">{item.price.toFixed(2)}</td>
-              <td className="p-2">${(item.qty * item.price).toFixed(2)}</td>
+              <td className="p-2">&#x20a6;{(item.qty * item.price).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
@@ -90,16 +90,16 @@ const PlaceOrder = () => {
     <div className="flex flex-col md:flex-row justify-between p-4 bg-[#eceaea]">
       <ul className="text-lg mb-4 md:mb-0 md:mr-8">
         <li>
-          <span className="font-semibold mb-3">Items:</span> ${cart.itemsPrice}
+          <span className="font-semibold mb-3">Items:</span> &#x20a6;{cart.itemsPrice}
         </li>
         <li>
-          <span className="font-semibold mb-3">Shipping:</span> ${cart.shippingPrice}
+          <span className="font-semibold mb-3">Shipping:</span> &#x20a6;{cart.shippingPrice}
         </li>
         <li>
-          <span className="font-semibold mb-3">Tax:</span> ${cart.taxPrice}
+          <span className="font-semibold mb-3">Tax:</span> &#x20a6;{cart.taxPrice}
         </li>
         <li>
-          <span className="font-semibold mb-3">Total:</span> ${cart.totalPrice}
+          <span className="font-semibold mb-3">Total:</span> &#x20a6;{cart.totalPrice}
         </li>
       </ul>
 

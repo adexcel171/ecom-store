@@ -26,7 +26,7 @@ const AllProducts = () => {
               {products.map((product) => (
                 <Link
                   key={product._id}
-                  to={`/admin/product/update/${product._id}`}
+                  to={`/admin/product/update/&#x20a6;{product._id}`}
                   className="block mb-4 overflow-hidden"
                 >
                   <div className="flex">
@@ -52,7 +52,7 @@ const AllProducts = () => {
 
                       <div className="flex justify-between">
                         <Link
-                          to={`/admin/product/update/${product._id}`}
+                          to={`/admin/product/update/&#x20a6;{product._id}`}
                           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
                         >
                           Update Product
@@ -72,7 +72,7 @@ const AllProducts = () => {
                             />
                           </svg>
                         </Link>
-                        <p>$ {product?.price}</p>
+                        <p>&#x20a6; {product?.price}</p>
                       </div>
                     </div>
                   </div>

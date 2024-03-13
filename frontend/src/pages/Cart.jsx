@@ -44,13 +44,13 @@ const Cart = () => {
           </div>
 
           <div className="flex-1 md:ml-4">
-            <Link to={`/product/${item._id}`} className="text-teal-500 block mb-2">
+            <Link to={`/product/&#x20a6;{item._id}`} className="text-teal-500 block mb-2">
               {item.name}
             </Link>
 
             <div className="text-black">{item.brand}</div>
             <div className="mt-2 text-black font-bold">
-              $ {item.price}
+              &#x20a6; {item.price}
             </div>
           </div>
 
@@ -86,7 +86,7 @@ const Cart = () => {
           </h2>
 
           <div className="text-2xl font-bold text-black">
-            ${" "}
+            &#x20a6;{" "}
             {cartItems
               .reduce((acc, item) => acc + item.qty * item.price, 0)
               .toFixed(2)}

@@ -89,7 +89,7 @@ const Login = () => {
           <p className="text-black">
             New Customer?{" "}
             <Link
-              to={redirect ? `/register?redirect=${redirect}` : "/register"}
+              to={redirect ? `/register?redirect=&#x20a6;{redirect}` : "/register"}
               className="text-teal-500 hover:underline"
             >
               Register

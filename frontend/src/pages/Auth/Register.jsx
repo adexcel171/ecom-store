@@ -136,7 +136,7 @@ const Register = () => {
       <p className="text-black">
         Already have an account?{" "}
         <Link
-          to={redirect ? `/login?redirect=${redirect}` : "/login"}
+          to={redirect ? `/login?redirect=&#x20a6;{redirect}` : "/login"}
           className="text-teal-500 hover:underline"
         >
           Login
