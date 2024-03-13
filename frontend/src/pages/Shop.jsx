@@ -84,7 +84,7 @@ const Shop = () => {
     <>
       <div className="container mx-auto mt[5rem]">
   <div className="flex flex-col md:flex-row">
-    <div className="bg-pink-800 text-white p-3 mt-4 mb-2 md:w-[30rem]">
+    <div className="bg-teal-800 text-white p-3 mt-4 mb-2 md:w-[30rem]">
       <h2 className="h4 text-center px-2 py-3 bg-black rounded-full mb-2">
         Filter by Categories
       </h2>
@@ -97,7 +97,7 @@ const Shop = () => {
                 type="checkbox"
                 id={c._id}
                 onChange={(e) => handleCheck(e.target.checked, c._id)}
-                className="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
 
               <label
@@ -124,7 +124,7 @@ const Shop = () => {
                 id={brand}
                 name="brand"
                 onChange={() => handleBrandClick(brand)}
-                className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300 focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                className="w-4 h-4 text-teal-400 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
 
               <label
@@ -148,7 +148,7 @@ const Shop = () => {
           placeholder="Enter Price"
           value={priceFilter}
           onChange={handlePriceChange}
-          className="w-full px-3 py-2 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:border-pink-300"
+          className="w-full px-3 py-2 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:border-teal-300"
         />
       </div>
 

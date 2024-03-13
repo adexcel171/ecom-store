@@ -66,25 +66,25 @@ const ProductCarousel = () => {
                 <div className="flex flex-col lg:flex-row justify-between">
                   <div className="lg:w-[60%]">
                     <h1 className="flex items-center mb-2">
-                      <FaStore className="mr-2  text-pink-800 t" /> Brand: {brand}
+                      <FaStore className="mr-2  text-teal-800 t" /> Brand: {brand}
                     </h1>
                     <h1 className="flex items-center mb-2">
-                      <FaClock className="mr-2  text-pink-800" /> Added: {moment(createdAt).fromNow()}
+                      <FaClock className="mr-2  text-teal-800" /> Added: {moment(createdAt).fromNow()}
                     </h1>
                     <h1 className="flex items-center mb-2">
-                      <FaStar className="mr-2  text-pink-800 t" /> Reviews: {numReviews}
+                      <FaStar className="mr-2  text-teal-800 t" /> Reviews: {numReviews}
                     </h1>
                   </div>
 
                   <div className="lg:w-[35%]">
                     <h1 className="flex items-center mb-2">
-                      <FaStar className="mr-2  text-pink-800 t" /> Ratings: {Math.round(rating)}
+                      <FaStar className="mr-2  text-teal-800 t" /> Ratings: {Math.round(rating)}
                     </h1>
                     <h1 className="flex items-center mb-2">
-                      <FaShoppingCart className="mr-2  text-pink-800 t" /> Quantity: {quantity}
+                      <FaShoppingCart className="mr-2  text-teal-800 t" /> Quantity: {quantity}
                     </h1>
                     <h1 className="flex items-center mb-2">
-                      <FaBox className="mr-2  text-pink-800 t" /> In Stock: {countInStock}
+                      <FaBox className="mr-2  text-teal-800 t" /> In Stock: {countInStock}
                     </h1>
                   </div>
                 </div>

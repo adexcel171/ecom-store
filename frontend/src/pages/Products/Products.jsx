@@ -86,7 +86,7 @@ const Product = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full  xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] "
+                className="w-full  xl:w-[48rem] xl:h[48rem] lg:w-[42rem] lg:h[42rem] md:w-[28rem] md:h[28rem] sm:w-[18rem] sm:h-[18rem] "
               />
               <HeartIcon product={product} />
             </div>
@@ -157,7 +157,7 @@ const Product = () => {
                 <button
                   onClick={addToCartHandler}
                   disabled={product.countInStock === 0}
-                  className="bg-pink-600 text-white py-2 px-4 rounded-lg mt-4 md:mt-0"
+                  className="bg-teal-600 text-white py-2 px-4 rounded-lg mt-4 md:mt-0"
                 >
                   Add To Cart
                 </button>

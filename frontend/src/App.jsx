@@ -3,6 +3,7 @@ import Navigation from "./pages/Auth/Navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Announcement from "./components/announce/Announcement";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
 
         <Outlet />
       </main>
+      <Footer/>
     </>
   );
 };

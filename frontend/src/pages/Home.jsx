@@ -5,6 +5,7 @@ import Message from "../components/Message";
 import Header from "../components/Header";
 import Product from "./Products/Product";
 
+
 const Home = () => {
   const { keyword } = useParams();
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
@@ -25,7 +26,7 @@ const Home = () => {
 
   <Link
     to="/shop"
-    className="bg-pink-600 font-bold rounded-full py-2 px-6 md:px-10 mt-4 md:mt-0"
+    className="bg-teal-600 font-bold rounded-full py-2 px-6 md:px-10 mt-4 md:mt-0"
   >
     Shop
   </Link>
@@ -41,6 +42,7 @@ const Home = () => {
     ))}
   </div>
 </div>
+
 
         </>
       )}

@@ -7,7 +7,7 @@ const Favorites = () => {
 
   return (
     <div className="mx-4 md:mx-8 lg:mx-12 xl:mx-16">
-    <h1 className="text-lg font-bold mt-4 md:ml-4 lg:ml-6 xl:ml-8">
+    <h1 className="text-lg text-center font-bold mt-4 md:ml-4 lg:ml-6 xl:ml-8">
       FAVORITE PRODUCTS
     </h1>
   

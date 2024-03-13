@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiOutlineHome,
   AiOutlineShopping,
@@ -9,11 +9,11 @@ import {
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
+import "./Navigation.css";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -41,26 +41,30 @@ const Navigation = () => {
     }
   };
 
+  useEffect(() => {
+    const closeSidebar = () => {
+      setShowSidebar(false);
+    };
+
+    document.body.addEventListener("click", closeSidebar);
+
+    return () => {
+      document.body.removeEventListener("click", closeSidebar);
+    };
+  }, []);
   return (
     <div
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between p-4 text-white bg-gray-600
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-sm shadow-lg shadow-md p-4 text-white bg-teal-800
       w-full h-[50px] fixed top-0`}
       
     >
-      
+      <div className="flex items-center transition-transform transform hover:translate-x-2">
+        <Link to='/' className="font-semibold cursor-pointer">ShOp- X</Link>
+      </div>
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
-        <Link
-          to="/"
-          className="flex items-center transition-transform transform hover:translate-x-2"
-        >
-          {/* <span className="nav-item-name mt-[]">Home</span> */}
-
-          <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={18} />
-        </Link>
-
         <Link
           to="/shop"
           className="flex items-center transition-transform transform hover:translate-x-2"
@@ -79,7 +83,7 @@ const Navigation = () => {
           <div className="absolute top-0">
             {cartItems.length > 0 && (
               <span>
-                <span className="px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
+                <span className="px-1 py-0 text-sm text-white bg-teal-500 rounded-full">
                   {cartItems.reduce((a, c) => a + c.qty, 0)}
                 </span>
               </span>
@@ -116,7 +120,7 @@ const Navigation = () => {
               }`}
               fill="none"
               viewBox="0 0 24 24"
-              stroke="pink"
+              stroke="white"
             >
               <path
                 strokeLinecap="round"

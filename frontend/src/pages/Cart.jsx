@@ -44,12 +44,12 @@ const Cart = () => {
           </div>
 
           <div className="flex-1 md:ml-4">
-            <Link to={`/product/${item._id}`} className="text-pink-500 block mb-2">
+            <Link to={`/product/${item._id}`} className="text-teal-500 block mb-2">
               {item.name}
             </Link>
 
-            <div className="text-white">{item.brand}</div>
-            <div className="mt-2 text-white font-bold">
+            <div className="text-black">{item.brand}</div>
+            <div className="mt-2 text-black font-bold">
               $ {item.price}
             </div>
           </div>
@@ -81,11 +81,11 @@ const Cart = () => {
 
       <div className="mt-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/2">
         <div className="p-4 rounded-lg bg-[#333]">
-          <h2 className="text-xl font-semibold mb-2 text-white">
+          <h2 className="text-xl font-semibold mb-2 text-black">
             Items ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
           </h2>
 
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-black">
             ${" "}
             {cartItems
               .reduce((acc, item) => acc + item.qty * item.price, 0)
@@ -93,7 +93,7 @@ const Cart = () => {
           </div>
 
           <button
-            className="bg-pink-500 mt-4 py-2 px-4 rounded-full text-lg w-full"
+            className="bg-teal-500 mt-4 py-2 px-4 rounded-full text-lg w-full"
             disabled={cartItems.length === 0}
             onClick={checkoutHandler}
           >

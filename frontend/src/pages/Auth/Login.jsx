@@ -47,7 +47,7 @@ const Login = () => {
   
         <form onSubmit={submitHandler} className="container md:w-[40rem] xl:w-[50rem]">
           <div className="my-4">
-            <label htmlFor="email" className="block text-sm font-medium text-white">
+            <label htmlFor="email" className="block text-sm font-medium text-black">
               Email Address
             </label>
             <input
@@ -61,7 +61,7 @@ const Login = () => {
           </div>
   
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-white">
+            <label htmlFor="password" className="block text-sm font-medium text-black">
               Password
             </label>
             <input
@@ -77,7 +77,7 @@ const Login = () => {
           <button
             disabled={isLoading}
             type="submit"
-            className="bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-4"
+            className="bg-teal-500 text-white px-4 py-2 rounded cursor-pointer my-4"
           >
             {isLoading ? "Signing In..." : "Sign In"}
           </button>
@@ -86,11 +86,11 @@ const Login = () => {
         </form>
   
         <div className="mt-4">
-          <p className="text-white">
+          <p className="text-black">
             New Customer?{" "}
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
-              className="text-pink-500 hover:underline"
+              className="text-teal-500 hover:underline"
             >
               Register
             </Link>
@@ -101,7 +101,7 @@ const Login = () => {
       <img
         src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
         alt=""
-        className="h-[20rem] md:h-[65rem] w-full md:w-[59%] lg:w-[70%] xl:block md:hidden sm:hidden rounded-lg"
+        className="h-[15rem] md:h-[40rem] w-full md:w-[50%] lg:w-[60%] xl:block md:hidden sm:hidden rounded-lg"
       />
     </section>
   </div>

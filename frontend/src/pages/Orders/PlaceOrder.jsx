@@ -87,7 +87,7 @@ const PlaceOrder = () => {
 
   <div className="mt-8 px-2">
     <h2 className="text-2xl font-semibold mb-5">Order Summary</h2>
-    <div className="flex flex-col md:flex-row justify-between p-4 bg-[#181818]">
+    <div className="flex flex-col md:flex-row justify-between p-4 bg-[#eceaea]">
       <ul className="text-lg mb-4 md:mb-0 md:mr-8">
         <li>
           <span className="font-semibold mb-3">Items:</span> ${cart.itemsPrice}
@@ -122,7 +122,7 @@ const PlaceOrder = () => {
 
     <button
       type="button"
-      className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full mt-4"
+      className="bg-teal-500 text-white py-3 item-center px-4 rounded-full text-lg w-[300px] mt-5"
       disabled={cart.cartItems === 0}
       onClick={placeOrderHandler}
     >
