@@ -16,7 +16,6 @@ const App = () => {
 
         <Outlet />
       </main>
-      <Footer/>
     </>
   );
 };
