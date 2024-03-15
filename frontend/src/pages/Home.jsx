@@ -41,15 +41,13 @@ const Home = () => {
         <Product product={product} />
       </div>
     ))}
+    <Footer/>
   </div>
 </div>
-<Footer/>
-
 
 
         </>
       )}
-      
     </>
   );
 };
