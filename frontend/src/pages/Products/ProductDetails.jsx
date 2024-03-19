@@ -68,7 +68,7 @@ const ProductDetails = () => {
       <div>
         <Link
           to="/"
-          className="text-white font-semibold hover:underline ml-[10rem]"
+          className="text-teal font-semibold hover:underline ml-[10rem]"
         >
           Go Back
         </Link>
@@ -95,7 +95,7 @@ const ProductDetails = () => {
 
   <div className="flex px-3 flex-col justify-between w-full sm:w-full md:w-full lg:w-1/2">
     <h2 className="text-2xl font-semibold">{product.name}</h2>
-    <p className="my-4 xl:w-3/4 lg:w-3/4 md:w-full text-[#B0B0B0]">
+    <p className="my-4 xl:w-3/4 lg:w-3/4 md:w-full text-black">
       {product.description}
     </p>
 
@@ -104,27 +104,27 @@ const ProductDetails = () => {
     <div className="flex items-center justify-between w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
       <div className="one">
         <h1 className="flex items-center mb-6">
-          <FaStore className="mr-2 text-white" /> Brand: {product.brand}
+          <FaStore className="mr-2 text-teal" /> Brand: {product.brand}
         </h1>
         <h1 className="flex items-center mb-6">
-          <FaClock className="mr-2 text-white" /> Added:{" "}
+          <FaClock className="mr-2 text-teal" /> Added:{" "}
           {moment(product.createAt).fromNow()}
         </h1>
         <h1 className="flex items-center mb-6">
-          <FaStar className="mr-2 text-white" /> Reviews: {product.numReviews}
+          <FaStar className="mr-2 text-teal" /> Reviews: {product.numReviews}
         </h1>
       </div>
 
       <div className="two">
         <h1 className="flex items-center mb-6">
-          <FaStar className="mr-2 text-white" /> Ratings: {rating}
+          <FaStar className="mr-2 text-teal" /> Ratings: {rating}
         </h1>
         <h1 className="flex items-center mb-6">
-          <FaShoppingCart className="mr-2 text-white" /> Quantity:{" "}
+          <FaShoppingCart className="mr-2 text-teal" /> Quantity:{" "}
           {product.quantity}
         </h1>
         <h1 className="flex items-center mb-6">
-          <FaBox className="mr-2 text-white" /> In Stock: {product.countInStock}
+          <FaBox className="mr-2 text-teal" /> In Stock: {product.countInStock}
         </h1>
       </div>
     </div>
@@ -153,7 +153,7 @@ const ProductDetails = () => {
       <button
         onClick={addToCartHandler}
         disabled={product.countInStock === 0}
-        className="bg-teal-600 text-white py-2 px-4 rounded-lg mt-4 md:mt-0"
+        className="bg-teal-600 text-teal py-2 px-4 rounded-lg mt-4 md:mt-0"
       >
         Add To Cart
       </button>

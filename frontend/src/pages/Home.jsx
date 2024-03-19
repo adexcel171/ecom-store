@@ -22,12 +22,12 @@ const Home = () => {
         </Message>
       ) : (
         <>
-          <div className="flex flex-col items-center justify-start md:flex-row md:justify-between p-4 md:p-8">
-  <h1 className="text-3xl md:text-4xl mt-4 md:mt-0">Special Products</h1>
+          <div className="flex flex-col text-center items-center justify-start md:flex-row md:justify-between p-4 md:p-8">
+  <h1 className="text-3xl md:text-4xl text-center mt-4 md:mt-0">Special Products</h1>
 
   <Link
     to="/shop"
-    className="bg-teal-600 font-bold rounded-full py-2 px-6 md:px-10 mt-4 md:mt-0"
+    className="bg-teal-600 font-bold rounded-full py-2 text-center px-6 md:px-10 mt-4 md:mt-0"
   >
     Shop
   </Link>
@@ -42,12 +42,14 @@ const Home = () => {
       </div>
     ))}
   </div>
-  <Footer/>
 
 </div>
 
+<Footer/>
 
         </>
+
+
       )}
     </>
   );

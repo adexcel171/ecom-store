@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  AiOutlineHome,
-  AiOutlineShopping,
-  AiOutlineLogin,
-  AiOutlineUserAdd,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineShopping, AiOutlineLogin, AiOutlineUserAdd, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +24,28 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const [logoutApiCall] = useLogoutMutation();
+  useEffect(() => {
+    const handleScroll = () => {
+      if (dropdownOpen) {
+        setDropdownOpen(false);
+      }
+    };
+  
+    const handleTouch = () => {
+      if (dropdownOpen) {
+        setDropdownOpen(false);
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("touchstart", handleTouch);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchstart", handleTouch);
+    };
+  }, [dropdownOpen]);
+  
 
   const logoutHandler = async () => {
     try {
@@ -52,37 +68,25 @@ const Navigation = () => {
       document.body.removeEventListener("click", closeSidebar);
     };
   }, []);
+
   return (
     <div
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-2 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-800
-      w-full h-[50px] fixed top-0`}
-      
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-500 w-full h-[50px] fixed top-0`}
     >
-     
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
-        <Link to='/'
-         className="flex items-center transition-transform transform hover:translate-x-2">
-        < AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
-        
+        <Link to='/' className="flex items-center transition-transform transform hover:translate-x-2">
+          <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
         </Link>
-        <Link
-          to="/shop"
-          className="flex items-center transition-transform transform hover:translate-x-2"
-        >
-          {/* <span className="nav-item-name text-white">Shop</span> */}
-
+        <Link to="/shop" className="flex items-center transition-transform transform hover:translate-x-2">
           <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={20} />
         </Link>
-
         <Link to="/cart" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
             <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={20} />
-            {/* <span className="nav-item-name mt-[]">Cart</span>{" "} */}
           </div>
-
           <div className="absolute top-0">
             {cartItems.length > 0 && (
               <span>
@@ -93,13 +97,9 @@ const Navigation = () => {
             )}
           </div>
         </Link>
-
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
             <FaHeart className="mb-[3px] mt-[10px] mr-2" size={20} />
-            {/* <span className="hidden nav-item-name mt-[3rem]">
-              Favorites
-            </span>{" "} */}
             <FavoritesCount />
           </div>
         </Link>
@@ -128,104 +128,119 @@ const Navigation = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
+                strokeWidth="4"
                 d={dropdownOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
               />
             </svg>
           )}
         </button>
 
-        {dropdownOpen && userInfo && (
-          <ul
-            className={`absolute right-0 top-6 mt-3  space-y-2 bg-white text-gray-600 ${
-              !userInfo.isAdmin ? "-top-20" : "buttom-80"
-            } `}
-          >
-            {userInfo.isAdmin && (
-              <>
-                <li>
-                  <Link
-                    to="/admin/dashboard"
-                    className="block px-4 pt-3 py-2 hover:bg-gray-100"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/admin/productlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Products
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/admin/categorylist"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Category
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/admin/orderlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Orders
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/admin/userlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                  >
-                    Users
-                  </Link>
-                </li>
-              </>
-            )}
+        <ul
+          className={`absolute right-0 top-8 mt-4 space-y-2 bg-white text-gray-600 ${
+            dropdownOpen ? "" : "hidden"
+          } transition-all duration-300`}
+        >
+          {userInfo && (
+            <>
+              {userInfo.isAdmin && (
+                <>
+                  <li>
+                    <Link
+                      to="/admin/dashboard"
+                      className="block px-4 pt-3 py-2 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/productlist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Products
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/categorylist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Category
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/orderlist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Orders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/userlist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Users
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li>
+                <Link
+                  to="/profile"
+                  className="block px-4 py-4 hover:bg-gray-100"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={logoutHandler}
+                  className="block w-full px-4 py-4 text-left hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
+        </ul>
 
-            <li>
-              <Link to="/profile" className="block px-4 py-4 hover:bg-gray-100">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <button
-                onClick={logoutHandler}
-                className="block w-full px-4 py-4 text-left hover:bg-gray-100"
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        )}
         {!userInfo && (
           <ul className="flex justify-between items-center px-5">
             <li>
-              <Link
-                to="/login"
-                className="flex flex-row align-center px-3 mb-[3px] justify-between transition-transform transform hover:translate-x-1"
-              >
-                <AiOutlineLogin className="mr-2" size={18} />
-                {/* <span className="text-">LOGIN</span> */}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/register"
-                className="flex items-center mb-[3px]  transition-transform transform hover:translate-x-2"
-              >
-                <AiOutlineUserAdd className=" mr-2" size={18}  />
-                {/* <span className="text-red">REGISTER</span> */}
-              </Link>
-            </li>
-          </ul>
-        )}
+            <Link
+                  to="/login"
+                  className="flex flex-row align-center px-3 mb-[3px] justify-between transition-transform transform hover:translate-x-1"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <AiOutlineLogin className="mr-2" size={18} />
+                  {/* <span className="text-">LOGIN</span> */}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/register"
+                  className="flex items-center mb-[3px]  transition-transform transform hover:translate-x-2"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <AiOutlineUserAdd className=" mr-2" size={18} />
+                  {/* <span className="text-red">REGISTER</span> */}
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+    
   );
 };
 
 export default Navigation;
+
