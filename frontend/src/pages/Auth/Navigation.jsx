@@ -31,18 +31,18 @@ const Navigation = () => {
       }
     };
   
-    const handleTouch = () => {
-      if (dropdownOpen) {
-        setDropdownOpen(false);
-      }
-    };
+    // const handleTouch = () => {
+    //   if (dropdownOpen) {
+    //     setDropdownOpen(false);
+    //   }
+    // };
   
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("touchstart", handleTouch);
+    // window.addEventListener("touchstart", handleTouch);
   
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchstart", handleTouch);
+      // window.removeEventListener("touchstart", handleTouch);
     };
   }, [dropdownOpen]);
   
