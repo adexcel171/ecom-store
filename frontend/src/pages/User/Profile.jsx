@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import { useProfileMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
+import { useGetMyOrdersQuery } from "../../redux/api/orderApiSlice";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const { data: orders, isLoading, error } = useGetMyOrdersQuery();
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -104,7 +106,8 @@ const Profile = () => {
               </button>
 
               <Link
-                to="/user-orders"
+              
+              to='/order/:id'
                 className="bg-teal-600 text-black py-2 px-4 rounded hover:bg-teal-700"
               >
                 My Orders
