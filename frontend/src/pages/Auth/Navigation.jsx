@@ -79,17 +79,15 @@ const Navigation = () => {
     >
        
 
-      <div className="flex flex-row justify-center space-x-4 mb-[20px]">
-
+  <div className="flex flex-row justify-center space-x-4 mb-[20px]">
+{/* 
         <Link  to='/' className="flex items-center transition-transform transform hover:translate-x-2">
         <img
   src={logo}
   alt="Logo"
   className="w-[40px] h-[40px] rounded-full border-2 border-gray-300 object-cover mb-[3px] mr-10 mt-[15px]"
 />
-
-
-        </Link>
+        </Link> */}
      
 
         <Link to='/' className="flex items-center transition-transform transform hover:translate-x-2">
