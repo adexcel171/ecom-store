@@ -8,6 +8,7 @@ import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
 import "./Navigation.css";
+import logo from "../../logooo.png"
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -76,7 +77,21 @@ const Navigation = () => {
         showSidebar ? "hidden" : "flex"
       } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-500 w-full h-[50px] fixed top-0`}
     >
+       
+
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
+
+        <Link  to='/' className="flex items-center transition-transform transform hover:translate-x-2">
+        <img
+  src={logo}
+  alt="Logo"
+  className="w-[40px] h-[40px] rounded-full border-2 border-gray-300 object-cover mb-[3px] mr-10 mt-[15px]"
+/>
+
+
+        </Link>
+     
+
         <Link to='/' className="flex items-center transition-transform transform hover:translate-x-2">
           <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
         </Link>
@@ -90,7 +105,7 @@ const Navigation = () => {
           <div className="absolute top-0">
             {cartItems.length > 0 && (
               <span>
-                <span className="px-1 py-0 text-sm text-white bg-teal-500 rounded-full">
+                <span className="px-1 py-0 text-sm text-white bg-red-500 rounded-full">
                   {cartItems.reduce((a, c) => a + c.qty, 0)}
                 </span>
               </span>
