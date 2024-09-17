@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlineHome, AiOutlineShopping, AiOutlineLogin, AiOutlineUserAdd, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  AiOutlineHome,
+  AiOutlineShopping,
+  AiOutlineLogin,
+  AiOutlineUserAdd,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +14,7 @@ import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
 import "./Navigation.css";
-import logo from "../../logooo.png"
+import logo from "../Auth/Excel Logo.png";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -31,22 +37,21 @@ const Navigation = () => {
         setDropdownOpen(false);
       }
     };
-  
+
     // const handleTouch = () => {
     //   if (dropdownOpen) {
     //     setDropdownOpen(false);
     //   }
     // };
-  
+
     window.addEventListener("scroll", handleScroll);
     // window.addEventListener("touchstart", handleTouch);
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       // window.removeEventListener("touchstart", handleTouch);
     };
   }, [dropdownOpen]);
-  
 
   const logoutHandler = async () => {
     try {
@@ -75,30 +80,32 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-500 w-full h-[50px] fixed top-0`}
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-500 w-full h-[60px] fixed top-0`}
     >
-       
-
-  <div className="flex flex-row justify-center space-x-4 mb-[20px]">
-{/* 
-        <Link  to='/' className="flex items-center transition-transform transform hover:translate-x-2">
-        <img
-  src={logo}
-  alt="Logo"
-  className="w-[40px] h-[40px] rounded-full border-2 border-gray-300 object-cover mb-[3px] mr-10 mt-[15px]"
-/>
-        </Link> */}
-     
-
-        <Link to='/' className="flex items-center transition-transform transform hover:translate-x-2">
-          <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
+      <div className="flex flex-row justify-center space-x-4 mb-[20px]">
+        <Link to="/" className="flex items-center ">
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-[60px] h-[60px] rounded-full mb-[3px] mr-10 mt-[22px]"
+          />
         </Link>
-        <Link to="/shop" className="flex items-center transition-transform transform hover:translate-x-2">
-          <AiOutlineShopping className="mr-2 mt-[10px] mb-[3px]" size={20} />
+
+        {/* <Link
+          to="/"
+          className="flex items-center transition-transform transform hover:translate-x-2"
+        >
+          <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
+        </Link> */}
+        <Link to="/shop" className="flex items-center ">
+          <AiOutlineShopping className="mr-2 mt-[15px] mb-[3px]" size={22} />
         </Link>
         <Link to="/cart" className="flex relative">
-          <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <AiOutlineShoppingCart className="mb-[3px] mt-[10px] mr-2" size={20} />
+          <div className="flex items-center ">
+            <AiOutlineShoppingCart
+              className="mb-[3px] mt-[15px] mr-2"
+              size={20}
+            />
           </div>
           <div className="absolute top-0">
             {cartItems.length > 0 && (
@@ -111,8 +118,8 @@ const Navigation = () => {
           </div>
         </Link>
         <Link to="/favorite" className="flex relative">
-          <div className="flex justify-center items-center top-0 transition-transform transform hover:translate-x-2">
-            <FaHeart className="mb-[3px] mt-[10px] mr-2" size={20} />
+          <div className="flex justify-center items-center">
+            <FaHeart className="mb-[3px] mt-[16px] mr-2" size={20} />
             <FavoritesCount />
           </div>
         </Link>
@@ -124,7 +131,9 @@ const Navigation = () => {
           className="flex items-center text-gray-800 mb-[3px] focus:outline-none"
         >
           {userInfo ? (
-            <span className="text-white mb-[6px] mr-2">{userInfo.username}</span>
+            <span className="text-white mb-[6px] mr-2">
+              {userInfo.username}
+            </span>
           ) : (
             <></>
           )}
@@ -228,32 +237,30 @@ const Navigation = () => {
         {!userInfo && (
           <ul className="flex justify-between items-center px-5">
             <li>
-            <Link
-                  to="/login"
-                  className="flex flex-row align-center px-3 mb-[3px] justify-between transition-transform transform hover:translate-x-1"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  <AiOutlineLogin className="mr-2" size={18} />
-                  {/* <span className="text-">LOGIN</span> */}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/register"
-                  className="flex items-center mb-[3px]  transition-transform transform hover:translate-x-2"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  <AiOutlineUserAdd className=" mr-2" size={18} />
-                  {/* <span className="text-red">REGISTER</span> */}
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
+              <Link
+                to="/login"
+                className="flex flex-row align-center px-3 mb-[3px] justify-between transition-transform transform hover:translate-x-1"
+                onClick={() => setDropdownOpen(false)}
+              >
+                <AiOutlineLogin className="mr-2" size={18} />
+                {/* <span className="text-">LOGIN</span> */}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/register"
+                className="flex items-center mb-[3px]  transition-transform transform hover:translate-x-2"
+                onClick={() => setDropdownOpen(false)}
+              >
+                <AiOutlineUserAdd className=" mr-2" size={18} />
+                {/* <span className="text-red">REGISTER</span> */}
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
-    
+    </div>
   );
 };
 
 export default Navigation;
-

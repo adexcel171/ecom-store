@@ -11,6 +11,7 @@ import {
 import Loader from "../components/Loader";
 import ProductCard from "./Products/ProductCard";
 import ShopSkeleton from "../components/ShoShopSkeletonShopSkeletonpSkeleton"; // Import the skeleton loader
+import Announcement from "../components/announce/Announcement";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -83,9 +84,10 @@ const Shop = () => {
 
   return (
     <>
+      <Announcement />
       <div className="container mx-auto mt-5">
         <div className="flex flex-col md:flex-row">
-          <div className="bg-teal-800 text-white p-3 mt-4 mb-2 md:w-[30rem]">
+          <div className="bg-teal-800 m-2 text-white md:rounded-md rounded-md md:m-2  p-3 mt-4 mb-2 md:w-[32rem]">
             <h2 className="h4 text-center px-2 py-3 bg-black rounded-full mb-2">
               Filter by Categories
             </h2>
@@ -163,7 +165,7 @@ const Shop = () => {
 
           <div className="p-3">
             <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
-            <div className="flex flex-wrap">
+            <div className="flex justify-center flex-wrap">
               {products.length === 0 ? (
                 <Loader />
               ) : (
@@ -182,4 +184,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
