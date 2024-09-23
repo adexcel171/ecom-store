@@ -97,25 +97,36 @@ const Profile = () => {
               />
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-teal-500 text-black py-2 px-4 rounded hover:bg-teal-600"
+                className="bg-teal-500 w-[400px] text-black py-2 px-4 rounded hover:bg-teal-600"
               >
                 Update
               </button>
-
-              <Link
-              
-              to='/order/:id'
-                className="bg-teal-600 text-black py-2 px-4 rounded hover:bg-teal-700"
-              >
-                My Orders
-              </Link>
             </div>
             {loadingUpdateProfile && <Loader />}
           </form>
         </div>
+      </div>
+      <h1 className=" font-bold text-center text-2xl mt-8 ">Check Orders</h1>
+      <div className="flex justify-center items-center gap-3 mt-4 flex-wrap md:flex lg:flex">
+        {orders?.map((order, index) => (
+          <div
+            key={order._id}
+            className="bg-white shadow-md p-4 w-[300px] rounded-lg flex flex-col items-center"
+          >
+            <div className="text-lg font-bold mb-2">Order #{index + 1}</div>
+            <div className="bg-teal-400 w-full text-white py-2 px-4 rounded text-center">
+              <Link
+                to={`/order/${order._id}`}
+                className="text-white hover:underline"
+              >
+                View Order
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
