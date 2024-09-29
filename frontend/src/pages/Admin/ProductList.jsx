@@ -1,12 +1,21 @@
-import { initializeApp } from 'firebase/app';
-import { useUploadProductImageMutation, useCreateProductMutation } from "../../redux/api/productApiSlice";
+import { initializeApp } from "firebase/app";
+import {
+  useUploadProductImageMutation,
+  useCreateProductMutation,
+} from "../../redux/api/productApiSlice";
 import { useFetchCategoriesQuery } from "../../redux/api/categoryApiSlice";
 import { toast } from "react-toastify";
 import AdminMenu from "./AdminMenu";
-import { useNavigate } from 'react-router-dom';
-import { getStorage, ref,  uploadBytes, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { useNavigate } from "react-router-dom";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCiaFGlP6V9QIB74rW9PS_MLizhHMwwSj0",
@@ -14,14 +23,13 @@ const firebaseConfig = {
   projectId: "mern-store-91eb2",
   storageBucket: "mern-store-91eb2.appspot.com",
   messagingSenderId: "914133497618",
-  appId: "1:914133497618:web:a1b35bcaeac635a1cbe5cb"
+  appId: "1:914133497618:web:a1b35bcaeac635a1cbe5cb",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const ProductList = () => {
-
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -35,15 +43,14 @@ const ProductList = () => {
 
   const navigate = useNavigate();
 
-
   const [createProduct] = useCreateProductMutation();
   const { data: categories } = useFetchCategoriesQuery();
 
   const uploadFileHandler = async (e) => {
     e.preventDefault();
-  
+
     const selectedFile = e.target.files[0];
-  
+
     try {
       // Check if image is valid
       if (!selectedFile) {
@@ -51,19 +58,20 @@ const ProductList = () => {
         toast.error("No image file provided");
         return;
       }
-  
+
       const fileName = new Date().getTime() + selectedFile.name;
-  
+
       const storage = getStorage(app);
       const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, selectedFile);
-  
+
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
-  
+
           switch (snapshot.state) {
             case "paused":
               console.log("Upload is paused");
@@ -75,7 +83,7 @@ const ProductList = () => {
           }
         },
         (error) => {
-          console.error('Error uploading image:', error.message);
+          console.error("Error uploading image:", error.message);
           toast.error("Error uploading image");
         },
         () => {
@@ -87,12 +95,11 @@ const ProductList = () => {
         }
       );
     } catch (error) {
-      console.error('Error uploading image:', error.message);
+      console.error("Error uploading image:", error.message);
       toast.error("Error uploading image");
     }
   };
-  
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -122,125 +129,123 @@ const ProductList = () => {
   };
   return (
     <div className="container xl:mx-[9rem] sm:mx-[0] text-black">
-  <div className="flex flex-col md:flex-row">
-    <div className="md:w-3/4 pt-3 mt-10">
-      <AdminMenu />
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-3/4 pt-3 mt-10">
+          <AdminMenu />
 
-      <div className="h-12">Create Product</div>
+          <div className="h-12">Create Product</div>
 
-      {imageLoaded && imageUrl && (
-        <div className="text-center">
-          <img
-            src={imageUrl}
-            alt="product"
-            className="block mx-auto max-h-[200px]"
-          />
-        </div>
-      )}
+          {imageLoaded && imageUrl && (
+            <div className="text-center">
+              <img
+                src={imageUrl}
+                alt="product"
+                className="block mx-auto max-h-[200px]"
+              />
+            </div>
+          )}
 
-      <div className="mb-3">
-        <label className="border text-black spx-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
-          {image ? image.name : "Upload Image"}
+          <div className="mb-3">
+            <label className="border text-black spx-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
+              {image ? image.name : "Upload Image"}
 
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={(e) => {
-              setImage(null);
-              uploadFileHandler(e);
-            }}
-            className={!imageUrl ? "hidden" : "text-black"}
-          />
-        </label>
-      </div>
-
-      <div className="p-3">
-        <div className="flex flex-wrap">
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="name">Name</label> <br />
-            <input
-              type="text"
-              className="p-4 w-full border rounded-lg bg-teal-600 text-black"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="name block">Price</label> <br />
-            <input
-              type="number"
-              className="p-4 w-full border rounded-lg bg-teal-600 text-black"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </div>
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="name block">Quantity</label> <br />
-            <input
-              type="number"
-              className="p-4 w-full border rounded-lg bg-teal-600 text-black"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-          </div>
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="name block">Brand</label> <br />
-            <input
-              type="text"
-              className="p-4 w-full border rounded-lg bg-teal-600 text-black"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-            />
-          </div>
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="" className="my-5">
-              Description
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={(e) => {
+                  setImage(null);
+                  uploadFileHandler(e);
+                }}
+                className={!imageUrl ? "hidden" : "text-black"}
+              />
             </label>
-            <textarea
-              type="text"
-              className="p-2 w-full bg-teal-600 border rounded-lg text-black"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
           </div>
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="name block">Count In Stock</label> <br />
-            <input
-              type="text"
-              className="p-4 w-full border rounded-lg bg-teal-600 text-black"
-              value={stock}
-              onChange={(e) => setStock(e.target.value)}
-            />
-          </div>
-          <div className="w-full sm:w-full md:w-[50%] mb-3">
-            <label htmlFor="">Category</label> <br />
-            <select
-              placeholder="Choose Category"
-              className="p-4 border rounded-lg bg-teal-600 text-black"
-              onChange={(e) => setCategory(e.target.value)}
+
+          <div className="p-3">
+            <div className="flex flex-wrap">
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="name">Name</label> <br />
+                <input
+                  type="text"
+                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="name block">Price</label> <br />
+                <input
+                  type="number"
+                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="name block">Quantity</label> <br />
+                <input
+                  type="number"
+                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="name block">Brand</label> <br />
+                <input
+                  type="text"
+                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="" className="my-5">
+                  Description
+                </label>
+                <textarea
+                  type="text"
+                  className="p-2 w-full bg-blue-600 border rounded-lg text-black"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </div>
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="name block">Count In Stock</label> <br />
+                <input
+                  type="text"
+                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  value={stock}
+                  onChange={(e) => setStock(e.target.value)}
+                />
+              </div>
+              <div className="w-full sm:w-full md:w-[50%] mb-3">
+                <label htmlFor="">Category</label> <br />
+                <select
+                  placeholder="Choose Category"
+                  className="p-4 border rounded-lg bg-blue-600 text-black"
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  {categories?.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <button
+              onClick={handleSubmit}
+              className="py-5 px-10 mt-5 rounded-lg text-lg font-bold bg-blue-700"
             >
-              {categories?.map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
+              Submit
+            </button>
           </div>
         </div>
-
-        <button
-          onClick={handleSubmit}
-          className="py-5 px-10 mt-5 rounded-lg text-lg font-bold bg-teal-700"
-        >
-          Submit
-        </button>
       </div>
     </div>
-  </div>
-</div>
-
-  
   );
 };
 

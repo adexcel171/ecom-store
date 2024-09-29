@@ -17,18 +17,20 @@ const ProductCard = ({ p }) => {
   };
 
   return (
-    <div className="max-w-sm relative bg-[#1A1A1A] rounded-lg shaodw dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-sm relative mt-5 bg-[#1A1A1A] rounded-lg shaodw dark:bg-gray-800 dark:border-gray-700">
       <section className="relative">
         <Link to={`/product/${p._id}`}>
-          <span className="absolute bottom-3 right-3 bg-teal-100 text-teal-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-teal-900 dark:text-teal-300">
+          <span className="absolute bottom-3 right-3 bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
             {p?.brand}
           </span>
-          <img
-            className="cursor-pointer w-full"
-            src={p.image}
-            alt={p.name}
-            style={{ width: "300px", height: "300px", objectFit: "cover" }}
-          />
+          <div className="flex justify-center  ">
+            <img
+              className="cursor-pointer w-full"
+              src={p.image}
+              alt={p.name}
+              style={{ width: "300px", height: "300px", objectFit: "cover" }}
+            />
+          </div>
         </Link>
         <HeartIcon product={p} />
       </section>
@@ -37,7 +39,7 @@ const ProductCard = ({ p }) => {
         <div className="flex justify-between">
           <h5 className="mb-2 text-xl text-white">{p?.name}</h5>
 
-          <p className="font-semibold text-teal-500">
+          <p className="font-semibold text-white">
             {p?.price?.toLocaleString("en-US", {
               style: "currency",
               currency: "USD",
@@ -52,7 +54,7 @@ const ProductCard = ({ p }) => {
         <section className="flex justify-between items-center">
           <Link
             to={`/product/${p._id}`}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Read More
             <svg
@@ -76,7 +78,7 @@ const ProductCard = ({ p }) => {
             className="p-2 rounded-full"
             onClick={() => addToCartHandler(p, 1)}
           >
-            <AiOutlineShoppingCart style={{color:"teal"}} size={30} />
+            <AiOutlineShoppingCart style={{ color: "white" }} size={30} />
           </button>
         </section>
       </div>

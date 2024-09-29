@@ -84,11 +84,10 @@ const Shop = () => {
 
   return (
     <>
-      <Announcement />
-      <div className="container mx-auto mt-5">
+      <div className="container mx-auto mt-10">
         <div className="flex flex-col md:flex-row">
-          <div className="bg-teal-800 m-2 text-white md:rounded-md rounded-md md:m-2  p-3 mt-4 mb-2 md:w-[32rem]">
-            <h2 className="h4 text-center px-2 py-3 bg-black rounded-full mb-2">
+          <div className="bg-blue-400 mt-10  text-white md:rounded-md rounded-md md:m-2  p-3 md:w-[40rem]">
+            <h2 className="h4 text-center px-2 mt-10 py-3 bg-black rounded-full mb-2">
               Filter by Categories
             </h2>
 
@@ -100,7 +99,7 @@ const Shop = () => {
                       type="checkbox"
                       id={c._id}
                       onChange={(e) => handleCheck(e.target.checked, c._id)}
-                      className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <label
                       htmlFor={c._id}
@@ -126,7 +125,7 @@ const Shop = () => {
                       id={brand}
                       name="brand"
                       onChange={() => handleBrandClick(brand)}
-                      className="w-4 h-4 text-teal-400 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-400 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <label
                       htmlFor={brand}
@@ -149,7 +148,7 @@ const Shop = () => {
                 placeholder="Enter Price"
                 value={priceFilter}
                 onChange={handlePriceChange}
-                className="w-full px-3 py-2 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:border-teal-300"
+                className="w-full px-3 py-2 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
               />
             </div>
 
@@ -163,7 +162,7 @@ const Shop = () => {
             </div>
           </div>
 
-          <div className="p-3">
+          <div className="p-3 mt-5">
             <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
             <div className="flex justify-center flex-wrap">
               {products.length === 0 ? (

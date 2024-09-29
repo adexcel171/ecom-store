@@ -80,7 +80,7 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-teal-300 ring-offset-2 ring-offset-white p-4 text-white bg-teal-500 w-full h-[60px] fixed top-0`}
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-blue-300 ring-offset-2 ring-offset-white p-4 text-white bg-blue-500 w-full h-[65px] fixed top-0`}
     >
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link to="/" className="flex items-center ">
@@ -98,13 +98,13 @@ const Navigation = () => {
           <AiOutlineHome className="mr-2 mt-[10px] mb-[3px]" size={20} />
         </Link> */}
         <Link to="/shop" className="flex items-center ">
-          <AiOutlineShopping className="mr-2 mt-[15px] mb-[3px]" size={22} />
+          <AiOutlineShopping className="mr-2 mt-[15px] mb-[3px]" size={23} />
         </Link>
         <Link to="/cart" className="flex relative">
           <div className="flex items-center ">
             <AiOutlineShoppingCart
               className="mb-[3px] mt-[15px] mr-2"
-              size={20}
+              size={23}
             />
           </div>
           <div className="absolute top-0">
@@ -119,7 +119,7 @@ const Navigation = () => {
         </Link>
         <Link to="/favorite" className="flex relative">
           <div className="flex justify-center items-center">
-            <FaHeart className="mb-[3px] mt-[16px] mr-2" size={20} />
+            <FaHeart className="mb-[3px] mt-[16px] mr-2" size={23} />
             <FavoritesCount />
           </div>
         </Link>

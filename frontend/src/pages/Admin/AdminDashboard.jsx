@@ -92,54 +92,53 @@ const AdminDashboard = () => {
     <>
       <AdminMenu />
 
-      <section className="xl:ml-[4rem] md:ml-[0rem]">
-  <div className="w-full md:w-[80%] flex justify-around flex-wrap">
-    <div className="rounded-lg bg-black p-5 w-full md:w-[20rem] mt-5 md:mt-0">
-      <div className="font-bold rounded-full w-[3rem] bg-teal-500 text-center p-3">
-        $
-      </div>
+      <section className="md:mt-[20px] xl:ml-[4rem]">
+        <div className="w-full md:w-[100%] flex mt-[10px] justify-around flex-wrap">
+          <div className="rounded-lg bg-blue-500 p-5 w-full md:w-[20rem] md:mt-[10px]">
+            <div className="font-bold rounded-full w-[3rem] mt-10 bg-green-700 text-center p-3">
+              $
+            </div>
 
-      <p className="mt-5">Sales</p>
-      <h1 className="text-xl font-bold">
-        $ {isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
-      </h1>
-    </div>
-    <div className="rounded-lg bg-black p-5 w-full md:w-[20rem] mt-5 md:mt-0">
-      <div className="font-bold rounded-full w-[3rem] bg-teal-500 text-center p-3">
-        $
-      </div>
+            <p className="mt-5">Sales</p>
+            <h1 className="text-xl font-bold">
+              $ {isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
+            </h1>
+          </div>
+          <div className="rounded-lg bg-blue-500 p-5 w-full md:w-[20rem] mt-5 md:mt-0">
+            <div className="font-bold rounded-full w-[3rem] bg-green-700 text-center p-3">
+              $
+            </div>
 
-      <p className="mt-5">Customers</p>
-      <h1 className="text-xl font-bold">
-        $ {isLoading ? <Loader /> : customers?.length}
-      </h1>
-    </div>
-    <div className="rounded-lg bg-black p-5 w-full md:w-[20rem] mt-5 md:mt-0">
-      <div className="font-bold rounded-full w-[3rem] bg-teal-500 text-center p-3">
-        $
-      </div>
+            <p className="mt-5">Customers</p>
+            <h1 className="text-xl font-bold">
+              $ {isLoading ? <Loader /> : customers?.length}
+            </h1>
+          </div>
+          <div className="rounded-lg bg-blue-500 p-5 w-full md:w-[20rem] mt-5 md:mt-0">
+            <div className="font-bold rounded-full w-[3rem] bg-green-700 text-center p-3">
+              $
+            </div>
 
-      <p className="mt-5">All Orders</p>
-      <h1 className="text-xl font-bold">
-        $ {isLoading ? <Loader /> : orders?.totalOrders}
-      </h1>
-    </div>
-  </div>
+            <p className="mt-5">All Orders</p>
+            <h1 className="text-xl font-bold">
+              $ {isLoading ? <Loader /> : orders?.totalOrders}
+            </h1>
+          </div>
+        </div>
 
-  <div className="mt-5 md:mt-[4rem] md:ml-[10rem]">
-    <Chart
-      options={state.options}
-      series={state.series}
-      type="bar"
-      width="100%" // Adjusted width to full width for all screens
-    />
-  </div>
+        <div className="mt-5 md:mt-[4rem] md:ml-[10rem]">
+          <Chart
+            options={state.options}
+            series={state.series}
+            type="bar"
+            width="100%" // Adjusted width to full width for all screens
+          />
+        </div>
 
-  <div className="mt-5">
-    <OrderList />
-  </div>
-</section>
-
+        <div className="mt-5">
+          <OrderList />
+        </div>
+      </section>
     </>
   );
 };

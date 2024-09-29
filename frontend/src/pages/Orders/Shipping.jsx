@@ -39,81 +39,80 @@ const Shipping = () => {
 
   return (
     <div className="container mx-auto  px-3 mt-10">
-  <ProgressSteps step1 step2 />
-  <div className="mt-10 px-4 flex flex-col justify-center items-center">
-    <form onSubmit={submitHandler} className="max-w-screen-md w-full">
-      <h1 className="text-2xl font-semibold mb-4 text-center">Shipping</h1>
-      <div className="mb-4">
-        <label className="block text-black mb-2">Address</label>
-        <input
-          type="text"
-          className="w-full p-2 border rounded"
-          placeholder="Enter address"
-          value={address}
-          required
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-black mb-2">City</label>
-        <input
-          type="text"
-          className="w-full p-2 border rounded"
-          placeholder="Enter city"
-          value={city}
-          required
-          onChange={(e) => setCity(e.target.value)}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-black mb-2">Postal Code</label>
-        <input
-          type="text"
-          className="w-full p-2 border rounded"
-          placeholder="Enter postal code"
-          value={postalCode}
-          required
-          onChange={(e) => setPostalCode(e.target.value)}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-black mb-2">Country</label>
-        <input
-          type="text"
-          className="w-full p-2 border rounded"
-          placeholder="Enter country"
-          value={country}
-          required
-          onChange={(e) => setCountry(e.target.value)}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-400">Select Method</label>
-        <div className="mt-2">
-          <label className="inline-flex items-center">
+      <ProgressSteps step1 step2 />
+      <div className="mt-10 px-4 flex flex-col justify-center items-center">
+        <form onSubmit={submitHandler} className="max-w-screen-md w-full">
+          <h1 className="text-2xl font-semibold mb-4 text-center">Shipping</h1>
+          <div className="mb-4">
+            <label className="block text-black mb-2">Address</label>
             <input
-              type="radio"
-              className="form-radio text-teal-500"
-              name="paymentMethod"
-              value="PayPal"
-              checked={paymentMethod === "PayPal"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              type="text"
+              className="w-full p-2 border rounded"
+              placeholder="Enter address"
+              value={address}
+              required
+              onChange={(e) => setAddress(e.target.value)}
             />
-            <span className="ml-2">PayPal or Credit Card</span>
-          </label>
-        </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">City</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              placeholder="Enter city"
+              value={city}
+              required
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">Postal Code</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              placeholder="Enter postal code"
+              value={postalCode}
+              required
+              onChange={(e) => setPostalCode(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">Country</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              placeholder="Enter country"
+              value={country}
+              required
+              onChange={(e) => setCountry(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-400">Select Method</label>
+            <div className="mt-2">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio text-blue-500"
+                  name="paymentMethod"
+                  value="PayPal"
+                  checked={paymentMethod === "PayPal"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <span className="ml-2">PayPal or Credit Card</span>
+              </label>
+            </div>
+          </div>
+
+          <button
+            className="bg-blue-500 text-black py-2 px-4 rounded-full text-lg w-full"
+            type="submit"
+          >
+            Continue
+          </button>
+        </form>
       </div>
-
-      <button
-        className="bg-teal-500 text-black py-2 px-4 rounded-full text-lg w-full"
-        type="submit"
-      >
-        Continue
-      </button>
-    </form>
-  </div>
-</div>
-
+    </div>
   );
 };
 

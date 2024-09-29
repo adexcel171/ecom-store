@@ -24,13 +24,13 @@ const Cart = () => {
 
   return (
     <>
-      <div className="container flex flex-col items-start px-3 mx-auto mt-8">
+      <div className="flex flex-col items-center px-3 mx-auto mt-10">
         {cartItems.length === 0 ? (
-          <div className="text-center pt-4 px-2 mb-4">
+          <div className="text-center pt-10 px-2 mb-4">
             Your cart is empty. <Link to="/shop">Go To Shop</Link>
           </div>
         ) : (
-          <div className="flex flex-col pt-3 w-full md:w-4/5 lg:w-3/5 xl:w-2/3">
+          <div className="flex flex-col md:flex items-center pt-3 w-full md:w-[400px] lg:w-[500px]">
             <h1 className="text-2xl pt-3 text-center font-semibold mb-4">
               Shopping Cart
             </h1>
@@ -38,20 +38,20 @@ const Cart = () => {
             {cartItems.map((item) => (
               <div
                 key={item._id}
-                className="flex flex-col md:flex-row items-center px-3 mb-4 md:mb-6 pb-2"
+                className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 items-center px-3 mb-4 md:mb-6 pb-2"
               >
-                <div className="w-full md:w-1/5 lg:w-1/6">
+                <div className="w-full">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover rounded"
+                    className="w-[300px] h-[300px] object-cover rounded-md "
                   />
                 </div>
 
                 <div className="flex-1 md:ml-4">
                   <Link
                     to={`/product/${item._id}`}
-                    className="text-teal-500 block mb-2"
+                    className="text-black block mb-2"
                   >
                     {item.name}
                   </Link>
@@ -78,12 +78,12 @@ const Cart = () => {
                   </select>
                 </div>
 
-                <div className="mt-2 md:ml-4">
+                <div className="mt-2 md:ml-5">
                   <button
-                    className="text-red-500"
+                    className="text-blue-500"
                     onClick={() => removeFromCartHandler(item._id)}
                   >
-                    <FaTrash className="ml-1 mt-.5" />
+                    <FaTrash className="w-10" />
                   </button>
                 </div>
               </div>
@@ -91,11 +91,11 @@ const Cart = () => {
 
             <div className="mt-4 w-full md:w-2/3 lg:w-1/2 xl:w-1/2">
               <div className="p-4 rounded-lg">
-                <h2 className="text-xl font-semibold mb-2 text-black">
+                <h2 className="text-xl text-center font-semibold mb-2 text-black">
                   Items ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
                 </h2>
 
-                <div className="text-2xl font-bold text-black">
+                <div className="text-2xl text-center font-bold text-black">
                   ${" "}
                   {cartItems
                     .reduce((acc, item) => acc + item.qty * item.price, 0)
@@ -103,7 +103,7 @@ const Cart = () => {
                 </div>
 
                 <button
-                  className="bg-teal-500 mt-4 py-2 px-4 rounded-full text-lg w-full"
+                  className="bg-blue-500 flex items-center justify-center mt-4 py-2 px-4 rounded-full text-lg w-full"
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >

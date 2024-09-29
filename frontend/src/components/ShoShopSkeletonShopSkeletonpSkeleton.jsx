@@ -5,17 +5,23 @@ const ShopSkeleton = () => {
   return (
     <div className="container mx-auto mt-20">
       <div className="flex flex-col md:flex-row">
-        <div className="bg-teal-800 text-white p-3 mt-4 mb-2 md:w-[30rem]">
+        <div className="bg-blue-800 text-white p-3 mt-4 mb-2 md:w-[30rem]">
           <div className="h-10 bg-black rounded-full mb-2 animate-pulse"></div>
           <div className="p-5">
             {[...Array(5)].map((_, index) => (
-              <div key={index} className="mb-2 h-6 w-full bg-gray-300 animate-pulse"></div>
+              <div
+                key={index}
+                className="mb-2 h-6 w-full bg-gray-300 animate-pulse"
+              ></div>
             ))}
           </div>
           <div className="h-10 bg-black rounded-full mb-2 animate-pulse"></div>
           <div className="p-5">
             {[...Array(3)].map((_, index) => (
-              <div key={index} className="mb-5 h-6 w-full bg-gray-300 animate-pulse"></div>
+              <div
+                key={index}
+                className="mb-5 h-6 w-full bg-gray-300 animate-pulse"
+              ></div>
             ))}
           </div>
           <div className="h-10 bg-black rounded-full mb-2 animate-pulse"></div>

@@ -9,10 +9,11 @@ const App = () => {
   return (
     <>
       <Navigation />
-      <ToastContainer />
 
-      <main className="py-3">
-      <Announcement/>
+      <main className="mt-3">
+        <ToastContainer className="mt-3 z-50" />
+
+        {/* <Announcement/> */}
 
         <Outlet />
       </main>

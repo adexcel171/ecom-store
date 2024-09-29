@@ -44,6 +44,9 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}/${productId}`,
         method: "PUT",
         body: formData,
+        headers: {
+          "Content-Type": "application/json", // This indicates you are sending JSON
+        },
       }),
     }),
 

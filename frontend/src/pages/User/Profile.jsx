@@ -100,7 +100,7 @@ const Profile = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-teal-500 w-[400px] text-black py-2 px-4 rounded hover:bg-teal-600"
+                className="bg-blue-500 w-[400px] text-black py-2 px-4 rounded hover:bg-blue-600"
               >
                 Update
               </button>
@@ -117,7 +117,7 @@ const Profile = () => {
             className="bg-white shadow-md p-4 w-[300px] rounded-lg flex flex-col items-center"
           >
             <div className="text-lg font-bold mb-2">Order #{index + 1}</div>
-            <div className="bg-teal-400 w-full text-white py-2 px-4 rounded text-center">
+            <div className="bg-blue-400 w-full text-white py-2 px-4 rounded text-center">
               <Link
                 to={`/order/${order._id}`}
                 className="text-white hover:underline"

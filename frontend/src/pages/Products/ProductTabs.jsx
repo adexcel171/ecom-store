@@ -28,7 +28,7 @@ const ProductTabs = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row px-2">
+    <div className="flex flex-col md:flex-row items-center justify-center px-2">
       <section className="mx-[5rem]">
         <div
           className={`flex-1 p-4 cursor-pointer text-lg ${
@@ -72,7 +72,7 @@ const ProductTabs = ({
                     required
                     value={rating}
                     onChange={(e) => setRating(e.target.value)}
-                    className="p-2 border rounded-lg xl:w-[40rem] text-black sm:w-[25rem]"
+                    className="p-2 border md:rounded-md w-[200px] rounded-lg xl:w-[25rem] text-black sm:w-[15rem]"
                   >
                     <option value="">Select</option>
                     <option value="1">Inferior</option>
@@ -84,23 +84,26 @@ const ProductTabs = ({
                 </div>
 
                 <div className="my-2">
-                  <label htmlFor="comment" className="block text-xl mb-2">
+                  <label
+                    htmlFor="comment"
+                    className="block md:rounded-md w-[200px]  text-xl mb-2"
+                  >
                     Comment
                   </label>
 
                   <textarea
                     id="comment"
-                    rows="3"
+                    rows="2"
                     required
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    className="p-2 border rounded-lg xl:w-[40rem] text-black"
+                    className="p-2 border md:rounded-md w-[200px]  rounded-lg xl:w-[25rem] text-black"
                   ></textarea>
                 </div>
                 <button
                   type="submit"
                   disabled={loadingProductReview}
-                  className="bg-teal-600 text-white py-2 px-4 rounded-lg"
+                  className="bg-blue-600 flex justify-center text-center items-center text-white py-2 px-4 rounded-lg"
                 >
                   Submit
                 </button>

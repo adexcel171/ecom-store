@@ -143,26 +143,26 @@ const Order = () => {
         <div className="mt-5  mx-2 border-gray-300 pb-4 mb-4">
           <h2 className="text-xl font-bold mb-2">Shipping</h2>
           <p className="mb-4  mt-4">
-            <strong className="text-teal-500">Order:</strong> {order._id}
+            <strong className="text-blue-500">Order:</strong> {order._id}
           </p>
 
           <p className="mb-4">
-            <strong className="text-teal-500">Name:</strong>{" "}
+            <strong className="text-blue-500">Name:</strong>{" "}
             {order.user.username}
           </p>
 
           <p className="mb-4">
-            <strong className="text-teal-500">Email:</strong> {order.user.email}
+            <strong className="text-blue-500">Email:</strong> {order.user.email}
           </p>
 
           <p className="mb-4">
-            <strong className="text-teal-500">Address:</strong>{" "}
+            <strong className="text-blue-500">Address:</strong>{" "}
             {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
             {order.shippingAddress.postalCode}, {order.shippingAddress.country}
           </p>
 
           <p className="mb-4">
-            <strong className="text-teal-500">Method:</strong>{" "}
+            <strong className="text-blue-500">Method:</strong>{" "}
             {order.paymentMethod}
           </p>
 
@@ -217,7 +217,7 @@ const Order = () => {
           <div>
             <button
               type="button"
-              className="bg-teal-500 text-white mx-3 w-full py-2"
+              className="bg-blue-500 text-white mx-3 w-full py-2"
               onClick={deliverHandler}
             >
               Mark As Delivered
