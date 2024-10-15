@@ -101,14 +101,15 @@ const Cart = () => {
                     .reduce((acc, item) => acc + item.qty * item.price, 0)
                     .toFixed(2)}
                 </div>
-
-                <button
-                  className="bg-blue-500 flex items-center justify-center mt-4 py-2 px-4 rounded-full text-lg w-full"
-                  disabled={cartItems.length === 0}
-                  onClick={checkoutHandler}
-                >
-                  Proceed To Checkout
-                </button>
+                <div className="flex justify-center items-center mt-5">
+                  <button
+                    className="bg-blue-500 text-white flex text-center flex-wrap items-center w-auto h-auto justify-center mt-4 py-2 px-4 rounded-md text-md "
+                    disabled={cartItems.length === 0}
+                    onClick={checkoutHandler}
+                  >
+                    Proceed To Checkout
+                  </button>
+                </div>
               </div>
             </div>
           </div>

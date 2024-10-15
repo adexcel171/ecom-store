@@ -41,13 +41,13 @@ const Login = () => {
 
   return (
     <div>
-      <section className="pl-5 pt-10 md:pl-10 lg:pl-20 xl:pl-32 flex flex-wrap">
-        <div className="md:mr-4 mt-5 md:mt-0">
-          <h1 className="text-2xl font-semibold mb-4">Sign In</h1>
+      <section className="p-5 pt-10 md:flex justify-between items-center ">
+        <div className=" mt-5 md:mt-10">
+          <h1 className="text-2xl text-center font-semibold mb-4">Sign In</h1>
 
           <form
             onSubmit={submitHandler}
-            className="container md:w-[40rem] xl:w-[50rem]"
+            className="container md:w-[45rem] xl:w-[50rem]"
           >
             <div className="my-4">
               <label
@@ -59,7 +59,7 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                className="mt-1 p-2 border rounded w-full  sm:w-[400px]"
+                className="mt-1 p-2 border rounded w-full  sm:w-[350px]"
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -76,7 +76,7 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
-                className="mt-1 p-2 border rounded w-full sm:w-[400px] "
+                className="mt-1 p-2 border rounded w-full sm:w-[350px] "
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -110,7 +110,8 @@ const Login = () => {
         <img
           src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
           alt=""
-          className="h-[15rem] md:h-[40rem] w-full md:w-[50%] lg:w-[60%] xl:block md:hidden sm:hidden rounded-lg"
+          className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[400px] md:shadow-md md:mr-8 md:mt-[40px] bg
+           lg:w-[40%]  rounded-lg"
         />
       </section>
     </div>

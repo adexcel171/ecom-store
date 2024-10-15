@@ -48,9 +48,9 @@ const Register = () => {
   };
 
   return (
-    <section className="pl-[1rem] mt-10 md:pl-[10rem] flex flex-wrap">
+    <section className=" p-5 pt-10 md:flex justify-between items-center">
       <div className="w-full px-2 md:w-1/2 mt-5 md:mt-4 md:mr-4">
-        <h1 className="text-2xl font-semibold mb-4">Register</h1>
+        <h1 className="text-2xl text-center font-semibold mb-4">Register</h1>
 
         <form
           onSubmit={submitHandler}
@@ -150,7 +150,8 @@ const Register = () => {
       <img
         src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80"
         alt=""
-        className="h-[15rem] md:h-[40rem] w-full md:w-[50%] lg:w-[60%] xl:block md:hidden sm:hidden rounded-lg"
+        className="h-[10rem] md:h-[20rem] mt-10 w-full md:w-[350px] md:shadow-md bg-blue md:mr-8 md:mt-[40px] bg
+           lg:w-[40%]  rounded-lg"
       />
     </section>
   );
