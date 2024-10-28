@@ -80,7 +80,7 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md p-4 text-blue-500 bg-gray-100 w-full h-[65px] fixed top-0`}
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md -restext-rose-600 bg-gray-100 w-full h-[65px] fixed top-0`}
     >
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link to="/" className="flex items-center ">
@@ -107,10 +107,10 @@ const Navigation = () => {
               size={23}
             />
           </div>
-          <div className="absolute top-0">
+          <div className="absolute top-2 left-2">
             {cartItems.length > 0 && (
               <span>
-                <span className="px-1 py-0 text-sm text-white bg-red-500 rounded-full">
+                <span className="px-1 py-0 text-sm text-white bg-rose-600 rounded-full">
                   {cartItems.reduce((a, c) => a + c.qty, 0)}
                 </span>
               </span>
