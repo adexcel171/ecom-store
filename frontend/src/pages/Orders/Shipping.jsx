@@ -39,10 +39,10 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className="container mx-auto mt-5 px-3">
-      <ProgressSteps step1 step2 />
+    <div className="container mx-auto mt-10 px-3">
+      {/* <ProgressSteps step1 step2 /> */}
       <div className="mt-10 px-4 flex flex-col justify-center items-center">
-        <form onSubmit={submitHandler} className="max-w-screen-md w-full">
+        <form onSubmit={submitHandler} className="max-w-screen-md w-full mt-10">
           <h1 className="text-2xl font-semibold mb-4 text-center">Shipping</h1>
           <div className="mb-4">
             <label className="block text-black mb-2">Address</label>
@@ -101,7 +101,7 @@ const Shipping = () => {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
                 <FaPaypal className="ml-2 mr-2 text-blue-500" />
-                <span>PayPal or Credit Card</span>
+                <span>PayPal</span>
               </label>
               <br />
               <label className="inline-flex items-center">
