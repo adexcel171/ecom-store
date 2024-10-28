@@ -14,7 +14,7 @@ import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
 import "./Navigation.css";
-import logo from "../Auth/Excel Logo.png";
+import logo from "../Auth/1.png";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -80,14 +80,14 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md ring-1 ring-blue-300 ring-offset-2 ring-offset-white p-4 text-white bg-blue-500 w-full h-[65px] fixed top-0`}
+      } xl:flex lg:flex md:hidden sm:hidden flex-row justify-between shadow-md p-4 text-blue-500 bg-gray-100 w-full h-[65px] fixed top-0`}
     >
       <div className="flex flex-row justify-center space-x-4 mb-[20px]">
         <Link to="/" className="flex items-center ">
           <img
             src={logo}
             alt="Logo"
-            className="w-[60px] h-[60px] rounded-full mb-[3px] mr-10 mt-[22px]"
+            className="w-[70px] h-[70px] rounded-full mb-[3px] mr-10 mt-[22px]"
           />
         </Link>
 
@@ -131,7 +131,7 @@ const Navigation = () => {
           className="flex items-center text-gray-800 mb-[3px] focus:outline-none"
         >
           {userInfo ? (
-            <span className="text-white mb-[6px] mr-2">
+            <span className="text-blue-400 mb-[6px] mr-2">
               {userInfo.username}
             </span>
           ) : (
@@ -145,7 +145,7 @@ const Navigation = () => {
               }`}
               fill="none"
               viewBox="0 0 24 24"
-              stroke="white"
+              stroke="blue"
             >
               <path
                 strokeLinecap="round"

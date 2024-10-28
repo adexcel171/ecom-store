@@ -42,7 +42,8 @@ const ProductCard = ({ p }) => {
           <p className="font-semibold text-white">
             {p?.price?.toLocaleString("en-US", {
               style: "currency",
-              currency: "USD",
+              currency: "NGN",
+              currencySymbol: "₦",
             })}
           </p>
         </div>

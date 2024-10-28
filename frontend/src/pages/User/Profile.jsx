@@ -50,48 +50,54 @@ const Profile = () => {
   return (
     <div className="container mx-auto p-4 mt-[10rem]">
       <div className="flex justify-center align-center md:flex md:space-x-4">
-        <div className="md:w-1/3">
-          <h2 className="text-2xl font-semibold mb-4">Update Profile</h2>
-          <form onSubmit={submitHandler}>
-            <div className="mb-4">
-              <label className="block text-black mb-2">Name</label>
+        <div className="w-full max-w-md">
+          <h2 className="text-2xl text-center font-semibold mb-4">
+            Update Profile
+          </h2>
+          <form onSubmit={submitHandler} className="space-y-4">
+            <div>
+              <label className="block text-black mb-2 text-sm">Name</label>
               <input
                 type="text"
                 placeholder="Enter name"
-                className="form-input p-4 rounded-sm w-full"
+                className="form-input p-3 rounded-sm w-full text-sm"
                 value={username}
                 onChange={(e) => setUserName(e.target.value)}
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-black mb-2">Email Address</label>
+            <div>
+              <label className="block text-black mb-2 text-sm">
+                Email Address
+              </label>
               <input
                 type="email"
                 placeholder="Enter email"
-                className="form-input p-4 rounded-sm w-full"
+                className="form-input p-3 rounded-sm w-full text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-black mb-2">Password</label>
+            <div>
+              <label className="block text-black mb-2 text-sm">Password</label>
               <input
                 type="password"
                 placeholder="Enter password"
-                className="form-input p-4 rounded-sm w-full"
+                className="form-input p-3 rounded-sm w-full text-sm"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-black mb-2">Confirm Password</label>
+            <div>
+              <label className="block text-black mb-2 text-sm">
+                Confirm Password
+              </label>
               <input
                 type="password"
                 placeholder="Confirm password"
-                className="form-input p-4 rounded-sm w-full"
+                className="form-input p-3 rounded-sm w-full text-sm"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -100,7 +106,7 @@ const Profile = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-blue-500 w-[400px] text-black py-2 px-4 rounded hover:bg-blue-600"
+                className="bg-blue-500 w-[100px] sm:max-w-[400px] text-black py-2 px-4 rounded hover:bg-blue-600 text-sm"
               >
                 Update
               </button>

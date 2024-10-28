@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Messsage from "../../components/Message";
+import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import {
   useDeliverOrderMutation,
@@ -11,6 +11,7 @@ import {
   useGetPaypalClientIdQuery,
   usePayOrderMutation,
 } from "../../redux/api/orderApiSlice";
+import { PaystackButton } from "react-paystack";
 
 const Order = () => {
   const { id: orderId } = useParams();
@@ -31,13 +32,49 @@ const Order = () => {
 
   const {
     data: paypal,
-    isLoading: loadingPaPal,
+    isLoading: loadingPayPal,
     error: errorPayPal,
   } = useGetPaypalClientIdQuery();
 
+  const [orderIsPaid, setOrderIsPaid] = useState(false);
+  const [usdAmount, setUsdAmount] = useState(0);
+  const [conversionRate, setConversionRate] = useState(0);
+  const [loadingConversion, setLoadingConversion] = useState(false);
+
+  // Function to fetch current NGN to USD conversion rate
+  const fetchConversionRate = async () => {
+    try {
+      setLoadingConversion(true);
+      const response = await fetch(
+        `https://api.exchangerate-api.com/v4/latest/NGN`
+      );
+      const data = await response.json();
+      const rate = data.rates.USD;
+      setConversionRate(rate);
+
+      // Convert NGN to USD
+      if (order?.totalPrice) {
+        const convertedAmount = (order.totalPrice * rate).toFixed(2);
+        setUsdAmount(convertedAmount);
+      }
+    } catch (error) {
+      toast.error("Error fetching conversion rate. Please try again.");
+      console.error("Conversion error:", error);
+    } finally {
+      setLoadingConversion(false);
+    }
+  };
+
   useEffect(() => {
-    if (!errorPayPal && !loadingPaPal && paypal.clientId) {
-      const loadingPaPalScript = async () => {
+    if (order && order.paymentMethod === "PayPal") {
+      fetchConversionRate();
+    }
+  }, [order]);
+
+  // Modified PayPal script loader
+  useEffect(() => {
+    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+      const loadPayPalScript = async () => {
         paypalDispatch({
           type: "resetOptions",
           value: {
@@ -50,32 +87,61 @@ const Order = () => {
 
       if (order && !order.isPaid) {
         if (!window.paypal) {
-          loadingPaPalScript();
+          loadPayPalScript();
         }
       }
     }
-  }, [errorPayPal, loadingPaPal, order, paypal, paypalDispatch]);
+  }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch]);
 
-  function onApprove(data, actions) {
-    return actions.order.capture().then(async function (details) {
-      try {
-        await payOrder({ orderId, details });
-        refetch();
-        toast.success("Order is paid");
-      } catch (error) {
-        toast.error(error?.data?.message || error.message);
-      }
-    });
-  }
-
+  // Modified createOrder function for PayPal
   function createOrder(data, actions) {
+    if (!usdAmount || usdAmount <= 0) {
+      toast.error("Invalid conversion amount");
+      return;
+    }
+
     return actions.order
       .create({
-        purchase_units: [{ amount: { value: order.totalPrice } }],
+        purchase_units: [
+          {
+            amount: {
+              value: usdAmount,
+              currency_code: "USD",
+            },
+            description: `Order ${order._id} - Converted from ₦${order.totalPrice} NGN`,
+          },
+        ],
       })
       .then((orderID) => {
         return orderID;
       });
+  }
+
+  // Modified onApprove function
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        const paymentResult = {
+          id: details.id,
+          status: details.status,
+          update_time: details.update_time,
+          payer: details.payer,
+          currency_conversion: {
+            from_currency: "NGN",
+            to_currency: "USD",
+            conversion_rate: conversionRate,
+            original_amount: order.totalPrice,
+            converted_amount: usdAmount,
+          },
+        };
+
+        await payOrder({ orderId, details: paymentResult });
+        refetch();
+        toast.success("Payment successful");
+      } catch (error) {
+        toast.error(error?.data?.message || error.message);
+      }
+    });
   }
 
   function onError(err) {
@@ -87,16 +153,47 @@ const Order = () => {
     refetch();
   };
 
+  const handlePaystackPayment = async (reference) => {
+    try {
+      const result = await payOrder({
+        orderId,
+        details: {
+          id: reference.reference,
+          status: "COMPLETED",
+          update_time: new Date().toISOString(),
+          payer: { email_address: order.user.email },
+        },
+      }).unwrap();
+
+      if (result && !result.error) {
+        setOrderIsPaid(true);
+        await refetch();
+        toast.success("Payment successful");
+      } else {
+        toast.error("Error updating order. Please contact support.");
+      }
+    } catch (err) {
+      toast.error(err?.data?.message || err.message);
+    }
+  };
+
+  const paystackConfig = {
+    reference: new Date().getTime().toString(),
+    email: order?.user?.email,
+    amount: order?.totalPrice * 100, // Paystack amount is in kobo
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
+  };
+
   return isLoading ? (
     <Loader />
   ) : error ? (
-    <Messsage variant="danger">{error.data.message}</Messsage>
+    <Message variant="danger">{error.data.message}</Message>
   ) : (
     <div className="container flex flex-col mt-10 mx-2 md:flex-row md: p-5">
       <div className="md:w-2/3 pr-4">
         <div className="border gray-300 mt-5 pb-4 mb-5">
           {order.orderItems.length === 0 ? (
-            <Messsage>Order is empty</Messsage>
+            <Message>Order is empty</Message>
           ) : (
             <div className="overflow-x-auto px-2">
               <table className="w-full md:w-[70%]">
@@ -128,7 +225,7 @@ const Order = () => {
                       <td className="p-2 text-center">{item.qty}</td>
                       <td className="p-2 text-center">{item.price}</td>
                       <td className="p-2 text-center">
-                        $ {(item.qty * item.price).toFixed(2)}
+                        ₦ {(item.qty * item.price).toFixed(2)}
                       </td>
                     </tr>
                   ))}
@@ -167,9 +264,9 @@ const Order = () => {
           </p>
 
           {order.isPaid ? (
-            <Messsage variant="success">Paid on {order.paidAt}</Messsage>
+            <Message variant="success">Paid on {order.paidAt}</Message>
           ) : (
-            <Messsage variant="danger">Not paid</Messsage>
+            <Message variant="danger">Not paid</Message>
           )}
         </div>
 
@@ -178,52 +275,77 @@ const Order = () => {
         </h2>
         <div className="flex flex-col md:flex-row mx-2 justify-between mb-2">
           <span>Items</span>
-          <span>$ {order.itemsPrice}</span>
+          <span>₦ {order.itemsPrice}</span>
         </div>
         <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
           <span>Shipping</span>
-          <span>$ {order.shippingPrice}</span>
+          <span>₦ {order.shippingPrice}</span>
         </div>
         <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
           <span>Tax</span>
-          <span>$ {order.taxPrice}</span>
+          <span>₦ {order.taxPrice}</span>
         </div>
         <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
           <span>Total</span>
-          <span>$ {order.totalPrice}</span>
+          <span>₦ {order.totalPrice}</span>
         </div>
 
         {!order.isPaid && (
           <div className="mb-4">
-            {loadingPay && <Loader />}{" "}
+            {loadingPay && <Loader />}
             {isPending ? (
               <Loader />
             ) : (
               <div>
-                <div className="px-4 pt-2">
-                  <PayPalButtons
-                    createOrder={createOrder}
-                    onApprove={onApprove}
-                    onError={onError}
-                  ></PayPalButtons>
-                </div>
+                {order.paymentMethod === "PayPal" && (
+                  <div className="px-4 pt-2">
+                    {loadingConversion ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <div className="mb-4 text-sm text-gray-600">
+                          <p>Amount in NGN: ₦{order.totalPrice}</p>
+                          <p>Converted Amount: ${usdAmount}</p>
+                          <p>Exchange Rate: 1 NGN = ${conversionRate}</p>
+                        </div>
+                        <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        />
+                      </>
+                    )}
+                  </div>
+                )}
+                {order.paymentMethod === "Paystack" && (
+                  <PaystackButton
+                    {...paystackConfig}
+                    text="Pay with Paystack"
+                    onSuccess={handlePaystackPayment}
+                    onClose={() => toast.error("Payment cancelled")}
+                    className="bg-green-500 text-white w-full py-2 rounded"
+                  />
+                )}
               </div>
             )}
           </div>
         )}
 
         {loadingDeliver && <Loader />}
-        {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-          <div>
-            <button
-              type="button"
-              className="bg-blue-500 text-white mx-3 w-full py-2"
-              onClick={deliverHandler}
-            >
-              Mark As Delivered
-            </button>
-          </div>
-        )}
+        {(order.isPaid || orderIsPaid) &&
+          userInfo &&
+          userInfo.isAdmin &&
+          !order.isDelivered && (
+            <div>
+              <button
+                type="button"
+                className="bg-blue-500 text-white mx-3 w-full py-2"
+                onClick={deliverHandler}
+              >
+                Mark As Delivered
+              </button>
+            </div>
+          )}
       </div>
     </div>
   );

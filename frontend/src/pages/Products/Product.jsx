@@ -8,7 +8,7 @@ const Product = ({ product }) => {
         <img
           src={product.image}
           alt={product.name}
-          className="w-[250px] h-[250px] rounded"
+          className="w-[250px] object-cover object-center h-[250px] rounded"
         />
         <HeartIcon product={product} />
       </div>
@@ -18,7 +18,7 @@ const Product = ({ product }) => {
           <h2 className="flex justify-between items-center sm:mx-3">
             <div className="text-lg  text-black">{product.name}</div>
             <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
-              $ {product.price}
+              ₦ {product.price}
             </span>
           </h2>
         </Link>

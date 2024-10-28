@@ -49,7 +49,7 @@ const OrderList = () => {
                         ? order.createdAt.substring(0, 10)
                         : "N/A"}
                     </td>
-                    <td>$ {order.totalPrice}</td>
+                    <td>₦ {order.totalPrice}</td>
                     <td className="py-2">
                       {order.isPaid ? (
                         <p className="p-1 text-center bg-green-400 w-[6rem] rounded-full">

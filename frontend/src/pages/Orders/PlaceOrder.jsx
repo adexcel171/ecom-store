@@ -34,6 +34,7 @@ const PlaceOrder = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
+      console.log("Order Tax Price:", res.taxPrice); // Debugging line
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (error) {
@@ -78,7 +79,7 @@ const PlaceOrder = () => {
                     <td className="p-2">{item.qty}</td>
                     <td className="p-2">{item.price.toFixed(2)}</td>
                     <td className="p-2">
-                      ${(item.qty * item.price).toFixed(2)}
+                      ₦{(item.qty * item.price).toFixed(2)}
                     </td>
                   </tr>
                 ))}
@@ -92,19 +93,19 @@ const PlaceOrder = () => {
           <div className="flex flex-col md:flex-row justify-between p-4 bg-[#eceaea]">
             <ul className="text-lg mb-4 md:mb-0 md:mr-8">
               <li>
-                <span className="font-semibold mb-3">Items:</span> $
+                <span className="font-semibold mb-3">Items:</span> ₦
                 {cart.itemsPrice}
               </li>
               <li>
-                <span className="font-semibold mb-3">Shipping:</span> $
+                <span className="font-semibold mb-3">Shipping:</span> ₦
                 {cart.shippingPrice}
               </li>
               <li>
-                <span className="font-semibold mb-3">Tax:</span> $
+                <span className="font-semibold mb-3">Tax:</span> ₦
                 {cart.taxPrice}
               </li>
               <li>
-                <span className="font-semibold mb-3">Total:</span> $
+                <span className="font-semibold mb-3">Total:</span> ₦
                 {cart.totalPrice}
               </li>
             </ul>

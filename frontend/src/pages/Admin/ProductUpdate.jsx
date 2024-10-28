@@ -15,8 +15,6 @@ const AdminProductUpdate = () => {
 
   const { data: productData } = useGetProductByIdQuery(params._id);
 
-  console.log(productData);
-
   const [image, setImage] = useState(productData?.image || "");
   const [name, setName] = useState(productData?.name || "");
   const [description, setDescription] = useState(
@@ -75,37 +73,25 @@ const AdminProductUpdate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("image", image);
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("price", price);
-      formData.append("category", category);
-      formData.append("quantity", quantity);
-      formData.append("brand", brand);
-      formData.append("countInStock", stock);
+      const result = await updateProduct({
+        productId: params._id,
+        name,
+        description,
+        price: Number(price),
+        category,
+        quantity: Number(quantity),
+        brand,
+        image,
+        countInStock: Number(stock),
+      }).unwrap();
 
-      // Update product using the RTK Query mutation
-      const data = await updateProduct({ productId: params._id, formData });
-
-      if (data?.error) {
-        toast.error(data.error, {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
-      } else {
-        toast.success(`Product successfully updated`, {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
+      if (result) {
+        toast.success("Product successfully updated");
         navigate("/admin/allproductslist");
       }
     } catch (err) {
-      console.log(err);
-      toast.error("Product update failed. Try again.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
+      console.error("Update error:", err);
+      toast.error(err?.data?.message || "Product update failed. Try again.");
     }
   };
 

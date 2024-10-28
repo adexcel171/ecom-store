@@ -6,6 +6,7 @@ import {
   savePaymentMethod,
 } from "../../redux/features/cart/cartSlice";
 import ProgressSteps from "../../components/ProgressSteps";
+import { FaPaypal, FaMoneyBillWave } from "react-icons/fa";
 
 const Shipping = () => {
   const cart = useSelector((state) => state.cart);
@@ -38,7 +39,7 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className=" container mx-auto mt-5  px-3 ">
+    <div className="container mx-auto mt-5 px-3">
       <ProgressSteps step1 step2 />
       <div className="mt-10 px-4 flex flex-col justify-center items-center">
         <form onSubmit={submitHandler} className="max-w-screen-md w-full">
@@ -88,8 +89,8 @@ const Shipping = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-400">Select Method</label>
-            <div className="mt-2">
+            <label className="block text-gray-400">Select Payment Method</label>
+            <div className="mt-2 space-y-2">
               <label className="inline-flex items-center">
                 <input
                   type="radio"
@@ -99,17 +100,33 @@ const Shipping = () => {
                   checked={paymentMethod === "PayPal"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                <span className="ml-2">PayPal or Credit Card</span>
+                <FaPaypal className="ml-2 mr-2 text-blue-500" />
+                <span>PayPal or Credit Card</span>
+              </label>
+              <br />
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  className="form-radio text-green-500"
+                  name="paymentMethod"
+                  value="Paystack"
+                  checked={paymentMethod === "Paystack"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <FaMoneyBillWave className="ml-2 mr-2 text-green-500" />
+                <span>Paystack</span>
               </label>
             </div>
           </div>
 
-          <button
-            className="bg-blue-500 text-black py-2 px-4 rounded-full text-lg w-full"
-            type="submit"
-          >
-            Continue
-          </button>
+          <div className="flex justify-center items-center">
+            <button
+              className="bg-blue-500 text-white py-2 px-4 rounded-full text-lg w-[200px]"
+              type="submit"
+            >
+              Continue
+            </button>
+          </div>
         </form>
       </div>
     </div>

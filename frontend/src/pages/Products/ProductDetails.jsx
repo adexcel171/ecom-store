@@ -80,13 +80,13 @@ const ProductDetails = () => {
           </div>
           <div className="flex px-2 flex-wrap justify-center relative md:items-center mt-4 sm:mt-4 mx-4 md:mt-3 lg:mt-8 xl:mt-10 ml-0 sm:ml-2 md:ml-10">
             <div>
+              <HeartIcon product={product} className="absoulte top-3" />
+
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full px-2  md:w-[400px] md:h-[300px] sm:w-full"
+                className="w-full px-2 object-cover object-center md:rounded-md md:w-[400px] md:h-[300px] sm:w-full"
               />
-
-              <HeartIcon product={product} className="absoulte top-3" />
             </div>
 
             <div className="flex px-3 flex-col justify-center items-center w-full sm:w-full md:w-full">
@@ -95,7 +95,7 @@ const ProductDetails = () => {
                 {product.description}
               </p>
 
-              <p className="text-5xl my-4 font-extrabold">$ {product.price}</p>
+              <p className="text-5xl my-4 font-extrabold">₦ {product.price}</p>
 
               <div className="flex items-center justify-between w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
                 <div className="one">
@@ -155,7 +155,7 @@ const ProductDetails = () => {
                 <button
                   onClick={addToCartHandler}
                   disabled={product.countInStock === 0}
-                  className="bg-blue-600 text-white mt-5 py-2 px-4 rounded-lg mt-4 md:mt-0"
+                  className="bg-blue-600 text-white mt-5 py-2 px-4 rounded-lg md:mt-0"
                 >
                   Add To Cart
                 </button>

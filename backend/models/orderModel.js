@@ -34,6 +34,13 @@ const orderSchema = mongoose.Schema(
       status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
+      currency_conversion: {
+        from_currency: { type: String },
+        to_currency: { type: String },
+        conversion_rate: { type: Number },
+        original_amount: { type: Number },
+        converted_amount: { type: Number },
+      },
     },
 
     itemsPrice: {
