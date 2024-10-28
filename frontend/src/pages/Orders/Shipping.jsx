@@ -121,7 +121,7 @@ const Shipping = () => {
 
           <div className="flex justify-center items-center">
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded-full text-lg w-[200px]"
+              className="bg-blue-500 text-white py-2 px-4 rounded-full text-lg w-full sm:w-[200px]"
               type="submit"
             >
               Continue
