@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
+import ecommerce from "./ecom.png";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -108,9 +109,9 @@ const Login = () => {
         </div>
 
         <img
-          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
+          src={ecommerce}
           alt=""
-          className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[400px] md:shadow-md md:mr-8 md:mt-[40px] bg
+          className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[380px] object-cover object-center md:shadow-md md:mr-8 md:mt-[40px] bg
            lg:w-[40%]  rounded-lg"
         />
       </section>

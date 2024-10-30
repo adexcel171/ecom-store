@@ -110,7 +110,7 @@ const Navigation = () => {
               size={23}
             />
           </div>
-          <div className="absolute top-2 left-2">
+          <div className="absolute top-5 left-2">
             {cartItems.length > 0 && (
               <span>
                 <span className="px-1 py-0 text-sm text-white bg-rose-600 rounded-full">
