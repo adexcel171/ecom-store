@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
 
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(amount);
+};
+
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,7 +65,7 @@ const Cart = () => {
 
                   <div className="text-black">{item.brand}</div>
                   <div className="mt-2 text-black font-bold">
-                    ₦ {item.price}
+                    {formatCurrency(item.price)}
                   </div>
                 </div>
 
@@ -96,10 +103,12 @@ const Cart = () => {
                 </h2>
 
                 <div className="text-2xl text-center font-bold text-black">
-                  ₦{" "}
-                  {cartItems
-                    .reduce((acc, item) => acc + item.qty * item.price, 0)
-                    .toFixed(2)}
+                  {formatCurrency(
+                    cartItems.reduce(
+                      (acc, item) => acc + item.qty * item.price,
+                      0
+                    )
+                  )}
                 </div>
                 <div className="flex justify-center items-center mt-5">
                   <button
