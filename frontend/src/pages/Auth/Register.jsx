@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
-// import ecommerce from "../Auth/ecom.png";
+import ecommerce from "./ecom.png";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -51,7 +51,9 @@ const Register = () => {
   return (
     <section className=" p-5 pt-10 md:flex justify-between items-center">
       <div className="w-full px-2 md:w-1/2 mt-5 md:mt-4 md:mr-4">
-        <h1 className="text-2xl text-center font-semibold mb-4">Register</h1>
+        <h1 className="text-2xl text-center pt-2 font-semibold mb-4">
+          Register
+        </h1>
 
         <form
           onSubmit={submitHandler}
@@ -148,11 +150,11 @@ const Register = () => {
           </p>
         </div>
       </div>
-      {/* <img
+      <img
         src={ecommerce}
         alt=""
         className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[380px] object-cover object-center md:shadow-md md:mr-8 md:mt-[40px] bg lg:w-[40%]  rounded-lg"
-      /> */}
+      />
     </section>
   );
 };
