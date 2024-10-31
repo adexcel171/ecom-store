@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebookMessenger, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -105,12 +106,18 @@ const Footer = () => {
       <hr />
       <div className=" flex justify-between items-center pt-7 text-center mt-4 pb-4">
         <p className="text-white">
-          © 2024 Your Ecommerce Website. All rights reserved.
+          © 2024 Your Excel Ecommerce Website. All rights reserved.
         </p>
         <div className="flex justify-between items-center px-5">
-          <FaInstagram className="mx-3 cursor-pointer" />
-          <FaFacebookMessenger className="mx-3 cursor-pointer" />
-          <FaWhatsapp className="mx-3  cursor-pointer" />
+          <Link to="https://wa.me/2348133333333">
+            <FaWhatsapp size={30} className="mx-3  cursor-pointer" />
+          </Link>
+          <Link to="https://www.instagram.com/admire_excellence">
+            <FaInstagram size={30} className="mx-3  cursor-pointer" />
+          </Link>
+          <Link to="https://www.facebook.com/godswill.okenyi/">
+            <FaFacebookMessenger size={30} className="mx-3  cursor-pointer" />
+          </Link>
         </div>
       </div>
     </footer>

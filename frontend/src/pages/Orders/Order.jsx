@@ -12,7 +12,7 @@ import {
   usePayOrderMutation,
 } from "../../redux/api/orderApiSlice";
 import { PaystackButton } from "react-paystack";
-
+import { FaWhatsapp, FaInstagram, FaFacebookMessenger } from "react-icons/fa";
 const Order = () => {
   const { id: orderId } = useParams();
 
@@ -233,6 +233,26 @@ const Order = () => {
               </table>
             </div>
           )}
+        </div>
+        <div className="flex justify-between items-center px-5">
+          <Link to="https://wa.me/2348133333333">
+            <FaWhatsapp
+              size={30}
+              className="mx-3 text-blue-500 cursor-pointer"
+            />
+          </Link>
+          <Link to="https://www.instagram.com/admire_excellence">
+            <FaInstagram
+              size={30}
+              className="mx-3  text-blue-500 cursor-pointer"
+            />
+          </Link>
+          <Link to="https://www.facebook.com/godswill.okenyi/">
+            <FaFacebookMessenger
+              size={30}
+              className="mx-3 text-blue-500 cursor-pointer"
+            />
+          </Link>
         </div>
       </div>
 

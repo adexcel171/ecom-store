@@ -95,7 +95,9 @@ const ProductDetails = () => {
                 {product.description}
               </p>
 
-              <p className="text-5xl my-4 font-extrabold">₦ {product.price}</p>
+              <p className="text-5xl my-4 font-extrabold">
+                ₦ {product.price.toLocaleString()}
+              </p>
 
               <div className="flex items-center justify-between w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
                 <div className="one">
