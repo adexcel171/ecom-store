@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
-import ecommerce from "../Auth/ecom.png";
+// import ecommerce from "../Auth/ecom.png";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -148,11 +148,11 @@ const Register = () => {
           </p>
         </div>
       </div>
-      <img
+      {/* <img
         src={ecommerce}
         alt=""
         className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[380px] object-cover object-center md:shadow-md md:mr-8 md:mt-[40px] bg lg:w-[40%]  rounded-lg"
-      />
+      /> */}
     </section>
   );
 };
