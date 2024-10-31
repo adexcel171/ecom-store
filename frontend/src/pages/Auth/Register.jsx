@@ -151,8 +151,7 @@ const Register = () => {
       <img
         src={ecommerce}
         alt=""
-        className="h-[10rem] md:h-[20rem] mt-10 w-full md:w-[350px] md:shadow-md bg-blue md:mr-8 md:mt-[40px] bg
-           lg:w-[40%]  rounded-lg"
+        className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[380px] object-cover object-center md:shadow-md md:mr-8 md:mt-[40px] bg lg:w-[40%]  rounded-lg"
       />
     </section>
   );
