@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
-import ecommerce from "./ecom.png";
+import ecommerce from "../Auth/ecom.png";
 import { toast } from "react-toastify";
 
 const Register = () => {
