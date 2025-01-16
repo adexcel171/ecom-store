@@ -35,6 +35,7 @@ import Order from "./pages/Orders/Order.jsx";
 import OrderList from "./pages/Admin/OrderList.jsx";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
+import PageNotFound from "./components/PageNotFound.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,10 +43,12 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route index={true} path="/" element={<Home />} />
+      <Route path="/search/:keyword" element={<Home />} />
       <Route path="/favorite" element={<Favorites />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="*" element={<PageNotFound />} />
 
       {/* Registered users */}
       <Route path="" element={<PrivateRoute />}>

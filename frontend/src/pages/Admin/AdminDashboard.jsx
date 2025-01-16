@@ -93,7 +93,7 @@ const AdminDashboard = () => {
       <AdminMenu />
 
       <section className="md:mt-[40px] xl:ml-[4rem] mt-8">
-        <div className="w-full md:w-[100%] flex flex-col md:flex-row mt-[20px] justify-around items-center md:items-stretch gap-5">
+        <div className="w-full md:w-[100%] flex flex-col md:flex-row mt-[159px] justify-around items-center md:items-stretch gap-5">
           <div className="rounded-lg bg-green-500 p-5 w-full md:w-[20rem] flex flex-col items-center text-center">
             <div className="font-bold rounded-full w-[3rem] bg-green-700 text-center p-3">
               $
@@ -101,27 +101,27 @@ const AdminDashboard = () => {
 
             <p className="mt-5">Sales</p>
             <h1 className="text-xl font-bold">
-              $ {isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
+              ₦ {isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
             </h1>
           </div>
           <div className="rounded-lg bg-green-500 p-5 w-full md:w-[20rem] flex flex-col items-center text-center">
             <div className="font-bold rounded-full w-[3rem] bg-green-700 text-center p-3">
-              $
+              ₦
             </div>
 
             <p className="mt-5">Customers</p>
             <h1 className="text-xl font-bold">
-              $ {isLoading ? <Loader /> : customers?.length}
+              ₦ {isLoading ? <Loader /> : customers?.length}
             </h1>
           </div>
           <div className="rounded-lg bg-green-500 p-5 w-full md:w-[20rem] flex flex-col items-center text-center">
             <div className="font-bold rounded-full w-[3rem] bg-green-700 text-center p-3">
-              $
+              ₦
             </div>
 
             <p className="mt-5">All Orders</p>
             <h1 className="text-xl font-bold">
-              $ {isLoading ? <Loader /> : orders?.totalOrders}
+              ₦ {isLoading ? <Loader /> : orders?.totalOrders}
             </h1>
           </div>
         </div>

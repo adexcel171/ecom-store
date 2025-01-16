@@ -44,7 +44,7 @@ const PlaceOrder = () => {
 
   return (
     <>
-      <div className="container  px-2 mx-auto mt-10">
+      <div className="container  px-2 mx-auto mt-[50px]">
         <ProgressSteps step1 step2 step3 />
 
         {cart.cartItems.length === 0 ? (
@@ -102,7 +102,7 @@ const PlaceOrder = () => {
               </li>
               <li>
                 <span className="font-semibold mb-3">Tax:</span> ₦
-                {cart.taxPrice}
+                {cart.taxPrice > 100000 ? 1 : 0}
               </li>
               <li>
                 <span className="font-semibold mb-3">Total:</span> ₦

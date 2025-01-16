@@ -19,7 +19,7 @@ const OrderList = () => {
         <div className="container mx-auto">
           <AdminMenu />
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full mt-[150px]">
               <thead className="border">
                 <tr>
                   <th className="text-left pl-1">ITEMS</th>

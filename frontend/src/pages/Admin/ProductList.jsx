@@ -133,7 +133,7 @@ const ProductList = () => {
         <div className="md:w-3/4 pt-3 mt-10">
           <AdminMenu />
 
-          <div className="h-12">Create Product</div>
+          <div className="h-12 text-center mt-5">Create Product</div>
 
           {imageLoaded && imageUrl && (
             <div className="text-center">
@@ -168,7 +168,7 @@ const ProductList = () => {
                 <label htmlFor="name">Name</label> <br />
                 <input
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -177,7 +177,7 @@ const ProductList = () => {
                 <label htmlFor="name block">Price</label> <br />
                 <input
                   type="number"
-                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
@@ -186,7 +186,7 @@ const ProductList = () => {
                 <label htmlFor="name block">Quantity</label> <br />
                 <input
                   type="number"
-                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
@@ -195,7 +195,7 @@ const ProductList = () => {
                 <label htmlFor="name block">Brand</label> <br />
                 <input
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 />
@@ -206,7 +206,7 @@ const ProductList = () => {
                 </label>
                 <textarea
                   type="text"
-                  className="p-2 w-full bg-blue-600 border rounded-lg text-black"
+                  className="p-2 w-full bg-gray-600 border rounded-lg text-black"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
@@ -215,7 +215,7 @@ const ProductList = () => {
                 <label htmlFor="name block">Count In Stock</label> <br />
                 <input
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-blue-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
                 />
@@ -224,7 +224,7 @@ const ProductList = () => {
                 <label htmlFor="">Category</label> <br />
                 <select
                   placeholder="Choose Category"
-                  className="p-4 border rounded-lg bg-blue-600 text-black"
+                  className="p-4 border rounded-lg bg-gray-600 text-black"
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   {categories?.map((c) => (
@@ -238,7 +238,7 @@ const ProductList = () => {
 
             <button
               onClick={handleSubmit}
-              className="py-5 px-10 mt-5 rounded-lg text-lg font-bold bg-blue-700"
+              className="py-5 px-10 mt-5 rounded-lg text-lg font-bold bg-gray-700"
             >
               Submit
             </button>

@@ -4,7 +4,7 @@ import React from "react";
 const ShopSkeleton = () => {
   return (
     <div className="container mx-auto mt-20">
-      <div className="flex flex-col md:flex-row">
+      <div className="flex mt-[70px] flex-col md:flex-row">
         <div className="bg-gray-400 text-white p-3 mt-4 mb-2 md:w-[25rem]">
           <div className="h-10 bg-black rounded-full mb-2 animate-pulse"></div>
           <div className="p-5">

@@ -8,8 +8,8 @@ function calcPrices(orderItems) {
     0
   );
 
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
-  const taxRate = 0.15;
+  const shippingPrice = itemsPrice > 100 ? 0 : 0;
+  const taxRate = 0;
   const taxPrice = (itemsPrice * taxRate).toFixed(2);
 
   const totalPrice = (
