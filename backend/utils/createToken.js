@@ -20,7 +20,7 @@ const generateToken = (res, userId) => {
   });
 
   res.cookie("jwt", token, {
-    httpOnly: true, // Changed to true for security
+    httpOnly: false, // Changed to true for security
     secure: true, // Changed to true for production
     sameSite: "none", // Changed to 'none' to allow cross-domain
     maxAge: 30 * 24 * 60 * 60 * 1000,
