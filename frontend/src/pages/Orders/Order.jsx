@@ -155,34 +155,14 @@ const Order = () => {
 
   const handlePaystackPayment = async (reference) => {
     try {
-      if (!reference || !reference.reference) {
-        throw new Error("Invalid payment reference");
-      }
-
-      if (!orderId || !order?.user?.email) {
-        throw new Error("Invalid order details");
-      }
-
-      const paymentResult = {
-        id: reference.reference,
-        status: "COMPLETED",
-        update_time: new Date().toISOString(),
-        payer: {
-          email_address: order.user.email,
-          paystack_reference: reference.reference,
-        },
-        payment_source: {
-          paystack: {
-            reference: reference.reference,
-            status: reference.status,
-            transaction: reference.transaction,
-          },
-        },
-      };
-
       const result = await payOrder({
         orderId,
-        details: paymentResult,
+        details: {
+          id: reference.reference,
+          status: "COMPLETED",
+          update_time: new Date().toISOString(),
+          payer: { email_address: order.user.email },
+        },
       }).unwrap();
 
       if (result && !result.error) {
@@ -190,54 +170,18 @@ const Order = () => {
         await refetch();
         toast.success("Payment successful");
       } else {
-        throw new Error("Error updating order status");
+        toast.error("Error updating order. Please contact support.");
       }
     } catch (err) {
-      console.error("Paystack payment error:", err);
-      toast.error(err?.data?.message || err.message || "Payment failed");
+      toast.error(err?.data?.message || err.message);
     }
   };
 
-  const getPaystackConfig = () => {
-    if (!order?.totalPrice || !order?.user?.email) {
-      return null;
-    }
-
-    return {
-      reference: `order_${orderId}_${new Date().getTime()}`,
-      email: order.user.email,
-      amount: Math.round(order.totalPrice * 100), // Convert to kobo and ensure integer
-      publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
-      metadata: {
-        order_id: orderId,
-        custom_fields: [
-          {
-            display_name: "Order ID",
-            variable_name: "order_id",
-            value: orderId,
-          },
-        ],
-      },
-      currency: "NGN",
-    };
-  };
-
-  const renderPaystackButton = () => {
-    const config = getPaystackConfig();
-
-    if (!config) {
-      return <Message variant="danger">Invalid order configuration</Message>;
-    }
-
-    return (
-      <PaystackButton
-        {...config}
-        text="Pay with Paystack"
-        onSuccess={handlePaystackPayment}
-        onClose={() => toast.error("Payment cancelled")}
-        className="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors"
-      />
-    );
+  const paystackConfig = {
+    reference: new Date().getTime().toString(),
+    email: order?.user?.email,
+    amount: order?.totalPrice * 100, // Paystack amount is in kobo
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
   };
 
   return isLoading ? (
@@ -365,6 +309,7 @@ const Order = () => {
           <span>Total</span>
           <span>₦ {order.totalPrice}</span>
         </div>
+
         {!order.isPaid && (
           <div className="mb-4">
             {loadingPay && <Loader />}
@@ -374,11 +319,32 @@ const Order = () => {
               <div>
                 {order.paymentMethod === "PayPal" && (
                   <div className="px-4 pt-2">
-                    {/* Keep existing PayPal section unchanged */}
+                    {loadingConversion ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <div className="mb-4 text-sm text-gray-600">
+                          <p>Amount in NGN: ₦{order.totalPrice}</p>
+                          <p>Converted Amount: ${usdAmount}</p>
+                          <p>Exchange Rate: 1 NGN = ${conversionRate}</p>
+                        </div>
+                        <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        />
+                      </>
+                    )}
                   </div>
                 )}
                 {order.paymentMethod === "Paystack" && (
-                  <div className="px-4 pt-2">{renderPaystackButton()}</div>
+                  <PaystackButton
+                    {...paystackConfig}
+                    text="Pay with Paystack"
+                    onSuccess={handlePaystackPayment}
+                    onClose={() => toast.error("Payment cancelled")}
+                    className="bg-green-500 text-white w-full py-2 rounded"
+                  />
                 )}
               </div>
             )}
