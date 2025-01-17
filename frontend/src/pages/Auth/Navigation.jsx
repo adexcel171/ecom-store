@@ -16,7 +16,7 @@ import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
 import "./Navigation.css";
-import logo from "../Auth/1.png";
+import logo from "../Auth/logo.svg";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -73,28 +73,22 @@ const Navigation = () => {
       className="fixed top-0 w-full bg-gray-100 shadow-md"
     >
       {/* Desktop Navigation */}
-      <div className="hidden xl:flex lg:flex md:flex justify-between items-center h-[80px] px-4">
+      <div className="hidden xl:flex lg:flex md:flex justify-between items-center h-[75px] px-4">
         <div className="flex flex-row justify-center space-x-6 items-center">
           <Link to="/" className="flex items-center">
-            <img
-              src={logo}
-              alt="Logo"
-              className="w-[100px] h-[100px] rounded-full"
-            />
+            <h1 className="font-bold text-4xl text-blue-900 ">X</h1>
+            <h2>store</h2>
           </Link>
 
           <div className="flex items-center space-x-4">
-            <Link
-              to="/shop"
-              className="flex flex-col items-center text-blue-400"
-            >
+            <Link to="/shop" className="flex flex-col items-center text-black">
               <AiOutlineShopping size={25} />
               {/* <span className="text-sm">Shop</span> */}
             </Link>
 
             <Link
               to="/cart"
-              className="flex flex-col items-center relative text-blue-400"
+              className="flex flex-col items-center relative text-black"
             >
               <AiOutlineShoppingCart size={25} />
               {cartItems.length > 0 && (
@@ -107,7 +101,7 @@ const Navigation = () => {
 
             <Link
               to="/favorite"
-              className="flex flex-col items-center text-blue-400"
+              className="flex flex-col items-center text-black"
             >
               <FaHeart className="flex" size={25} />
               <FavoritesCount />
@@ -123,7 +117,7 @@ const Navigation = () => {
                 onClick={toggleDropdown}
                 className="flex items-center text-gray-800 focus:outline-none"
               >
-                <span className="text-blue-400 mr-2">{userInfo.username}</span>
+                <span className="text-black mr-2">{userInfo.username}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className={`h-4 w-4 ml-1 ${
@@ -264,7 +258,7 @@ const Navigation = () => {
         {/* Hamburger Menu */}
         <button
           onClick={toggleMobileMenu}
-          className="focus:outline-none text-blue-400"
+          className="focus:outline-none text-black"
         >
           {isMobileMenuOpen ? (
             <AiOutlineClose size={24} />
@@ -287,7 +281,7 @@ const Navigation = () => {
                 <div className="flex justify-end mb-4">
                   <button
                     onClick={toggleMobileMenu}
-                    className="focus:outline-none text-blue-400"
+                    className="focus:outline-none text-black"
                   >
                     <AiOutlineClose size={24} />
                   </button>
