@@ -11,7 +11,7 @@ const App = () => {
       <Navigation />
 
       <main className="mt-3">
-        <ToastContainer className="mt-3 z-50" />
+        <ToastContainer className="mt-3 w-[70px] z-50" />
 
         <Announcement />
 

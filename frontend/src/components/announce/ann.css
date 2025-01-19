@@ -3,20 +3,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
+  margin-top: 80px;
 
   background-color: transparent;
   color: black;
   height: 10px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   z-index: 100000000;
-  margin-top: 40px;
 }
 .annocement-text {
   display: flex;
   align-items: center;
   margin-right: 2rem;
-  color: grey;
+  color: rgb(8, 8, 8);
 }
 .text1 span {
   margin-right: 2rem;
