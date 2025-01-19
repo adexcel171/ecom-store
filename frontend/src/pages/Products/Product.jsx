@@ -3,12 +3,12 @@ import HeartIcon from "./HeartIcon";
 
 const Product = ({ product }) => {
   return (
-    <div className="w-full mx-2 p-2 flex-col ">
+    <div className="w-full  p-2 flex-col ">
       <div className="relative">
         <img
           src={product.image}
           alt={product.name}
-          className="w-[200px] object-cover object-center h-[200px] rounded"
+          className="w-[200px] object-cover object-center h-[180px] rounded"
         />
         <HeartIcon product={product} />
       </div>
