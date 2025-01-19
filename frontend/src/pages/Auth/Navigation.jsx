@@ -239,7 +239,6 @@ const Navigation = () => {
           <Link
             to="/shop"
             className="flex items-center mr-4  space-x-10 py-2 border-b"
-            onClick={toggleMobileMenu}
           >
             <AiOutlineShopping className="mr-2" size={24} />
           </Link>
