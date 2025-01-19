@@ -19,7 +19,7 @@ const Product = ({ product }) => {
             <div className="text-lg text-center  text-black">
               {product.name}
             </div>
-            <span className="bg-blue-100 text-black text-sm font-medium w-full text-center  py-0.5 rounded dark:bg-blue-300 dark:text-black">
+            <span className="bg-blue-100 text-black text-sm font-medium w-full text-center  py-0.5 rounded dark:bg-gray-300 dark:text-black">
               ₦ {product.price.toLocaleString()}
             </span>
           </h2>
