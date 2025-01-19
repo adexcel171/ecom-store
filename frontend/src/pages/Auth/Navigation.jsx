@@ -236,6 +236,13 @@ const Navigation = () => {
             <h1 className="font-bold text-4xl text-blue-900 ">X</h1>
             <h2 className="mr-4">store</h2>
           </Link>
+          <Link
+            to="/shop"
+            className="flex items-center mr-4  space-x-10 py-2 border-b"
+            onClick={toggleMobileMenu}
+          >
+            <AiOutlineShopping className="mr-2" size={24} />
+          </Link>
 
           <Link
             to="/cart"
@@ -286,15 +293,6 @@ const Navigation = () => {
 
                 {/* Mobile Menu Items */}
                 <nav className="space-y-4">
-                  <Link
-                    to="/shop"
-                    className="flex items-center py-2 border-b"
-                    onClick={toggleMobileMenu}
-                  >
-                    <AiOutlineShopping className="mr-2" size={20} />
-                    Shop
-                  </Link>
-
                   {/* User-specific menu items */}
                   {userInfo ? (
                     <>

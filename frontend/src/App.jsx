@@ -13,7 +13,7 @@ const App = () => {
       <main className="mt-3">
         <ToastContainer className="mt-3 z-50" />
 
-        {/* <Announcement/> */}
+        <Announcement />
 
         <Outlet />
       </main>

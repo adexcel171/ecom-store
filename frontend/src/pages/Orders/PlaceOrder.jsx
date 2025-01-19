@@ -94,20 +94,20 @@ const PlaceOrder = () => {
             <ul className="text-lg mb-4 md:mb-0 md:mr-8">
               <li>
                 <span className="font-semibold mb-3">Items:</span> ₦
-                {cart.itemsPrice}
+                {cart.itemsPrice.toLocaleString("en-US")}
               </li>
               <li>
                 <span className="font-semibold mb-3">Shipping:</span> ₦
-                {cart.shippingPrice}
+                {cart.shippingPrice > 10000000 ? 1 : 0}
               </li>
               <li>
                 <span className="font-semibold mb-3">Tax:</span> ₦
                 {cart.taxPrice > 100000 ? 1 : 0}
               </li>
-              <li>
+              {/* <li>
                 <span className="font-semibold mb-3">Total:</span> ₦
                 {cart.totalPrice}
-              </li>
+              </li> */}
             </ul>
 
             {error && <Message variant="danger">{error.data.message}</Message>}
