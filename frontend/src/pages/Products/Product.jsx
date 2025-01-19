@@ -13,13 +13,13 @@ const Product = ({ product }) => {
         <HeartIcon product={product} />
       </div>
 
-      <div className="p-4">
+      <div className="p-4 w-full">
         <Link to={`/product/${product._id}`}>
-          <h2 className="flex justify-center flex-col items-center sm:mx-3">
+          <h2 className="flex justify-center flex-col items-center">
             <div className="text-lg text-center  text-black">
               {product.name}
             </div>
-            <span className="bg-blue-100 text-blue-800 text-sm font-medium  py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+            <span className="bg-blue-100 text-black text-sm font-medium w-full text-center  py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
               ₦ {product.price.toLocaleString()}
             </span>
           </h2>
