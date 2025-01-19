@@ -233,16 +233,13 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex justify-center items-center">
           <Link to="/" className="flex items-center">
-            <img
-              src={logo}
-              alt="Logo"
-              className="w-[70px] h-[70px] rounded-full"
-            />
+            <h1 className="font-bold text-4xl text-blue-900 ">X</h1>
+            <h2 className="mr-4">store</h2>
           </Link>
 
           <Link
             to="/cart"
-            className="flex items-center space-x-7 py-2 border-b relative"
+            className="flex items-center space-x-10 py-2 border-b relative"
             // onClick={toggleMobileMenu}
           >
             <AiOutlineShoppingCart className="mr-2" size={24} />
