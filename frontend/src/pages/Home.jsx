@@ -96,7 +96,7 @@ const Home = () => {
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            <div className="flex justify-center flex-wrap mt-4 md:mt-8">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 justify-center mt-4 md:mt-8">
               {data.products.length === 0 ? (
                 <Message>No products found</Message>
               ) : (
