@@ -21,13 +21,6 @@ const Home = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(keyword || "");
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
-  useEffect(() => {
-    AOS.init({
-      duration: 300, // Reduce duration
-      once: true,
-      disable: "mobile", // Disable on mobile for better performance
-    });
-  }, []);
 
   useEffect(() => {
     AOS.init({
