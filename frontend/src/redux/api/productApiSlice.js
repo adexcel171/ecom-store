@@ -8,8 +8,24 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}`,
         params: { keyword },
       }),
-      keepUnusedDataFor: 5,
-      providesTags: ["Products"],
+      keepUnusedDataFor: 300, // Increase cache duration to 5 minutes (300 seconds)
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.products.map(({ _id }) => ({
+                type: "Products",
+                id: _id,
+              })),
+              { type: "Products", id: "LIST" },
+            ]
+          : [{ type: "Products", id: "LIST" }],
+      // Add staleTime for background updates
+      staleTime: 60, // Consider data stale after 1 minute
+      // Add transformation to normalize response
+      transformResponse: (response) => ({
+        products: response.products,
+        total: response.total || response.products.length,
+      }),
     }),
 
     getProductById: builder.query({
@@ -36,27 +52,19 @@ export const productApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: productData,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: [{ type: "Products", id: "LIST" }],
     }),
 
     updateProduct: builder.mutation({
       query: ({ productId, ...productData }) => ({
         url: `${PRODUCT_URL}/${productId}`,
         method: "PUT",
-        body: productData, // Ensure this is a JSON object
-        headers: {
-          "Content-Type": "application/json", // This indicates you are sending JSON
-        },
+        body: productData,
       }),
-      invalidatesTags: ["Products", "Product"],
-    }),
-
-    uploadProductImage: builder.mutation({
-      query: (data) => ({
-        url: `${UPLOAD_URL}`,
-        method: "POST",
-        body: data,
-      }),
+      invalidatesTags: (result, error, { productId }) => [
+        { type: "Products", id: productId },
+        { type: "Products", id: "LIST" },
+      ],
     }),
 
     deleteProduct: builder.mutation({

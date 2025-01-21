@@ -84,6 +84,7 @@ const Product = () => {
           <div className="flex flex-wrap justify-center relative items-between mt-[2rem]">
             <div>
               <img
+                loading="lazy"
                 src={product.image}
                 alt={product.name}
                 className="w-full  xl:w-[48rem] xl:h[48rem] lg:w-[42rem] lg:h[42rem] md:w-[28rem] md:h[28rem] sm:w-[18rem] sm:h-[18rem] "
