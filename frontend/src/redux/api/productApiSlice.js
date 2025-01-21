@@ -52,19 +52,27 @@ export const productApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: productData,
       }),
-      invalidatesTags: [{ type: "Products", id: "LIST" }],
+      invalidatesTags: ["Product"],
     }),
 
     updateProduct: builder.mutation({
       query: ({ productId, ...productData }) => ({
         url: `${PRODUCT_URL}/${productId}`,
         method: "PUT",
-        body: productData,
+        body: productData, // Ensure this is a JSON object
+        headers: {
+          "Content-Type": "application/json", // This indicates you are sending JSON
+        },
       }),
-      invalidatesTags: (result, error, { productId }) => [
-        { type: "Products", id: productId },
-        { type: "Products", id: "LIST" },
-      ],
+      invalidatesTags: ["Products", "Product"],
+    }),
+
+    uploadProductImage: builder.mutation({
+      query: (data) => ({
+        url: `${UPLOAD_URL}`,
+        method: "POST",
+        body: data,
+      }),
     }),
 
     deleteProduct: builder.mutation({
