@@ -22,7 +22,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://excel-ecom.onrender.com/",
+    origin: "https://excel-ecom.onrender.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // enable cookies
     optionsSuccessStatus: 204,
@@ -33,9 +33,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
