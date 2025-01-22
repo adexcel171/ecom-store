@@ -54,7 +54,7 @@ const ProductCarousel = () => {
                     <img
                       src={image}
                       alt={name}
-                      className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-center hover:scale-105 transition-transform duration-500"
+                      className="w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover object-center hover:scale-105 transition-transform duration-500"
                     />
                   </div>
 
