@@ -9,6 +9,12 @@ import ProgressSteps from "../../components/ProgressSteps";
 import { FaPaypal, FaMoneyBillWave } from "react-icons/fa";
 
 const Shipping = () => {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    }).format(amount);
+  };
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 

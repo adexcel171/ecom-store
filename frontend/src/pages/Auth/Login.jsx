@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
-// import ecommerce from "./ecom.png";
-
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -14,9 +12,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [login, { isLoading }] = useLoginMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
@@ -33,7 +29,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      console.log(res);
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
     } catch (err) {
@@ -42,80 +37,126 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <section className="p-5 pt-10 md:flex justify-between items-center ">
-        <div className=" mt-5 md:mt-10">
-          <h1 className="text-2xl text-center font-semibold mb-4">Sign In</h1>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="max-w-6xl w-full mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          {/* Form Section */}
+          <div className="w-full lg:w-1/2 bg-white p-8 rounded-2xl shadow-lg">
+            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+              Welcome Back
+            </h1>
 
-          <form
-            onSubmit={submitHandler}
-            className="container md:w-[45rem] xl:w-[50rem]"
-          >
-            <div className="my-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-black"
+            <form onSubmit={submitHandler} className="space-y-6">
+              <div>
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <button
+                disabled={isLoading}
+                type="submit"
+                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center font-medium"
               >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="mt-1 p-2 border rounded w-full  sm:w-[350px]"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+                {isLoading ? <Loader /> : "Sign In"}
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <p className="text-gray-600">
+                New Customer?{" "}
+                <Link
+                  to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                  className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+                >
+                  Create an account
+                </Link>
+              </p>
             </div>
+          </div>
 
-            <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-black"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="mt-1 p-2 border rounded w-full sm:w-[350px] "
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+          {/* Animated Image Section */}
+          <div className="w-full lg:w-1/2 flex items-center justify-center">
+            <div className="relative w-full max-w-md animate-float">
+              <svg className="w-full h-auto" viewBox="0 0 400 400">
+                {/* User Circle */}
+                <circle
+                  cx="200"
+                  cy="150"
+                  r="60"
+                  fill="#4B5563"
+                  className="animate-pulse"
+                />
+                <circle cx="200" cy="130" r="25" fill="#9CA3AF" />
+                <path d="M160 180 Q200 220 240 180" fill="#9CA3AF" />
+
+                {/* Decorative Elements */}
+                <g className="animate-bounce">
+                  <circle cx="120" cy="250" r="8" fill="#60A5FA" />
+                  <circle cx="280" cy="250" r="8" fill="#60A5FA" />
+                  <circle cx="200" cy="280" r="8" fill="#60A5FA" />
+                </g>
+
+                {/* Animated Lock */}
+                <g transform="translate(150, 300)" className="animate-wiggle">
+                  <rect
+                    x="15"
+                    y="0"
+                    width="70"
+                    height="50"
+                    rx="10"
+                    fill="#2563EB"
+                  />
+                  <path
+                    d="M30 0 L30 -20 Q50 -20 70 -20 L70 0"
+                    fill="none"
+                    stroke="#2563EB"
+                    strokeWidth="12"
+                  />
+                </g>
+
+                {/* Animated Stars */}
+                <g className="animate-twinkle">
+                  <path d="M80 100 L90 110 L80 120 L70 110 Z" fill="#FCD34D" />
+                  <path
+                    d="M300 120 L310 130 L300 140 L290 130 Z"
+                    fill="#FCD34D"
+                  />
+                  <path d="M320 80 L330 90 L320 100 L310 90 Z" fill="#FCD34D" />
+                </g>
+              </svg>
             </div>
-
-            <button
-              disabled={isLoading}
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer my-4"
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </button>
-
-            {isLoading && <Loader />}
-          </form>
-
-          <div className="mt-4">
-            <p className="text-black">
-              New Customer?{" "}
-              <Link
-                to={redirect ? `/register?redirect=${redirect}` : "/register"}
-                className="text-blue-500 hover:underline"
-              >
-                Register
-              </Link>
-            </p>
           </div>
         </div>
-
-        {/* <img
-          src={ecommerce}
-          alt=""
-          className="h-[10rem] md:h-[25rem] mt-10 w-full md:w-[380px] object-cover object-center md:shadow-md md:mr-8 md:mt-[40px] bg
-           lg:w-[40%]  rounded-lg"
-        /> */}
-      </section>
+      </div>
     </div>
   );
 };

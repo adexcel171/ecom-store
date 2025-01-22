@@ -234,26 +234,6 @@ const Order = () => {
             </div>
           )}
         </div>
-        <div className="flex justify-between items-center px-5">
-          <Link to="https://wa.me/2348133333333">
-            <FaWhatsapp
-              size={30}
-              className="mx-3 text-blue-500 cursor-pointer"
-            />
-          </Link>
-          <Link to="https://www.instagram.com/admire_excellence">
-            <FaInstagram
-              size={30}
-              className="mx-3  text-blue-500 cursor-pointer"
-            />
-          </Link>
-          <Link to="https://www.facebook.com/godswill.okenyi/">
-            <FaFacebookMessenger
-              size={30}
-              className="mx-3 text-blue-500 cursor-pointer"
-            />
-          </Link>
-        </div>
       </div>
 
       <div className="md:w-1/3">
@@ -309,7 +289,30 @@ const Order = () => {
           <span>Total</span>
           <span>₦ {order.totalPrice}</span>
         </div>
-
+        <div className="flex justify-center mt-3 items-center px-2">
+          <h1>
+            You can screenshot after payment and send to any of our social media
+            platform
+          </h1>
+          <Link to="https://wa.me/2348119223162">
+            <FaWhatsapp
+              size={30}
+              className="mx-3 text-green-500 cursor-pointer"
+            />
+          </Link>
+          <Link to="https://www.instagram.com/admire_excellence">
+            <FaInstagram
+              size={30}
+              className="mx-3  text-black cursor-pointer"
+            />
+          </Link>
+          <Link to="https://www.facebook.com/godswill.okenyi/">
+            <FaFacebookMessenger
+              size={30}
+              className="mx-3 text-blue-500 cursor-pointer"
+            />
+          </Link>
+        </div>
         {!order.isPaid && (
           <div className="mb-4">
             {loadingPay && <Loader />}

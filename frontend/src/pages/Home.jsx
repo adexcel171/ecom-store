@@ -15,6 +15,7 @@ import { Search } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
+const ProductCarousel = lazy(() => import("./Products/ProductCarousel"));
 
 const Home = () => {
   const { keyword } = useParams();
@@ -56,7 +57,7 @@ const Home = () => {
           </Message>
         ) : (
           <>
-            <div className="flex flex-col items-center justify-center mt-[50px] w-full px-4 py-6">
+            <div className="flex flex-col items-center justify-center mt-[40px] w-full px-4 py-6">
               <form
                 onSubmit={handleSearch}
                 className="relative w-full max-w-xl mb-8"
@@ -81,6 +82,8 @@ const Home = () => {
                 </button>
               </form>
             </div>
+            <h1 className="text-center text-2xl ">Featured Product</h1>
+            <ProductCarousel />
 
             <div
               className="flex flex-col text-center items-center justify-center md:flex-col md:justify-center p-4 md:p-8"

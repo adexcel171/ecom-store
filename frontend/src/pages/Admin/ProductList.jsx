@@ -128,7 +128,7 @@ const ProductList = () => {
     }
   };
   return (
-    <div className="container xl:mx-[9rem] sm:mx-[0] text-black">
+    <div className="container xl:mx-[9rem] sm:mx-[0] text-white">
       <div className="flex flex-col md:flex-row">
         <div className="md:w-3/4 pt-3 mt-10">
           <AdminMenu />
@@ -146,7 +146,7 @@ const ProductList = () => {
           )}
 
           <div className="mb-3">
-            <label className="border text-black spx-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
+            <label className="border text-white spx-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
               {image ? image.name : "Upload Image"}
 
               <input
@@ -157,7 +157,7 @@ const ProductList = () => {
                   setImage(null);
                   uploadFileHandler(e);
                 }}
-                className={!imageUrl ? "hidden" : "text-black"}
+                className={!imageUrl ? "hidden" : "text-white"}
               />
             </label>
           </div>
@@ -167,8 +167,9 @@ const ProductList = () => {
               <div className="w-full sm:w-full md:w-[50%] mb-3">
                 <label htmlFor="name">Name</label> <br />
                 <input
+                  placeholder="enter product name..."
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -176,8 +177,9 @@ const ProductList = () => {
               <div className="w-full sm:w-full md:w-[50%] mb-3">
                 <label htmlFor="name block">Price</label> <br />
                 <input
+                  placeholder="enter Product price.."
                   type="number"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
@@ -185,8 +187,9 @@ const ProductList = () => {
               <div className="w-full sm:w-full md:w-[50%] mb-3">
                 <label htmlFor="name block">Quantity</label> <br />
                 <input
+                  placeholder="enter  Quantity Available"
                   type="number"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
@@ -194,8 +197,9 @@ const ProductList = () => {
               <div className="w-full sm:w-full md:w-[50%] mb-3">
                 <label htmlFor="name block">Brand</label> <br />
                 <input
+                  placeholder="enter Product Brand"
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 />
@@ -205,8 +209,9 @@ const ProductList = () => {
                   Description
                 </label>
                 <textarea
+                  placeholder="About Product"
                   type="text"
-                  className="p-2 w-full bg-gray-600 border rounded-lg text-black"
+                  className="p-2 w-full bg-gray-600 border rounded-lg text-white"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
@@ -214,8 +219,9 @@ const ProductList = () => {
               <div className="w-full sm:w-full md:w-[50%] mb-3">
                 <label htmlFor="name block">Count In Stock</label> <br />
                 <input
+                  placeholder="count in stock"
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-black"
+                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
                 />
@@ -224,7 +230,7 @@ const ProductList = () => {
                 <label htmlFor="">Category</label> <br />
                 <select
                   placeholder="Choose Category"
-                  className="p-4 border rounded-lg bg-gray-600 text-black"
+                  className="p-4 border rounded-lg bg-gray-600 text-white"
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   {categories?.map((c) => (
