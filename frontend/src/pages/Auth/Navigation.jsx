@@ -76,7 +76,7 @@ const Navigation = () => {
       <div className="hidden xl:flex lg:flex md:flex justify-between items-center h-[75px] px-4">
         <div className="flex flex-row justify-center space-x-6 items-center">
           <Link to="/" className="flex items-center">
-            <h1 className="font-bold text-4xl text-blue-900 ">X</h1>
+            <h1 className="font-bold text-3xl text-blue-900 ">X</h1>
             <h2>store</h2>
           </Link>
 
@@ -233,7 +233,7 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex justify-center items-center">
           <Link to="/" className="flex items-center">
-            <h1 className="font-bold text-4xl text-blue-900 ">X</h1>
+            <h1 className="font-bold text-3xl text-blue-900 ">X</h1>
             <h2 className="mr-4">store</h2>
           </Link>
           <Link

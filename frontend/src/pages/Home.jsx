@@ -24,11 +24,15 @@ const Home = () => {
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
 
   useEffect(() => {
-    AOS.init({
-      duration: 500,
-      once: true,
-      easing: "ease-in-out",
-    });
+    // Only initialize AOS for screens larger than 768px (md breakpoint)
+    if (window.innerWidth > 768) {
+      AOS.init({
+        duration: 500,
+        once: true,
+        easing: "ease-in-out",
+        disable: "mobile", // Disable on mobile devices
+      });
+    }
   }, []);
 
   const handleSearch = (e) => {
@@ -61,6 +65,7 @@ const Home = () => {
               <form
                 onSubmit={handleSearch}
                 className="relative w-full max-w-xl mb-8"
+                data-aos-mobile="false" // Disable AOS on mobile
                 data-aos="fade-down"
               >
                 <input
@@ -88,6 +93,7 @@ const Home = () => {
             <div
               className="flex flex-col text-center items-center justify-center md:flex-col md:justify-center p-4 md:p-8"
               data-aos="fade-up"
+              data-aos-mobile="false"
             >
               <h1 className="text-3xl md:text-4xl text-center mt-4 md:mt-6">
                 {keyword
@@ -106,6 +112,7 @@ const Home = () => {
               className="flex flex-col items-center p-4 md:p-8"
               data-aos="fade-up"
               data-aos-delay="200"
+              data-aos-mobile="false"
             >
               <div className="grid grid-cols-2 md:grid-cols-6 gap-4 justify-center mt-4 md:mt-8">
                 {data.products.length === 0 ? (
@@ -116,7 +123,10 @@ const Home = () => {
                       key={product._id}
                       className="m-2"
                       data-aos="fade-up"
-                      data-aos-delay={`${200 + index * 100}`}
+                      data-aos-mobile="false"
+                      data-aos-delay={
+                        window.innerWidth > 768 ? `${200 + index * 100}` : "0"
+                      }
                     >
                       <Product product={product} />
                     </div>
