@@ -30,7 +30,7 @@ const Home = () => {
         duration: 500,
         once: true,
         easing: "ease-in-out",
-        disable: "mobile", // Disable on mobile devices
+        // Disable on mobile devices
       });
     }
   }, []);
@@ -61,7 +61,7 @@ const Home = () => {
           </Message>
         ) : (
           <>
-            <div className="flex flex-col items-center justify-center mt-[40px] w-full px-4 py-6">
+            <div className="flex flex-col items-center justify-center mt-[20px] w-full px-4 py-6">
               <form
                 onSubmit={handleSearch}
                 className="relative w-full max-w-xl mb-8"
@@ -87,7 +87,6 @@ const Home = () => {
                 </button>
               </form>
             </div>
-            <h1 className="text-center text-2xl ">Featured Product</h1>
             <ProductCarousel />
 
             <div
@@ -114,7 +113,7 @@ const Home = () => {
               data-aos-delay="200"
               data-aos-mobile="false"
             >
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-4 justify-center mt-4 md:mt-8">
+              <div className="grid grid-cols-2 md:grid-cols-4  gap-2 justify-center mt-4 md:mt-8">
                 {data.products.length === 0 ? (
                   <Message>No products found</Message>
                 ) : (

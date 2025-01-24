@@ -37,7 +37,7 @@ const Cart = () => {
             Your cart is empty. <Link to="/shop">Go To Shop</Link>
           </div>
         ) : (
-          <div className="flex flex-col md:flex items-center pt-3 w-full md:w-[400px] lg:w-[500px]">
+          <div className="flex flex-col md:flex items-center pt-3 w-full md:w-full h-[400px]">
             <h1 className="text-2xl pt-3 text-center font-semibold mb-4">
               Shopping Cart
             </h1>
@@ -51,7 +51,7 @@ const Cart = () => {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-[300px] h-[300px] object-cover rounded-md "
+                    className="w-[400px] h-[300px] object-cover rounded-md "
                   />
                 </div>
 
