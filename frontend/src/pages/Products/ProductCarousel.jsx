@@ -71,7 +71,7 @@ const ProductCarousel = () => {
                             {name}
                           </h2>
                           <p className="text-xl font-bold text-blue-600">
-                            ${price.toFixed(2)}
+                            ₦ {price.toFixed(2)}
                           </p>
                           <p className="text-gray-600 text-sm lg:w-[90%] leading-relaxed">
                             {description.substring(0, 170)}...
