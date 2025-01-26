@@ -61,6 +61,7 @@ const Home = () => {
           </Message>
         ) : (
           <>
+            <ProductCarousel />
             <div className="flex flex-col items-center justify-center mt-[20px] w-full px-4 py-6">
               <form
                 onSubmit={handleSearch}
@@ -87,7 +88,6 @@ const Home = () => {
                 </button>
               </form>
             </div>
-            <ProductCarousel />
 
             <div
               className="flex flex-col text-center items-center justify-center md:flex-col md:justify-center p-4 md:p-8"
