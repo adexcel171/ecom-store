@@ -132,7 +132,7 @@ const Shop = () => {
     <div className="mx-auto mt-10">
       <div className="flex flex-col md:flex-row">
         <div
-          className="bg-gray-400 mt-10 text-white md:rounded-md rounded-md md:m-2 p-3 md:w-[35rem]"
+          className="bg-gray-400 mt-10 text-white  md:rounded-md rounded-md md:m-2 p-3 md:w-[35rem]"
           data-aos="fade-right"
         >
           <h2 className="h4 text-center px-2 mt-10 py-3 bg-black rounded-full mb-2">
