@@ -94,7 +94,7 @@ const AdminDashboard = () => {
 
       <section className="md:mt-[40px] xl:ml-[4rem] mt-8">
         <div className="w-full md:w-[100%] flex flex-col md:flex-row mt-[159px] justify-around items-center md:items-stretch gap-5">
-          <div className="rounded-lg bg-gray-400 p-5 w-full md:w-[20rem] flex flex-col items-center text-center">
+          <div className="rounded-lg h-[200px] bg-gray-400 p-5 w-[200px] md:w-[20rem] flex flex-col items-center text-center">
             <div className="font-bold rounded-full w-[3rem] bg-gray-300 text-center p-3">
               $
             </div>
@@ -104,7 +104,7 @@ const AdminDashboard = () => {
               ₦ {isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
             </h1>
           </div>
-          <div className="rounded-lg bg-gray-400 p-5 w-full md:w-[20rem] flex flex-col items-center text-center">
+          <div className="rounded-lg bg-gray-400  h-[200px] p-5  w-[200px] md:w-[20rem] flex flex-col items-center text-center">
             <div className="font-bold rounded-full w-[3rem] bg-gray-300 text-center p-3">
               ₦
             </div>
@@ -114,7 +114,7 @@ const AdminDashboard = () => {
               ₦ {isLoading ? <Loader /> : customers?.length}
             </h1>
           </div>
-          <div className="rounded-lg bg-gray-400 p-5 w-full md:w-[20rem] flex flex-col items-center text-center">
+          <div className="rounded-lg  h-[200px] bg-gray-400 p-5  w-[200px] md:w-[20rem] flex flex-col items-center text-center">
             <div className="font-bold rounded-full w-[3rem] bg-gray-300 text-center p-3">
               ₦
             </div>
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
             options={state.options}
             series={state.series}
             type="bar"
-            width="100%" // Adjusted width to full width for all screens
+            width="80%" // Adjusted width to full width for all screens
           />
         </div>
         <div className="mt-5">

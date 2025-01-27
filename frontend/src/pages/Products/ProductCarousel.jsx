@@ -28,11 +28,10 @@ const ProductCarousel = () => {
 
   return (
     <>
-      <h1 className=" text-center text-2xl hidden md:flex flex-col ">
+      <h1 className=" text-center text-2xl hidden md:flex mt-2 ">
         Featured Product
       </h1>
-
-      <div className="mb-4  hidden md:flex w-[80%] mx-auto   p-4 sm:p-6">
+      <div className="mb-4  hidden md:flex w-[80%] mx-auto max-h-screen   p-4 sm:p-6">
         {isLoading ? null : error ? (
           <Message variant="danger">
             {error?.data?.message || error.error}
