@@ -82,7 +82,7 @@ const Home = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white px-4 py-1 rounded-md hover:bg-gray-700"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-gray-700"
                 >
                   Search
                 </button>
@@ -99,7 +99,7 @@ const Home = () => {
               </h1>
               <Link
                 to="/shop"
-                className="bg-gray-600 text-white font-bold rounded-full py-2 text-center md:mt-4 px-6 md:px-10 mt-4"
+                className="bg-blue-600 text-white font-bold rounded-full py-2 text-center md:mt-4 px-6 md:px-10 mt-4"
               >
                 Shop
               </Link>
@@ -111,7 +111,7 @@ const Home = () => {
               data-aos-delay="200"
               data-aos-mobile="false"
             >
-              <div className="grid grid-cols-2 md:grid-cols-6  gap-2 justify-center mt-4 md:mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-6  gap-2 justify-center mt-4 md:mt-8">
                 {data.products.length === 0 ? (
                   <Message>No products found</Message>
                 ) : (
