@@ -28,7 +28,7 @@ const ProductCard = ({ p }) => {
               className="cursor-pointer w-full"
               src={p.image}
               alt={p.name}
-              style={{ width: "350px", height: "300px", objectFit: "cover" }}
+              style={{ width: "300px", height: "300px", objectFit: "cover" }}
             />
           </div>
         </Link>
@@ -55,7 +55,7 @@ const ProductCard = ({ p }) => {
         <section className="flex justify-between items-center">
           <Link
             to={`/product/${p._id}`}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-gray-500 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-gray-500 dark:focus:ring-blue-800"
           >
             Read More
             <svg
