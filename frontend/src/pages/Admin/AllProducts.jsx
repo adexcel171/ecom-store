@@ -26,7 +26,7 @@ const AllProducts = () => {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 flex justify-center">
+    <div className="min-h-screen mt[80px] w-full bg-gray-50 flex justify-center">
       <div className="container max-w-full mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
           {/* Sidebar */}

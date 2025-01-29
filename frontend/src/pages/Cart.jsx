@@ -31,7 +31,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center px-3 mx-auto mt-10">
+      <div className="flex flex-col items-center px-3 mx-auto mt-[70px]">
         {cartItems.length === 0 ? (
           <div className="text-center pt-10 px-2 mb-4">
             Your cart is empty. <Link to="/shop">Go To Shop</Link>

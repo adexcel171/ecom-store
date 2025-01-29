@@ -128,111 +128,132 @@ const ProductList = () => {
     }
   };
   return (
-    <div className="container xl:mx-[9rem] sm:mx-[0] text-white">
+    <div className="container max-w-6xl mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row">
-        <div className="md:w-3/4 pt-3 mt-10">
+        <div className="md:w-3/4 mx-auto w-full">
           <AdminMenu />
 
-          <div className="h-12 text-center mt-5">Create Product</div>
+          <div className="bg-white rounded-xl shadow-lg p-6 mt-8">
+            <h2 className="text-2xl font-bold text-gray-800 text-center mb-8 flex items-center justify-center">
+              <span className="w-2 h-8 bg-blue-500 rounded-full mr-3"></span>
+              Create Product
+              <span className="w-2 h-8 bg-blue-500 rounded-full ml-3"></span>
+            </h2>
 
-          {imageLoaded && imageUrl && (
-            <div className="text-center">
-              <img
-                src={imageUrl}
-                alt="product"
-                className="block mx-auto max-h-[200px]"
-              />
-            </div>
-          )}
+            {imageLoaded && imageUrl && (
+              <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+                <img
+                  src={imageUrl}
+                  alt="product"
+                  className="block mx-auto max-h-[200px] rounded-lg shadow-md"
+                />
+              </div>
+            )}
 
-          <div className="mb-3">
-            <label className="border text-white spx-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
-              {image ? image.name : "Upload Image"}
-
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={(e) => {
-                  setImage(null);
-                  uploadFileHandler(e);
-                }}
-                className={!imageUrl ? "hidden" : "text-white"}
-              />
-            </label>
-          </div>
-
-          <div className="p-3">
-            <div className="flex flex-wrap">
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="name">Name</label> <br />
+            <div className="mb-6">
+              <label className="relative block p-8 border-2 border-dashed border-gray-300 rounded-xl hover:border-blue-500 transition-colors cursor-pointer group">
+                <div className="text-center">
+                  <div className="text-gray-600 group-hover:text-blue-500 transition-colors mb-2">
+                    {image ? (
+                      <span className="font-medium text-blue-500">
+                        {image.name}
+                      </span>
+                    ) : (
+                      <>
+                        <i className="fas fa-cloud-upload-alt text-3xl mb-2"></i>
+                        <p>Upload Image</p>
+                      </>
+                    )}
+                  </div>
+                </div>
                 <input
-                  placeholder="enter product name..."
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={(e) => {
+                    setImage(null);
+                    uploadFileHandler(e);
+                  }}
+                  className="hidden"
+                />
+              </label>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Name
+                </label>
+                <input
+                  placeholder="Enter product name..."
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="name block">Price</label> <br />
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Price
+                </label>
                 <input
-                  placeholder="enter Product price.."
+                  placeholder="Enter product price..."
                   type="number"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </div>
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="name block">Quantity</label> <br />
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Quantity
+                </label>
                 <input
-                  placeholder="enter  Quantity Available"
+                  placeholder="Enter quantity available"
                   type="number"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
               </div>
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="name block">Brand</label> <br />
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Brand
+                </label>
                 <input
-                  placeholder="enter Product Brand"
+                  placeholder="Enter product brand"
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 />
               </div>
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="" className="my-5">
-                  Description
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Count In Stock
                 </label>
-                <textarea
-                  placeholder="About Product"
-                  type="text"
-                  className="p-2 w-full bg-gray-600 border rounded-lg text-white"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </div>
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="name block">Count In Stock</label> <br />
                 <input
-                  placeholder="count in stock"
+                  placeholder="Count in stock"
                   type="text"
-                  className="p-4 w-full border rounded-lg bg-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800"
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
                 />
               </div>
-              <div className="w-full sm:w-full md:w-[50%] mb-3">
-                <label htmlFor="">Category</label> <br />
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Category
+                </label>
                 <select
-                  placeholder="Choose Category"
-                  className="p-4 border rounded-lg bg-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800"
                   onChange={(e) => setCategory(e.target.value)}
                 >
+                  <option value="">Choose Category</option>
                   {categories?.map((c) => (
                     <option key={c._id} value={c._id}>
                       {c.name}
@@ -240,14 +261,28 @@ const ProductList = () => {
                   ))}
                 </select>
               </div>
+
+              <div className="space-y-2 md:col-span-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Description
+                </label>
+                <textarea
+                  placeholder="About Product"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-800 min-h-[120px]"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </div>
             </div>
 
-            <button
-              onClick={handleSubmit}
-              className="py-5 px-10 mt-5 rounded-lg text-lg font-bold bg-gray-700"
-            >
-              Submit
-            </button>
+            <div className="mt-8 flex justify-end">
+              <button
+                onClick={handleSubmit}
+                className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition-colors font-medium"
+              >
+                Create Product
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ import { Search } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
+import Shop from "./Shop";
 const ProductCarousel = lazy(() => import("./Products/ProductCarousel"));
 
 const Home = () => {
@@ -61,7 +62,7 @@ const Home = () => {
           </Message>
         ) : (
           <>
-            <div className="flex flex-col items-center justify-center mt-[20px] w-full px-4 py-6">
+            <div className="flex flex-col items-center justify-center mt-[30px] w-full px-4 py-6">
               <form
                 onSubmit={handleSearch}
                 className="relative w-full max-w-xl mb-8"
@@ -81,27 +82,24 @@ const Home = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white px-4 py-1 rounded-md hover:bg-gray-700"
                 >
                   Search
                 </button>
               </form>
-              <ProductCarousel />
             </div>
-
+            <div className=""></div>
             <div
               className="flex flex-col text-center items-center justify-center md:flex-col md:justify-center p-4 md:p-8"
               data-aos="fade-up"
               data-aos-mobile="false"
             >
               <h1 className="text-3xl md:text-4xl text-center mt-4 md:mt-6">
-                {keyword
-                  ? `Search Results for "${keyword}"`
-                  : "Special Products"}
+                {keyword ? `Search Results for "${keyword}"` : ""}
               </h1>
               <Link
                 to="/shop"
-                className="bg-blue-600 text-white font-bold rounded-full py-2 text-center md:mt-4 px-6 md:px-10 mt-4"
+                className="bg-gray-600 text-white font-bold rounded-full py-2 text-center md:mt-4 px-6 md:px-10 mt-4"
               >
                 Shop
               </Link>
@@ -113,7 +111,7 @@ const Home = () => {
               data-aos-delay="200"
               data-aos-mobile="false"
             >
-              <div className="grid grid-cols-2 md:grid-cols-4  gap-2 justify-center mt-4 md:mt-8">
+              <div className="grid grid-cols-2 md:grid-cols-6  gap-2 justify-center mt-4 md:mt-8">
                 {data.products.length === 0 ? (
                   <Message>No products found</Message>
                 ) : (
@@ -133,6 +131,7 @@ const Home = () => {
                 )}
               </div>
             </div>
+            <Shop />
 
             <Footer />
           </>

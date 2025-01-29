@@ -17,7 +17,7 @@ const ProductCard = ({ p }) => {
   };
 
   return (
-    <div className="max-w-sm relative mt-5 bg-[#212222] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-sm relative mt-5 bg-gray-900 rounded-lg shadow dark:bg-gray-900 dark:border-gray-900">
       <section className="relative">
         <Link to={`/product/${p._id}`}>
           <span className="absolute bottom-3 right-3 bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
@@ -28,7 +28,7 @@ const ProductCard = ({ p }) => {
               className="cursor-pointer w-full"
               src={p.image}
               alt={p.name}
-              style={{ width: "300px", height: "300px", objectFit: "cover" }}
+              style={{ width: "350px", height: "300px", objectFit: "cover" }}
             />
           </div>
         </Link>
@@ -55,7 +55,7 @@ const ProductCard = ({ p }) => {
         <section className="flex justify-between items-center">
           <Link
             to={`/product/${p._id}`}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-gray-500 dark:focus:ring-blue-800"
           >
             Read More
             <svg

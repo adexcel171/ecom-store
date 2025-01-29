@@ -76,9 +76,11 @@ const Navigation = () => {
       <div className="hidden xl:flex lg:flex md:flex justify-between items-center h-[75px] px-4">
         <div className="flex flex-row justify-center space-x-6 items-center">
           <Link to="/" className="flex items-center">
-            <h1 className="font-extrabold text-3xl text-black mr-2">X</h1>
+            <h1 className=" font-extrabold text-3xl text-gray-900  ">E</h1>
+            <span className="font-extrabold text-2xl text-gray-800 mr-6">
+              XCEL
+            </span>
           </Link>
-
           <div className="flex items-center space-x-4">
             <Link to="/shop" className="flex flex-col items-center text-black">
               <AiOutlineShopping size={25} />
@@ -232,7 +234,10 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex justify-center items-center">
           <Link to="/" className="flex items-center">
-            <h1 className=" font-extrabold text-3xl text-black mr-6 ">X</h1>
+            <h1 className=" font-extrabold text-3xl text-gray-900  ">E</h1>
+            <span className="font-extrabold text-2xl text-gray-800 mr-6">
+              XCEL
+            </span>
           </Link>
           <Link
             to="/shop"

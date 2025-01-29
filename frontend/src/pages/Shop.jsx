@@ -15,6 +15,7 @@ import ShopSkeleton from "../components/ShoShopSkeletonShopSkeletonpSkeleton";
 import Announcement from "../components/announce/Announcement";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
+import ProductCarousel from "./Products/ProductCarousel";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -129,92 +130,101 @@ const Shop = () => {
   }
 
   return (
-    <div className="mx-auto mt-10">
-      <div className="flex flex-col md:flex-row">
-        <div
-          className="bg-gray-400 mt-10 text-white  md:rounded-md rounded-md md:m-2 p-3 md:w-[35rem]"
-          data-aos="fade-right"
-        >
-          <h2 className="h4 text-center px-2 mt-10 py-3 bg-black rounded-full mb-2">
-            Filter by Categories
-          </h2>
-
-          <div className="p-5">
-            {categories?.map((c, index) => (
-              <div
-                key={c._id}
-                className="mb-2"
-                data-aos="fade-up"
-                data-aos-delay={`${index * 50}`}
-              >
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id={c._id}
-                    onChange={(e) => handleCheck(e.target.checked, c._id)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label
-                    htmlFor={c._id}
-                    className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+    <div className="mx-3 mt-[50px]">
+      <ProductCarousel />
+      <div
+        className="w-full bg-white shadow-lg border-b mt-[70px] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+        data-aos="fade-down"
+      >
+        <div className="max-w-7xl mx-auto px-6 py-5">
+          <div className="flex flex-wrap items-start gap-8">
+            {/* Categories Filter */}
+            <div className="flex-1 min-w-[200px] bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="w-1 h-4 bg-blue-500 rounded-full mr-2"></span>
+                Categories
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {categories?.map((c, index) => (
+                  <div
+                    key={c._id}
+                    className="flex items-center bg-white px-3 py-2 rounded-md shadow-sm transition-all duration-200 hover:shadow-md"
+                    data-aos="fade-up"
+                    data-aos-delay={`${index * 50}`}
                   >
-                    {c.name}
-                  </label>
-                </div>
+                    <input
+                      type="checkbox"
+                      id={c._id}
+                      onChange={(e) => handleCheck(e.target.checked, c._id)}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                    />
+                    <label
+                      htmlFor={c._id}
+                      className="ml-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
+                    >
+                      {c.name}
+                    </label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
 
-          <h2 className="h4 text-center py-2 bg-black rounded-full mb-2">
-            Filter by Brands
-          </h2>
-
-          <div className="p-5">
-            {uniqueBrands?.map((brand) => (
-              <div key={brand} className="mb-5">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    id={brand}
-                    name="brand"
-                    onChange={() => handleBrandClick(brand)}
-                    className="w-4 h-4 text-blue-400 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label
-                    htmlFor={brand}
-                    className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+            {/* Brands Filter */}
+            <div className="flex-1 min-w-[200px] bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="w-1 h-4 bg-green-500 rounded-full mr-2"></span>
+                Brands
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {uniqueBrands?.map((brand) => (
+                  <div
+                    key={brand}
+                    className="flex items-center bg-white px-3 py-2 rounded-md shadow-sm transition-all duration-200 hover:shadow-md"
                   >
-                    {brand}
-                  </label>
-                </div>
+                    <input
+                      type="radio"
+                      id={brand}
+                      name="brand"
+                      onChange={() => handleBrandClick(brand)}
+                      className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200"
+                    />
+                    <label
+                      htmlFor={brand}
+                      className="ml-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
+                    >
+                      {brand}
+                    </label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
 
-          <h2 className="h4 text-center py-2 bg-black rounded-full mb-2">
-            Filter by Price
-          </h2>
-
-          <div className="p-5">
-            <input
-              type="text"
-              placeholder="Enter Price"
-              value={priceFilter}
-              onChange={handlePriceChange}
-              className="w-full px-3 py-2 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-            />
-          </div>
-
-          <div className="p-5 pt-0">
-            <button
-              className="w-full border my-4"
-              onClick={() => window.location.reload()}
-            >
-              Reset
-            </button>
+            {/* Price Filter */}
+            <div className="flex-1 min-w-[200px] bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="w-1 h-4 bg-purple-500 rounded-full mr-2"></span>
+                Price
+              </h2>
+              <div className="flex gap-3 items-center">
+                <input
+                  type="text"
+                  placeholder="Enter Price"
+                  value={priceFilter}
+                  onChange={handlePriceChange}
+                  className="flex-1 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white transition-all duration-200"
+                />
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-4 py-2 text-sm text-gray-600 bg-white border rounded-lg hover:bg-gray-50 hover:text-gray-900 active:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-
+      </div>
+      <div className="flex flex-col md:flex-row">
         <div className="p-3 mt-5" data-aos="fade-left">
           <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
           <div className="flex justify-center flex-wrap">
