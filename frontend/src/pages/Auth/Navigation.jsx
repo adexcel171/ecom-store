@@ -16,7 +16,7 @@ import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
 import "./Navigation.css";
-import logo from "../Auth/logo.svg";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -76,7 +76,8 @@ const Navigation = () => {
       <div className="hidden xl:flex lg:flex md:flex justify-between items-center h-[75px] px-4">
         <div className="flex flex-row justify-center space-x-6 items-center">
           <Link to="/" className="flex items-center">
-            <h1 className=" font-extrabold text-2xl text-blue-900 mr-2 ">
+            <h1 className="flex items-center font-extrabold text-2xl text-blue-900">
+              <FaShoppingCart className="mr-2" /> {/* Shop icon */}
               XCEL
             </h1>
           </Link>
@@ -233,7 +234,8 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex justify-center items-center">
           <Link to="/" className="flex items-center">
-            <h1 className=" font-extrabold text-2xl text-blue-900 mr-3  ">
+            <h1 className="flex items-center font-extrabold text-2xl text-blue-900">
+              <FaShoppingCart className="mr-2" /> {/* Shop icon */}
               XCEL
             </h1>
           </Link>

@@ -41,7 +41,10 @@ const Footer = () => {
             <p className="mb-4">
               Stay updated with our latest offers and products
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="flex flex-col sm:flex-row gap-2"
+            >
               <input
                 type="email"
                 value={email}
@@ -62,7 +65,7 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Contact Form Section */}
           <div className="lg:col-span-2">
             <h2 className="text-xl font-bold mb-4">Contact Us</h2>
