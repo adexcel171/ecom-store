@@ -8,7 +8,7 @@ const Product = ({ product }) => {
         <img
           src={product.image}
           alt={product.name}
-          className="w-[200px] object-cover object-center h-[180px] rounded"
+          className="w-[250px] object-cover object-center h-[200px] rounded"
         />
         <HeartIcon product={product} />
       </div>
