@@ -16,7 +16,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect } from "react";
 import Shop from "./Shop";
-const ProductCarousel = lazy(() => import("./Products/ProductCarousel"));
+import ProductCarousel from "./Products/ProductCarousel";
 
 const Home = () => {
   const { keyword } = useParams();
@@ -104,7 +104,6 @@ const Home = () => {
                 Shop
               </Link>
             </div>
-
             <div
               className="flex flex-col items-center p-4 md:p-8"
               data-aos="fade-up"
@@ -131,7 +130,6 @@ const Home = () => {
                 )}
               </div>
             </div>
-            <Shop />
 
             <Footer />
           </>

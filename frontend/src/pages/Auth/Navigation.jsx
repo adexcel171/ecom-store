@@ -2,59 +2,43 @@ import React, { useState, useEffect } from "react";
 import {
   AiOutlineHome,
   AiOutlineShopping,
-  AiOutlineLogin,
-  AiOutlineUserAdd,
+  AiOutlineUser,
   AiOutlineShoppingCart,
   AiOutlineMenu,
   AiOutlineClose,
 } from "react-icons/ai";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaChevronDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
-import "./Navigation.css";
-import { FaShoppingCart } from "react-icons/fa";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const toggleMobileMenu = (e) => {
-    e.stopPropagation();
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const [scrolled, setScrolled] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [logoutApiCall] = useLogoutMutation();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (dropdownOpen) {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+      if (dropdownOpen || isMobileMenuOpen) {
         setDropdownOpen(false);
-      }
-      if (isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [dropdownOpen, isMobileMenuOpen]);
 
   const logoutHandler = async () => {
@@ -68,319 +52,252 @@ const Navigation = () => {
   };
 
   return (
-    <div
-      style={{ zIndex: 9999 }}
-      className="fixed top-0 w-full bg-gray-100 shadow-md"
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "bg-white shadow-lg" : "bg-white/95 backdrop-blur-sm"
+      }`}
     >
       {/* Desktop Navigation */}
-      <div className="hidden xl:flex lg:flex md:flex justify-between items-center h-[75px] px-4">
-        <div className="flex flex-row justify-center space-x-6 items-center">
-          <Link to="/" className="flex items-center">
-            <h1 className="flex items-center font-extrabold text-2xl text-blue-900">
-              <FaShoppingCart className="mr-1" /> {/* Shop icon */}
-              XCEL
-            </h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center space-x-2 text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          >
+            <span>BIG X</span>
           </Link>
-          <div className="flex items-center space-x-4">
-            <Link to="/shop" className="flex flex-col items-center text-black">
-              <AiOutlineShopping size={25} />
-              {/* <span className="text-sm">Shop</span> */}
-            </Link>
 
+          {/* Main Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link
+              to="/"
+              className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <AiOutlineHome className="mr-1" />
+              Home
+            </Link>
+            <Link
+              to="/shop"
+              className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <AiOutlineShopping className="mr-1" />
+              Shop
+            </Link>
+            <Link
+              to="/favorite"
+              className="flex items-center text-gray-600 hover:text-blue-600 relative"
+            >
+              <FaHeart className="mr-1" />
+              <FavoritesCount />
+            </Link>
             <Link
               to="/cart"
-              className="flex flex-col items-center relative text-black"
+              className="flex items-center text-gray-600 hover:text-blue-600 relative"
             >
-              <AiOutlineShoppingCart size={25} />
+              <AiOutlineShoppingCart className="mr-1" />
               {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 px-1 py-0 text-xs text-white bg-rose-600 rounded-full">
+                <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
                   {cartItems.reduce((a, c) => a + c.qty, 0)}
                 </span>
               )}
-              {/* <span className="text-sm">Cart</span> */}
-            </Link>
-
-            <Link
-              to="/favorite"
-              className="flex flex-col items-center text-black"
-            >
-              <FaHeart className="flex" size={25} />
-              <FavoritesCount />
-              {/* <span className="text-sm">Favorite</span> */}
             </Link>
           </div>
-        </div>
 
-        <div className="flex items-center">
-          {userInfo ? (
-            <div className="relative">
-              <button
-                onClick={toggleDropdown}
-                className="flex items-center text-gray-800 focus:outline-none"
-              >
-                <span className="text-black mr-2">{userInfo.username}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 ml-1 ${
-                    dropdownOpen ? "transform rotate-180" : ""
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="blue"
+          {/* User Section */}
+          <div className="hidden md:flex items-center space-x-4">
+            {userInfo ? (
+              <div className="relative">
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="4"
-                    d={dropdownOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-                  />
-                </svg>
-              </button>
+                  <AiOutlineUser />
+                  <span>{userInfo.username}</span>
+                  <FaChevronDown className="text-sm mt-0.5" />
+                </button>
 
-              {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
-                  <ul className="py-1">
-                    {userInfo.isAdmin && (
-                      <>
-                        <li>
-                          <Link
-                            to="/admin/dashboard"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setDropdownOpen(false)}
-                          >
-                            Dashboard
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/admin/productlist"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setDropdownOpen(false)}
-                          >
-                            Products
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/admin/categorylist"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setDropdownOpen(false)}
-                          >
-                            Category
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/admin/orderlist"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setDropdownOpen(false)}
-                          >
-                            Orders
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/admin/userlist"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setDropdownOpen(false)}
-                          >
-                            Users
-                          </Link>
-                        </li>
-                      </>
-                    )}
-                    <li>
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 hover:bg-gray-100"
-                        onClick={() => setDropdownOpen(false)}
-                      >
-                        Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        onClick={logoutHandler}
-                        className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="flex space-x-4">
-              <Link
-                to="/login"
-                className="flex items-center transition-transform transform hover:translate-x-1"
-              >
-                <AiOutlineLogin className="mr-2" size={18} />
-              </Link>
-              <Link
-                to="/register"
-                className="flex items-center transition-transform transform hover:translate-x-2"
-              >
-                <AiOutlineUserAdd className="mr-2" size={18} />
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      <div className="xl:hidden lg:hidden md:hidden flex justify-between items-center h-[60px] px-4">
-        {/* Logo */}
-        <div className="flex justify-center items-center">
-          <Link to="/" className="flex items-center">
-            <h1 className="flex items-center font-extrabold text-2xl text-blue-900 mr-4">
-              <FaShoppingCart className="mr-1" /> {/* Shop icon */}
-              XCEL
-            </h1>
-          </Link>
-          <Link
-            to="/shop"
-            className="flex items-center mr-4  space-x-10 py-2 border-b"
-          >
-            <AiOutlineShopping className="mr-2" size={24} />
-          </Link>
-
-          <Link
-            to="/cart"
-            className="flex items-center space-x-10 py-2 border-b relative"
-            // onClick={toggleMobileMenu}
-          >
-            <AiOutlineShoppingCart className="mr-2" size={24} />
-
-            {cartItems.length > 0 && (
-              <span className="absolute right-0 px-2 py-1 mb-7 text-xs text-white bg-rose-600 rounded-full">
-                {cartItems.reduce((a, c) => a + c.qty, 0)}
-              </span>
-            )}
-          </Link>
-        </div>
-
-        {/* Hamburger Menu */}
-        <button
-          onClick={toggleMobileMenu}
-          className="focus:outline-none text-black"
-        >
-          {isMobileMenuOpen ? (
-            <AiOutlineClose size={24} />
-          ) : (
-            <AiOutlineMenu size={24} />
-          )}
-        </button>
-
-        {/* Mobile Menu Overlay */}
-        {isMobileMenuOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <div
-              className="fixed top-0 right-0 w-64 h-full bg-white shadow-lg transform translate-x-0 transition-transform duration-300 ease-in-out z-50"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="p-4">
-                <div className="flex justify-end mb-4">
-                  <button
-                    onClick={toggleMobileMenu}
-                    className="focus:outline-none text-black"
-                  >
-                    <AiOutlineClose size={24} />
-                  </button>
-                </div>
-
-                {/* Mobile Menu Items */}
-                <nav className="space-y-4">
-                  {/* User-specific menu items */}
-                  {userInfo ? (
-                    <>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border">
+                    <div className="p-2 space-y-1">
                       {userInfo.isAdmin && (
                         <>
                           <Link
                             to="/admin/dashboard"
-                            className="block py-2 border-b"
-                            onClick={toggleMobileMenu}
+                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                           >
                             Dashboard
                           </Link>
                           <Link
                             to="/admin/productlist"
-                            className="block py-2 border-b"
-                            onClick={toggleMobileMenu}
+                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                           >
                             Products
                           </Link>
                           <Link
-                            to="/admin/categorylist"
-                            className="block py-2 border-b"
-                            onClick={toggleMobileMenu}
-                          >
-                            Category
-                          </Link>
-                          <Link
                             to="/admin/orderlist"
-                            className="block py-2 border-b"
-                            onClick={toggleMobileMenu}
+                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                           >
                             Orders
-                          </Link>
-                          <Link
-                            to="/admin/userlist"
-                            className="block py-2 border-b"
-                            onClick={toggleMobileMenu}
-                          >
-                            Users
                           </Link>
                         </>
                       )}
                       <Link
                         to="/profile"
-                        className="block py-2 border-b"
-                        onClick={toggleMobileMenu}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                       >
                         Profile
                       </Link>
                       <button
-                        onClick={() => {
-                          logoutHandler();
-                          toggleMobileMenu();
-                        }}
-                        className="block w-full py-2 text-left border-b"
+                        onClick={logoutHandler}
+                        className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
                       >
                         Logout
                       </button>
-                    </>
-                  ) : (
-                    <>
-                      <Link
-                        to="/login"
-                        className="flex items-center py-2 border-b"
-                        onClick={toggleMobileMenu}
-                      >
-                        <AiOutlineLogin className="mr-2" size={20} />
-                        Login
-                      </Link>
-                      <Link
-                        to="/register"
-                        className="flex items-center py-2 border-b"
-                        onClick={toggleMobileMenu}
-                      >
-                        <AiOutlineUserAdd className="mr-2" size={20} />
-                        Register
-                      </Link>
-                    </>
-                  )}
-                </nav>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
+            ) : (
+              <div className="flex space-x-4">
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
+            className="md:hidden p-2 text-gray-600 hover:text-blue-600"
+          >
+            {isMobileMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`md:hidden fixed inset-0 bg-black/50 z-40 transition-opacity ${
+          isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        <div
+          className={`absolute right-0 top-0 h-full w-64 bg-white transform transition-transform duration-300 ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="p-4 border-b">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xl font-bold text-blue-600">BIG X</span>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 text-gray-600"
+              >
+                <AiOutlineClose />
+              </button>
+            </div>
+
+            {userInfo ? (
+              <div className="flex items-center space-x-2 text-gray-600">
+                <AiOutlineUser />
+                <span>{userInfo.username}</span>
+              </div>
+            ) : (
+              <div className="flex space-x-2">
+                <Link
+                  to="/login"
+                  className="flex-1 text-center px-4 py-2 text-blue-600"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="flex-1 text-center px-4 py-2  text-blue-500 rounded-lg"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <nav className="p-4 space-y-2">
+            <Link
+              to="/"
+              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+            >
+              Home
+            </Link>
+            <Link
+              to="/shop"
+              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+            >
+              Shop
+            </Link>
+            <Link
+              to="/favorite"
+              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+            >
+              Favorites
+            </Link>
+            <Link
+              to="/cart"
+              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+            >
+              Cart ({cartItems.reduce((a, c) => a + c.qty, 0)})
+            </Link>
+
+            {userInfo?.isAdmin && (
+              <div className="pt-4 border-t">
+                <div className="text-sm text-gray-500 px-2 py-1">Admin</div>
+                <Link
+                  to="/admin/dashboard"
+                  className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  to="/admin/productlist"
+                  className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                >
+                  Products
+                </Link>
+                <Link
+                  to="/admin/orderlist"
+                  className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                >
+                  Orders
+                </Link>
+              </div>
+            )}
+
+            {userInfo && (
+              <button
+                onClick={logoutHandler}
+                className="w-full text-left p-2 text-red-600 hover:bg-red-50 rounded-lg"
+              >
+                Logout
+              </button>
+            )}
+          </nav>
+        </div>
+      </div>
+    </nav>
   );
 };
 

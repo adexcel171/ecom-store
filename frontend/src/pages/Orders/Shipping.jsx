@@ -9,12 +9,6 @@ import ProgressSteps from "../../components/ProgressSteps";
 import { FaPaypal, FaMoneyBillWave } from "react-icons/fa";
 
 const Shipping = () => {
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-NG", {
-      style: "currency",
-      currency: "NGN",
-    }).format(amount);
-  };
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -31,13 +25,11 @@ const Shipping = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };
 
-  // Payment
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate("/shipping");
@@ -45,95 +37,133 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className="container mx-auto mt-10 px-3">
-      {/* <ProgressSteps step1 step2 /> */}
-      <div className="mt-10 px-4 flex flex-col justify-center items-center">
-        <form onSubmit={submitHandler} className="max-w-screen-md w-full mt-10">
-          <h1 className="text-2xl font-semibold mb-4 text-center">Shipping</h1>
-          <div className="mb-4">
-            <label className="block text-black mb-2">Address</label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter address"
-              value={address}
-              required
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black mb-2">City</label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter city"
-              value={city}
-              required
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black mb-2">Postal Code</label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter postal code"
-              value={postalCode}
-              required
-              onChange={(e) => setPostalCode(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black mb-2">Country</label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter country"
-              value={country}
-              required
-              onChange={(e) => setCountry(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-400">Select Payment Method</label>
-            <div className="mt-2 space-y-2">
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  className="form-radio text-blue-500"
-                  name="paymentMethod"
-                  value="PayPal"
-                  checked={paymentMethod === "PayPal"}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-                <FaPaypal className="ml-2 mr-2 text-blue-500" />
-                <span>PayPal</span>
-              </label>
-              <br />
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  className="form-radio text-green-500"
-                  name="paymentMethod"
-                  value="Paystack"
-                  checked={paymentMethod === "Paystack"}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-                <FaMoneyBillWave className="ml-2 mr-2 text-green-500" />
-                <span>Paystack</span>
-              </label>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <ProgressSteps step1 step2 />
 
-          <div className="flex justify-center items-center">
-            <button
-              className="bg-blue-500 text-white py-2 px-4 rounded-full text-lg w-full sm:w-[200px]"
-              type="submit"
-            >
-              Continue
-            </button>
-          </div>
-        </form>
+        <div className="mt-8 bg-white rounded-xl shadow-lg p-6 sm:p-8">
+          <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+            Shipping Details
+          </h1>
+
+          <form onSubmit={submitHandler} className="space-y-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Street Address
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  placeholder="123 Main Street"
+                  value={address}
+                  required
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  City
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  placeholder="Enter city"
+                  value={city}
+                  required
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Postal Code
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  placeholder="Enter postal code"
+                  value={postalCode}
+                  required
+                  onChange={(e) => setPostalCode(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Country
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  placeholder="Enter country"
+                  value={country}
+                  required
+                  onChange={(e) => setCountry(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Payment Method
+              </h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <label
+                  className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                    paymentMethod === "PayPal"
+                      ? "border-purple-500 bg-purple-50"
+                      : "border-gray-200 hover:border-purple-300"
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <input
+                      type="radio"
+                      className="form-radio text-purple-600"
+                      name="paymentMethod"
+                      value="PayPal"
+                      checked={paymentMethod === "PayPal"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    <FaPaypal className="w-6 h-6 text-blue-500" />
+                    <span className="text-gray-700 font-medium">PayPal</span>
+                  </div>
+                </label>
+
+                <label
+                  className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                    paymentMethod === "Paystack"
+                      ? "border-green-500 bg-green-50"
+                      : "border-gray-200 hover:border-green-300"
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <input
+                      type="radio"
+                      className="form-radio text-green-600"
+                      name="paymentMethod"
+                      value="Paystack"
+                      checked={paymentMethod === "Paystack"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    <FaMoneyBillWave className="w-6 h-6 text-green-500" />
+                    <span className="text-gray-700 font-medium">Paystack</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-blue-600 transition-all transform hover:scale-101"
+              >
+                Continue to Payment
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

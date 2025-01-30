@@ -3,23 +3,25 @@ import HeartIcon from "./HeartIcon";
 
 const Product = ({ product }) => {
   return (
-    <div className="w-full  p-2 flex-col ">
+    <div className="w-full max-w-[300px] p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      {/* Product Image Section */}
       <div className="relative">
         <img
           src={product.image}
           alt={product.name}
-          className="w-[300px] object-cover object-center h-[200px] rounded"
+          className="w-full h-[200px] sm:h-[250px] object-cover rounded-t-lg"
         />
         <HeartIcon product={product} />
       </div>
 
-      <div className="p-4 w-full flex justify-center flex-col items-center">
+      {/* Product Details Section */}
+      <div className="p-4">
         <Link to={`/product/${product._id}`}>
-          <h2 className="flex justify-center flex-col items-center">
-            <div className="text-center font-medium  text-black">
+          <h2 className="text-center">
+            <div className="text-lg font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300">
               {product.name}
             </div>
-            <span className="bg-blue-100 text-black  font-medium  text-center  py-0.5 rounded dark:bg-gray-300 dark:text-black">
+            <span className="mt-2 inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
               ₦ {product.price.toLocaleString()}
             </span>
           </h2>

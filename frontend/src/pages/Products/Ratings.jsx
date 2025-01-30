@@ -1,30 +1,41 @@
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
-const Ratings = ({ value, text, color }) => {
+const Ratings = ({ value, text, color = "yellow-400", size = "text-lg" }) => {
   const fullStars = Math.floor(value);
-  const halfStars = value - fullStars > 0.5 ? 1 : 0;
-  const emptyStar = 5 - fullStars - halfStars;
+  const hasHalfStar = value - fullStars >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-1">
+      {/* Full Stars */}
       {[...Array(fullStars)].map((_, index) => (
-        <FaStar key={index} className={`text-${color} ml-1`} />
+        <FaStar
+          key={`full-${index}`}
+          className={`${size} text-${color} transition-transform hover:scale-110`}
+        />
       ))}
 
-      {halfStars === 1 && <FaStarHalfAlt className={`text-${color} ml-1`} />}
-      {[...Array(emptyStar)].map((_, index) => (
-        <FaRegStar key={index} className={`text-${color} ml-1`} />
+      {/* Half Star */}
+      {hasHalfStar && (
+        <FaStarHalfAlt
+          className={`${size} text-${color} transition-transform hover:scale-110`}
+        />
+      )}
+
+      {/* Empty Stars */}
+      {[...Array(emptyStars)].map((_, index) => (
+        <FaRegStar
+          key={`empty-${index}`}
+          className={`${size} text-${color} opacity-75 transition-transform hover:scale-110`}
+        />
       ))}
 
-      <span className={`rating-text ml-{2rem} text-${color}`}>
-        {text && text}
-      </span>
+      {/* Rating Text */}
+      {text && (
+        <span className={`ml-2 font-medium text-${color} ${size}`}>{text}</span>
+      )}
     </div>
   );
-};
-
-Ratings.defaultProps = {
-  color: "yellow-500",
 };
 
 export default Ratings;

@@ -17,29 +17,29 @@ const ProductCard = ({ p }) => {
   };
 
   return (
-    <div className="w-[305px] h-auto relative mt-5 bg-gray-900 rounded-lg shadow dark:bg-gray-900 dark:border-gray-900">
+    <div className="w-full max-w-[350px] h-auto relative mt-5 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-900 dark:border-gray-900">
+      {/* Product Image Section */}
       <section className="relative">
         <Link to={`/product/${p._id}`}>
-          <span className="absolute bottom-3 right-3 bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+          <span className="absolute bottom-3 right-3 bg-green-500 text-white text-sm font-medium px-2.5 py-0.5 rounded-full">
             {p?.brand}
           </span>
-          <div className="flex justify-center  ">
+          <div className="flex justify-center">
             <img
-              className="cursor-pointer w-full"
+              className="cursor-pointer w-full h-[250px] sm:h-[300px] object-cover rounded-t-lg"
               src={p.image}
               alt={p.name}
-              style={{ width: "350px", height: "300px", objectFit: "cover" }}
             />
           </div>
         </Link>
         <HeartIcon product={p} />
       </section>
 
+      {/* Product Details Section */}
       <div className="p-5">
-        <div className="flex justify-between">
-          <h5 className="mb-2 text-xl text-white">{p?.name}</h5>
-
-          <p className="font-semibold text-white">
+        <div className="flex justify-between items-center">
+          <h5 className="text-xl font-bold text-white">{p?.name}</h5>
+          <p className="font-semibold text-green-400">
             {p?.price?.toLocaleString("en-US", {
               style: "currency",
               currency: "NGN",
@@ -48,14 +48,16 @@ const ProductCard = ({ p }) => {
           </p>
         </div>
 
-        <p className="mb-3 font-normal text-[#CFCFCF]">
+        {/* Product Description */}
+        <p className="mt-2 mb-4 font-normal text-gray-300">
           {p?.description?.substring(0, 60)} ...
         </p>
 
+        {/* Action Buttons */}
         <section className="flex justify-between items-center">
           <Link
             to={`/product/${p._id}`}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-gray-500 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 transition-colors duration-300"
           >
             Read More
             <svg
@@ -75,11 +77,12 @@ const ProductCard = ({ p }) => {
             </svg>
           </Link>
 
+          {/* Add to Cart Button */}
           <button
-            className="p-2 rounded-full"
+            className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
             onClick={() => addToCartHandler(p, 1)}
           >
-            <AiOutlineShoppingCart style={{ color: "white" }} size={30} />
+            <AiOutlineShoppingCart className="text-white" size={24} />
           </button>
         </section>
       </div>

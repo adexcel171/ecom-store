@@ -2,8 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFilteredProductsQuery } from "../redux/api/productApiSlice";
 import { useFetchCategoriesQuery } from "../redux/api/categoryApiSlice";
-import { motion, useAnimation, useInView } from "framer-motion"; // Update this import
-
+import { motion, useAnimation, useInView } from "framer-motion";
 import {
   setCategories,
   setProducts,
@@ -11,11 +10,9 @@ import {
 } from "../redux/features/shop/shopSlice";
 import Loader from "../components/Loader";
 import ProductCard from "./Products/ProductCard";
-import ShopSkeleton from "../components/ShoShopSkeletonShopSkeletonpSkeleton";
-import Announcement from "../components/announce/Announcement";
+import ShopSkeleton from "./../components/ShoShopSkeletonShopSkeletonpSkeleton";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Import AOS styles
-import ProductCarousel from "./Products/ProductCarousel";
+import "aos/dist/aos.css";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -131,14 +128,15 @@ const Shop = () => {
 
   return (
     <div className="mx-3 mt-[50px]">
+      {/* Filters Section */}
       <div
         className="w-full bg-white shadow-lg border-b mt-[70px] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
         data-aos="fade-down"
       >
-        <div className="max-w-7xl mx-auto px-6 py-5">
-          <div className="flex flex-wrap items-start gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          <div className="flex flex-col md:flex-row gap-6">
             {/* Categories Filter */}
-            <div className="flex-1 min-w-[200px] bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
               <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
                 <span className="w-1 h-4 bg-blue-500 rounded-full mr-2"></span>
                 Categories
@@ -169,7 +167,7 @@ const Shop = () => {
             </div>
 
             {/* Brands Filter */}
-            <div className="flex-1 min-w-[200px] bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
               <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
                 <span className="w-1 h-4 bg-green-500 rounded-full mr-2"></span>
                 Brands
@@ -199,22 +197,22 @@ const Shop = () => {
             </div>
 
             {/* Price Filter */}
-            <div className="flex-1 min-w-[200px] bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
               <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
                 <span className="w-1 h-4 bg-purple-500 rounded-full mr-2"></span>
                 Price
               </h2>
-              <div className="flex gap-3 items-center">
+              <div className="flex flex-col sm:flex-row gap-3 items-center">
                 <input
                   type="text"
                   placeholder="Enter Price"
                   value={priceFilter}
                   onChange={handlePriceChange}
-                  className="flex w-[70px] px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white transition-all duration-200"
+                  className="w-full sm:w-[100px] px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white transition-all duration-200"
                 />
                 <button
                   onClick={() => window.location.reload()}
-                  className="px-4 py-2 text-sm text-gray-600 bg-white border rounded-lg hover:bg-gray-50 hover:text-gray-900 active:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                  className="w-full sm:w-auto px-4 py-2 text-sm text-gray-600 bg-white border rounded-lg hover:bg-gray-50 hover:text-gray-900 active:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   Reset
                 </button>
@@ -223,25 +221,25 @@ const Shop = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row">
-        <div className="p-3 mt-5" data-aos="fade-left">
-          <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
-          <div className="flex justify-center flex-wrap">
-            {products.length === 0 ? (
-              <Loader />
-            ) : (
-              products?.map((p, index) => (
-                <div
-                  className="p-3"
-                  key={p._id}
-                  data-aos="fade-up"
-                  data-aos-delay={`${index * 100}`}
-                >
-                  <ProductCard p={p} />
-                </div>
-              ))
-            )}
-          </div>
+
+      {/* Products Section */}
+      <div className="p-3 mt-5" data-aos="fade-left">
+        <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
+        <div className="flex justify-center flex-wrap gap-4">
+          {products.length === 0 ? (
+            <Loader />
+          ) : (
+            products?.map((p, index) => (
+              <div
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-3"
+                key={p._id}
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`}
+              >
+                <ProductCard p={p} />
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

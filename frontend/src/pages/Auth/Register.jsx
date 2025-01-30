@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../components/Loader";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
 
 const Register = () => {
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,153 +30,161 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (password !== confirmPassword) {
+      setError("Passwords do not match");
       toast.error("Passwords do not match");
-    } else {
-      try {
-        const res = await register({ username, email, password }).unwrap();
-        dispatch(setCredentials({ ...res }));
-        navigate(redirect);
-        toast.success("User successfully registered");
-      } catch (err) {
-        console.log(err);
-        toast.error(err.data.message);
-      }
+      return;
+    }
+
+    try {
+      const res = await register({ username, email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate(redirect);
+      toast.success("Registration successful! Welcome aboard! 🎉");
+    } catch (err) {
+      setError(err?.data?.message || "Registration failed");
+      toast.error(err?.data?.message || err.error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-6xl w-full mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Form Section */}
-          <div className="w-full lg:w-1/2 bg-white p-8 rounded-2xl shadow-lg">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-              Create Account
-            </h1>
-
-            <form onSubmit={submitHandler} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Enter your name"
-                  value={username}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="password"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Create a password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Confirm your password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
-
-              <button
-                disabled={isLoading}
-                type="submit"
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center font-medium"
-              >
-                {isLoading ? <Loader /> : "Create Account"}
-              </button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-gray-600">
-                Already have an account?{" "}
-                <Link
-                  to={redirect ? `/login?redirect=${redirect}` : "/login"}
-                  className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
-                >
-                  Sign in
-                </Link>
-              </p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+        {/* Left Section: Illustration */}
+        <div className="w-full lg:w-1/2 bg-gradient-to-br from-blue-600 to-purple-600 p-8 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h2 className="text-4xl font-bold mb-4">Join Our Community!</h2>
+            <p className="text-lg">
+              Create an account to unlock exclusive features and personalized
+              experiences.
+            </p>
+            <div className="mt-8">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEOn9D-TDi9s5DhXIfxarlQcekkcr7Z1Vx4g&s"
+                alt="Registration Illustration"
+                className="w-full h-auto rounded-lg"
+              />
             </div>
           </div>
+        </div>
 
-          {/* Animated Image Section */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center">
-            <div className="relative w-full max-w-md animate-float">
-              <svg className="w-full h-auto" viewBox="0 0 400 400">
-                {/* Shop Building */}
-                <rect x="100" y="150" width="200" height="200" fill="#4B5563" />
-                <rect x="80" y="130" width="240" height="20" fill="#374151" />
-                <rect x="150" y="250" width="100" height="100" fill="#F3F4F6" />
+        {/* Right Section: Registration Form */}
+        <div className="w-full lg:w-1/2 p-8">
+          <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            Get Started
+          </h1>
 
-                {/* Animated Shopping Cart */}
-                <g className="animate-bounce">
-                  <circle cx="180" cy="380" r="10" fill="#60A5FA" />
-                  <circle cx="220" cy="380" r="10" fill="#60A5FA" />
-                  <path
-                    d="M160 360 L240 360 L230 330 L170 330 Z"
-                    fill="#2563EB"
-                  />
-                </g>
-
-                {/* Animated Stars */}
-                <g className="animate-pulse">
-                  <path d="M50 50 L60 60 L50 70 L40 60 Z" fill="#FCD34D" />
-                  <path d="M300 80 L310 90 L300 100 L290 90 Z" fill="#FCD34D" />
-                  <path
-                    d="M350 150 L360 160 L350 170 L340 160 Z"
-                    fill="#FCD34D"
-                  />
-                </g>
-              </svg>
+          <form onSubmit={submitHandler} className="space-y-5">
+            {/* Name Input */}
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder="Enter your full name"
+                value={username}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </div>
+
+            {/* Email Input */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Password Input */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder="Create a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Confirm Password Input */}
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center font-medium"
+            >
+              {isLoading ? (
+                <RotatingLines
+                  strokeColor="white"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="24"
+                  visible={true}
+                />
+              ) : (
+                "Create Account"
+              )}
+            </button>
+          </form>
+
+          {/* Login Link */}
+          <div className="mt-6 text-center">
+            <p className="text-gray-600">
+              Already have an account?{" "}
+              <Link
+                to={redirect ? `/login?redirect=${redirect}` : "/login"}
+                className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+              >
+                Sign in here
+              </Link>
+            </p>
           </div>
         </div>
       </div>

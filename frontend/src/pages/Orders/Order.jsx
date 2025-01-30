@@ -12,7 +12,14 @@ import {
   usePayOrderMutation,
 } from "../../redux/api/orderApiSlice";
 import { PaystackButton } from "react-paystack";
-import { FaWhatsapp, FaInstagram, FaFacebookMessenger } from "react-icons/fa";
+import {
+  FaWhatsapp,
+  FaInstagram,
+  FaFacebookMessenger,
+  FaBox,
+} from "react-icons/fa";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+
 const Order = () => {
   const { id: orderId } = useParams();
 
@@ -183,192 +190,246 @@ const Order = () => {
     amount: order?.totalPrice * 100, // Paystack amount is in kobo
     publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
   };
-
   return isLoading ? (
     <Loader />
   ) : error ? (
     <Message variant="danger">{error.data.message}</Message>
   ) : (
-    <div className="container flex flex-col mt-10 mx-2 md:flex-row md: p-5">
-      <div className="md:w-2/3 pr-4">
-        <div className="border gray-300 mt-5 pb-4 mb-5">
-          {order.orderItems.length === 0 ? (
-            <Message>Order is empty</Message>
-          ) : (
-            <div className="overflow-x-auto px-2">
-              <table className="w-full md:w-[70%]">
-                <thead className="border-b-2">
-                  <tr>
-                    <th className="p-2">Image</th>
-                    <th className="p-2">Product</th>
-                    <th className="p-2 text-center">Quantity</th>
-                    <th className="p-2">Unit Price</th>
-                    <th className="p-2">Total</th>
-                  </tr>
-                </thead>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+          {/* Order Header */}
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+              Order Summary
+            </h1>
+            <p className="text-gray-600 mt-2">Order ID: {order._id}</p>
+          </div>
 
-                <tbody>
-                  {order.orderItems.map((item, index) => (
-                    <tr key={index}>
-                      <td className="p-2">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-16 h-16 object-cover"
-                        />
-                      </td>
-
-                      <td className="p-2">
-                        <Link to={`/product/${item.product}`}>{item.name}</Link>
-                      </td>
-
-                      <td className="p-2 text-center">{item.qty}</td>
-                      <td className="p-2 text-center">{item.price}</td>
-                      <td className="p-2 text-center">
-                        ₦ {(item.qty * item.price).toFixed(2)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="md:w-1/3">
-        <div className="mt-5  mx-2 border-gray-300 pb-4 mb-4">
-          <h2 className="text-xl font-bold mb-2">Shipping</h2>
-          <p className="mb-4  mt-4">
-            <strong className="text-blue-500">Order:</strong> {order._id}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-blue-500">Name:</strong>{" "}
-            {order.user.username}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-blue-500">Email:</strong> {order.user.email}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-blue-500">Address:</strong>{" "}
-            {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-            {order.shippingAddress.postalCode}, {order.shippingAddress.country}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-blue-500">Method:</strong>{" "}
-            {order.paymentMethod}
-          </p>
-
-          {order.isPaid ? (
-            <Message variant="success">Paid on {order.paidAt}</Message>
-          ) : (
-            <Message variant="danger">Not paid</Message>
-          )}
-        </div>
-
-        <h2 className="text-xl mx-2 font-bold mb-2 mt-3 md:mt-0">
-          Order Summary
-        </h2>
-        <div className="flex flex-col md:flex-row mx-2 justify-between mb-2">
-          <span>Items</span>
-          <span>₦ {order.itemsPrice.toLocaleString()}</span>
-        </div>
-        <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
-          <span>Shipping</span>
-          <span>₦ {order.shippingPrice.toLocaleString()}</span>
-        </div>
-        <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
-          <span>Tax</span>
-          <span>₦ {order.taxPrice}</span>
-        </div>
-        <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
-          <span>Total</span>
-          <span>₦ {order.totalPrice.toLocaleString()}</span>
-        </div>
-        <div className="flex justify-center mt-3 items-center px-2">
-          <h1>
-            You can screenshot after payment and send to any of our social media
-            platform
-          </h1>
-          <Link to="https://wa.me/2348119223162">
-            <FaWhatsapp
-              size={30}
-              className="mx-3 text-green-500 cursor-pointer"
-            />
-          </Link>
-          <Link to="https://www.instagram.com/admire_excellence">
-            <FaInstagram
-              size={30}
-              className="mx-3  text-black cursor-pointer"
-            />
-          </Link>
-          <Link to="https://www.facebook.com/godswill.okenyi/">
-            <FaFacebookMessenger
-              size={30}
-              className="mx-3 text-blue-500 cursor-pointer"
-            />
-          </Link>
-        </div>
-        {!order.isPaid && (
-          <div className="mb-4">
-            {loadingPay && <Loader />}
-            {isPending ? (
-              <Loader />
-            ) : (
-              <div>
-                {order.paymentMethod === "PayPal" && (
-                  <div className="px-4 pt-2">
-                    {loadingConversion ? (
-                      <Loader />
-                    ) : (
-                      <>
-                        <div className="mb-4 text-sm text-gray-600">
-                          <p>Amount in NGN: ₦{order.totalPrice}</p>
-                          <p>Converted Amount: ${usdAmount}</p>
-                          <p>Exchange Rate: 1 NGN = ${conversionRate}</p>
-                        </div>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        />
-                      </>
-                    )}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Order Items */}
+            <div className="lg:col-span-2">
+              <div className="border-b pb-4 mb-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <FaBox className="mr-2 text-purple-500" />
+                  Order Items
+                </h2>
+                {order.orderItems.length === 0 ? (
+                  <Message>Order is empty</Message>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="p-3 text-left text-sm font-semibold">
+                            Product
+                          </th>
+                          <th className="p-3 text-center text-sm font-semibold">
+                            Qty
+                          </th>
+                          <th className="p-3 text-right text-sm font-semibold">
+                            Price
+                          </th>
+                          <th className="p-3 text-right text-sm font-semibold">
+                            Total
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {order.orderItems.map((item, index) => (
+                          <tr key={index} className="border-b">
+                            <td className="p-3">
+                              <div className="flex items-center">
+                                <img
+                                  src={item.image}
+                                  alt={item.name}
+                                  className="w-12 h-12 object-cover rounded-lg mr-3"
+                                />
+                                <Link
+                                  to={`/product/${item.product}`}
+                                  className="hover:text-purple-600"
+                                >
+                                  {item.name}
+                                </Link>
+                              </div>
+                            </td>
+                            <td className="p-3 text-center">{item.qty}</td>
+                            <td className="p-3 text-right">
+                              ₦{item.price.toFixed(2)}
+                            </td>
+                            <td className="p-3 text-right font-medium">
+                              ₦{(item.qty * item.price).toFixed(2)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 )}
-                {order.paymentMethod === "Paystack" && (
-                  <PaystackButton
-                    {...paystackConfig}
-                    text="Pay with Paystack"
-                    onSuccess={handlePaystackPayment}
-                    onClose={() => toast.error("Payment cancelled")}
-                    className="bg-green-500 text-white w-full py-2 rounded"
-                  />
+              </div>
+
+              {/* Shipping Details */}
+              <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <RiMoneyDollarCircleLine className="mr-2 text-blue-500" />
+                  Shipping Details
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-600">Customer Name</p>
+                    <p className="font-medium">{order.user.username}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Email</p>
+                    <p className="font-medium">{order.user.email}</p>
+                  </div>
+                  <div className="sm:col-span-2">
+                    <p className="text-sm text-gray-600">Shipping Address</p>
+                    <p className="font-medium">
+                      {order.shippingAddress.address},{" "}
+                      {order.shippingAddress.city}
+                      <br />
+                      {order.shippingAddress.postalCode},{" "}
+                      {order.shippingAddress.country}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Summary */}
+            <div className="bg-gray-50 rounded-xl p-6 h-fit">
+              <h2 className="text-xl font-semibold mb-4">Payment Summary</h2>
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between">
+                  <span>Subtotal:</span>
+                  <span className="font-medium">
+                    ₦{order.itemsPrice.toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Shipping:</span>
+                  <span className="font-medium">
+                    ₦{order.shippingPrice.toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Tax:</span>
+                  <span className="font-medium">
+                    ₦{order.taxPrice.toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between border-t pt-3">
+                  <span className="font-semibold">Total:</span>
+                  <span className="font-semibold text-purple-600">
+                    ₦{order.totalPrice.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
+              {/* Payment Status */}
+              <div className="mb-6">
+                {order.isPaid ? (
+                  <Message variant="success">
+                    Paid on {new Date(order.paidAt).toLocaleDateString()}
+                  </Message>
+                ) : (
+                  <Message variant="danger">Payment Pending</Message>
                 )}
               </div>
-            )}
-          </div>
-        )}
 
-        {loadingDeliver && <Loader />}
-        {(order.isPaid || orderIsPaid) &&
-          userInfo &&
-          userInfo.isAdmin &&
-          !order.isDelivered && (
-            <div>
-              <button
-                type="button"
-                className="bg-blue-500 text-white mx-3 w-full py-2"
-                onClick={deliverHandler}
-              >
-                Mark As Delivered
-              </button>
+              {/* Payment Methods */}
+              {!order.isPaid && (
+                <div className="space-y-4">
+                  {loadingPay && <Loader />}
+                  {isPending ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      {order.paymentMethod === "PayPal" && (
+                        <div className="bg-white rounded-lg p-4 shadow-sm">
+                          {loadingConversion ? (
+                            <Loader />
+                          ) : (
+                            <>
+                              <div className="text-sm bg-purple-50 p-3 rounded-lg mb-4">
+                                <p className="text-gray-600">
+                                  <span className="font-medium">
+                                    Conversion:
+                                  </span>{" "}
+                                  ₦1 = ${conversionRate}
+                                </p>
+                                <p className="text-gray-600">
+                                  <span className="font-medium">Total:</span> $
+                                  {usdAmount}
+                                </p>
+                              </div>
+                              <PayPalButtons
+                                createOrder={createOrder}
+                                onApprove={onApprove}
+                                onError={onError}
+                              />
+                            </>
+                          )}
+                        </div>
+                      )}
+                      {order.paymentMethod === "Paystack" && (
+                        <PaystackButton
+                          {...paystackConfig}
+                          text="Pay with Paystack"
+                          onSuccess={handlePaystackPayment}
+                          onClose={() => toast.error("Payment cancelled")}
+                          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* Social Proof */}
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-600 mb-3">
+                  Need help with your order? Contact us via:
+                </p>
+                <div className="flex justify-center space-x-4">
+                  <Link
+                    to="https://wa.me/2348119223162"
+                    className="text-green-500 hover:text-green-600 transition-colors"
+                  >
+                    <FaWhatsapp size={28} />
+                  </Link>
+                  <Link
+                    to="https://www.instagram.com/admire_excellence"
+                    className="text-pink-500 hover:text-pink-600 transition-colors"
+                  >
+                    <FaInstagram size={28} />
+                  </Link>
+                  <Link
+                    to="https://www.facebook.com/godswill.okenyi/"
+                    className="text-blue-500 hover:text-blue-600 transition-colors"
+                  >
+                    <FaFacebookMessenger size={28} />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Admin Delivery */}
+              {loadingDeliver && <Loader />}
+              {(order.isPaid || orderIsPaid) &&
+                userInfo &&
+                userInfo.isAdmin &&
+                !order.isDelivered && (
+                  <button
+                    onClick={deliverHandler}
+                    className="w-full mt-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-blue-600 transition-all"
+                  >
+                    Mark as Delivered
+                  </button>
+                )}
             </div>
-          )}
+          </div>
+        </div>
       </div>
     </div>
   );

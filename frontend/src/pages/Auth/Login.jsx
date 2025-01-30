@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../components/Loader";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,133 +28,114 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setError(""); // Reset error message
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
     } catch (err) {
+      setError("Incorrect password. Please try again.");
       toast.error(err?.data?.message || err.error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-6xl w-full mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Form Section */}
-          <div className="w-full lg:w-1/2 bg-white p-8 rounded-2xl shadow-lg">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
-              Welcome Back
-            </h1>
-
-            <form onSubmit={submitHandler} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="password"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-
-              <button
-                disabled={isLoading}
-                type="submit"
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center font-medium"
-              >
-                {isLoading ? <Loader /> : "Sign In"}
-              </button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-gray-600">
-                New Customer?{" "}
-                <Link
-                  to={redirect ? `/register?redirect=${redirect}` : "/register"}
-                  className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
-                >
-                  Create an account
-                </Link>
-              </p>
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+        {/* Left Section: Illustration */}
+        <div className="w-full lg:w-1/2 bg-gradient-to-br from-blue-600 to-purple-600 p-8 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h2 className="text-4xl font-bold mb-4">Welcome Back!</h2>
+            <p className="text-lg">
+              Sign in to access your account and explore our exclusive offers.
+            </p>
+            <div className="mt-8">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6c5woc98WaW2s-O0JnuG6eyw-kir5TSv2VQ&s"
+                alt="Login Illustration"
+                className="w-full h-[70%] rounded-lg"
+              />
             </div>
           </div>
+        </div>
 
-          {/* Animated Image Section */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center">
-            <div className="relative w-full max-w-md animate-float">
-              <svg className="w-full h-auto" viewBox="0 0 400 400">
-                {/* User Circle */}
-                <circle
-                  cx="200"
-                  cy="150"
-                  r="60"
-                  fill="#4B5563"
-                  className="animate-pulse"
-                />
-                <circle cx="200" cy="130" r="25" fill="#9CA3AF" />
-                <path d="M160 180 Q200 220 240 180" fill="#9CA3AF" />
+        {/* Right Section: Login Form */}
+        <div className="w-full lg:w-1/2 p-8">
+          <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            Sign In
+          </h1>
 
-                {/* Decorative Elements */}
-                <g className="animate-bounce">
-                  <circle cx="120" cy="250" r="8" fill="#60A5FA" />
-                  <circle cx="280" cy="250" r="8" fill="#60A5FA" />
-                  <circle cx="200" cy="280" r="8" fill="#60A5FA" />
-                </g>
-
-                {/* Animated Lock */}
-                <g transform="translate(150, 300)" className="animate-wiggle">
-                  <rect
-                    x="15"
-                    y="0"
-                    width="70"
-                    height="50"
-                    rx="10"
-                    fill="#2563EB"
-                  />
-                  <path
-                    d="M30 0 L30 -20 Q50 -20 70 -20 L70 0"
-                    fill="none"
-                    stroke="#2563EB"
-                    strokeWidth="12"
-                  />
-                </g>
-
-                {/* Animated Stars */}
-                <g className="animate-twinkle">
-                  <path d="M80 100 L90 110 L80 120 L70 110 Z" fill="#FCD34D" />
-                  <path
-                    d="M300 120 L310 130 L300 140 L290 130 Z"
-                    fill="#FCD34D"
-                  />
-                  <path d="M320 80 L330 90 L320 100 L310 90 Z" fill="#FCD34D" />
-                </g>
-              </svg>
+          <form onSubmit={submitHandler} className="space-y-6">
+            {/* Email Input */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
+
+            {/* Password Input */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center font-medium"
+            >
+              {isLoading ? (
+                <RotatingLines
+                  strokeColor="white"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="24"
+                  visible={true}
+                />
+              ) : (
+                "Sign In"
+              )}
+            </button>
+          </form>
+
+          {/* Sign Up Link */}
+          <div className="mt-6 text-center">
+            <p className="text-gray-600">
+              New Customer?{" "}
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+              >
+                Create an account
+              </Link>
+            </p>
           </div>
         </div>
       </div>
