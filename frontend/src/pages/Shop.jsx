@@ -131,7 +131,6 @@ const Shop = () => {
 
   return (
     <div className="mx-3 mt-[50px]">
-      <ProductCarousel />
       <div
         className="w-full bg-white shadow-lg border-b mt-[70px] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
         data-aos="fade-down"
@@ -211,7 +210,7 @@ const Shop = () => {
                   placeholder="Enter Price"
                   value={priceFilter}
                   onChange={handlePriceChange}
-                  className="flex-1 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white transition-all duration-200"
+                  className="flex w-[70px] px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white transition-all duration-200"
                 />
                 <button
                   onClick={() => window.location.reload()}
