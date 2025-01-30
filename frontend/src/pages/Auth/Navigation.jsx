@@ -78,7 +78,7 @@ const Navigation = () => {
           <Link to="/" className="flex items-center">
             <h1 className="flex items-center font-extrabold text-2xl text-blue-900">
               <FaShoppingCart className="mr-1" /> {/* Shop icon */}
-              XCEl
+              XCEL
             </h1>
           </Link>
           <div className="flex items-center space-x-4">
