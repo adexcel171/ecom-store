@@ -234,8 +234,8 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex justify-center items-center">
           <Link to="/" className="flex items-center">
-            <h1 className="flex items-center font-extrabold text-2xl text-blue-900">
-              <FaShoppingCart className="mr-2" /> {/* Shop icon */}
+            <h1 className="flex items-center font-extrabold text-2xl text-blue-900 mr-4">
+              <FaShoppingCart className="mr-4" /> {/* Shop icon */}
               XCEL
             </h1>
           </Link>

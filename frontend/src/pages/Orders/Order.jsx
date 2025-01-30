@@ -275,11 +275,11 @@ const Order = () => {
         </h2>
         <div className="flex flex-col md:flex-row mx-2 justify-between mb-2">
           <span>Items</span>
-          <span>₦ {order.itemsPrice}</span>
+          <span>₦ {order.itemsPrice.toLocaleString()}</span>
         </div>
         <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
           <span>Shipping</span>
-          <span>₦ {order.shippingPrice}</span>
+          <span>₦ {order.shippingPrice.toLocaleString()}</span>
         </div>
         <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
           <span>Tax</span>
@@ -287,7 +287,7 @@ const Order = () => {
         </div>
         <div className="flex flex-col mx-2 md:flex-row justify-between mb-2">
           <span>Total</span>
-          <span>₦ {order.totalPrice}</span>
+          <span>₦ {order.totalPrice.toLocaleString()}</span>
         </div>
         <div className="flex justify-center mt-3 items-center px-2">
           <h1>

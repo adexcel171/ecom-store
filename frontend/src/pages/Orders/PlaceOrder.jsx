@@ -77,9 +77,9 @@ const PlaceOrder = () => {
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </td>
                     <td className="p-2">{item.qty}</td>
-                    <td className="p-2">{item.price.toFixed(2)}</td>
+                    <td className="p-2">{item.price.toLocaleString()}</td>
                     <td className="p-2">
-                      ₦{(item.qty * item.price).toFixed(2)}
+                      ₦{(item.qty * item.price).toLocaleString()}
                     </td>
                   </tr>
                 ))}
@@ -94,7 +94,7 @@ const PlaceOrder = () => {
             <ul className="text-lg mb-4 md:mb-0 md:mr-8">
               <li>
                 <span className="font-semibold mb-3">Items:</span> ₦
-                {cart.itemsPrice.toLocaleString("en-US")}
+                {cart.itemsPrice.toLocaleString()}
               </li>
               <li>
                 <span className="font-semibold mb-3">Shipping:</span> ₦
