@@ -51,8 +51,7 @@ const Login = () => {
             </p>
             <div className="mt-8">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6c5woc98WaW2s-O0JnuG6eyw-kir5TSv2VQ&s"
-                alt="Login Illustration"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM1IErvkJe7fTOg3qpvVzvkI8Qc0bT5eYtGw&s"
                 className="w-full h-[70%] rounded-lg"
               />
             </div>

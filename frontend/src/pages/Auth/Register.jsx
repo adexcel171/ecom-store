@@ -62,7 +62,7 @@ const Register = () => {
             </p>
             <div className="mt-8">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEOn9D-TDi9s5DhXIfxarlQcekkcr7Z1Vx4g&s"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM1IErvkJe7fTOg3qpvVzvkI8Qc0bT5eYtGw&s"
                 alt="Registration Illustration"
                 className="w-full h-auto rounded-lg"
               />
