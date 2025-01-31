@@ -114,7 +114,7 @@ const Navigation = () => {
                   className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors"
                 >
                   <AiOutlineUser />
-                  <span>{userInfo.username}</span>
+                  <span className="text-purple-500">{userInfo.username}</span>
                   <FaChevronDown className="text-sm mt-0.5" />
                 </button>
 
@@ -217,7 +217,7 @@ const Navigation = () => {
             {userInfo ? (
               <div className="flex items-center space-x-2 text-gray-400">
                 <AiOutlineUser />
-                <span className="text-black">{userInfo.username}</span>
+                <span className="text-purple-600">{userInfo.username}</span>
               </div>
             ) : (
               <div className="flex space-x-2">
