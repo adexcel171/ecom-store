@@ -88,8 +88,9 @@ const Navigation = () => {
               to="/favorite"
               className="flex items-center text-gray-600 hover:text-blue-600 relative"
             >
-              <FaHeart className="mr-1" />
               <FavoritesCount />
+
+              <FaHeart className="mr-1" />
             </Link>
             <Link
               to="/cart"
@@ -191,7 +192,7 @@ const Navigation = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden fixed inset-0 bg-black/50 z-40 transition-opacity ${
+        className={`md:hidden fixed inset-0 bg-gray-200 z-40 transition-opacity ${
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMobileMenuOpen(false)}

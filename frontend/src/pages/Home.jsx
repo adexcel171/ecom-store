@@ -2,11 +2,11 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../redux/api/productApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Search } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 import ProductCarousel from "./Products/ProductCarousel";
+import HeroSection from "../components/Hero";
 
 // Lazy-loaded components
 const Header = lazy(() => import("../components/Header"));
@@ -17,7 +17,6 @@ const Shop = lazy(() => import("./Shop"));
 const Home = () => {
   const { keyword } = useParams();
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState(keyword || "");
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
 
   // Memoize products to prevent unnecessary re-renders
@@ -38,12 +37,6 @@ const Home = () => {
     const timeoutId = setTimeout(initAOS, 500);
     return () => clearTimeout(timeoutId);
   }, []);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const trimmedSearchTerm = searchTerm.trim().toLowerCase();
-    navigate(trimmedSearchTerm ? `/search/${trimmedSearchTerm}` : "/all");
-  };
 
   // Optimized product render function
   const renderProducts = () => {
@@ -74,17 +67,9 @@ const Home = () => {
       <Suspense fallback={<div className="h-16 bg-gray-100" />}>
         {!keyword && <Header />}
       </Suspense>
-
+      <HeroSection />
       <main className="flex-grow">
-        <div className="flex flex-col items-center justify-center mt-[30px] w-full px-4 py-6">
-          <form
-            onSubmit={handleSearch}
-            className="relative w-full max-w-xl mb-8"
-            data-aos="fade-down"
-          >
-            {/* Search form remains same */}
-          </form>
-        </div>
+        <div className="flex flex-col items-center justify-center mt-[30px] w-full px-4 py-6"></div>
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 p-4">
