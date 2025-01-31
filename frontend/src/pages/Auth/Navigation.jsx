@@ -217,7 +217,7 @@ const Navigation = () => {
             {userInfo ? (
               <div className="flex items-center space-x-2 text-gray-400">
                 <AiOutlineUser />
-                <span className="text-white">{userInfo.username}</span>
+                <span className="text-black">{userInfo.username}</span>
               </div>
             ) : (
               <div className="flex space-x-2">
@@ -267,7 +267,9 @@ const Navigation = () => {
             </Link>
             {userInfo?.isAdmin && (
               <div className="pt-4 border-t border-gray-700">
-                <div className="text-sm text-gray-400 px-2 py-1">Admin</div>
+                <div className="text-sm text-gray-400 px-2 text-black py-1">
+                  Admin
+                </div>
                 <Link
                   to="/admin/dashboard"
                   className="block p-2 text-white hover:bg-gray-700 rounded-lg"
