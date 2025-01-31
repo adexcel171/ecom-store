@@ -192,44 +192,44 @@ const Navigation = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden fixed inset-0 bg-gray-200 z-40 transition-opacity ${
+        className={`md:hidden fixed inset-0 bg-gray-900 z-40 transition-opacity ${
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
-          className={`absolute right-0 top-0 h-full w-64 bg-white transform transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-full w-64 bg-gray-800 transform transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="p-4 border-b">
+          {/* Header Section */}
+          <div className="p-4 border-b border-gray-700">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xl font-bold text-blue-600">BIG X</span>
+              <span className="text-xl font-bold text-white">BIG X</span>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-gray-600"
+                className="p-2 text-gray-400 hover:text-white"
               >
                 <AiOutlineClose />
               </button>
             </div>
-
             {userInfo ? (
-              <div className="flex items-center space-x-2 text-gray-600">
+              <div className="flex items-center space-x-2 text-gray-400">
                 <AiOutlineUser />
-                <span>{userInfo.username}</span>
+                <span className="text-white">{userInfo.username}</span>
               </div>
             ) : (
               <div className="flex space-x-2">
                 <Link
                   to="/login"
-                  className="flex-1 text-center px-4 py-2 text-blue-600"
+                  className="flex-1 text-center px-4 py-2 text-white hover:bg-gray-700 rounded-lg"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="flex-1 text-center px-4 py-2  text-blue-500 rounded-lg"
+                  className="flex-1 text-center px-4 py-2 text-white hover:bg-gray-700 rounded-lg"
                 >
                   Register
                 </Link>
@@ -237,60 +237,61 @@ const Navigation = () => {
             )}
           </div>
 
-          <nav className="p-4 space-y-2">
+          {/* Navigation Items */}
+          <nav className="p-4 space-y-2 bg-gray-800">
+            {" "}
+            {/* Ensure this has a dark background */}
             <Link
               to="/"
-              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
             >
               Home
             </Link>
             <Link
               to="/shop"
-              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
             >
               Shop
             </Link>
             <Link
               to="/favorite"
-              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
             >
               Favorites
             </Link>
             <Link
               to="/cart"
-              className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
             >
               Cart ({cartItems.reduce((a, c) => a + c.qty, 0)})
             </Link>
-
             {userInfo?.isAdmin && (
-              <div className="pt-4 border-t">
-                <div className="text-sm text-gray-500 px-2 py-1">Admin</div>
+              <div className="pt-4 border-t border-gray-700">
+                <div className="text-sm text-gray-400 px-2 py-1">Admin</div>
                 <Link
                   to="/admin/dashboard"
-                  className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                  className="block p-2 text-white hover:bg-gray-700 rounded-lg"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/admin/productlist"
-                  className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                  className="block p-2 text-white hover:bg-gray-700 rounded-lg"
                 >
                   Products
                 </Link>
                 <Link
                   to="/admin/orderlist"
-                  className="block p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                  className="block p-2 text-white hover:bg-gray-700 rounded-lg"
                 >
                   Orders
                 </Link>
               </div>
             )}
-
             {userInfo && (
               <button
                 onClick={logoutHandler}
-                className="w-full text-left p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                className="w-full text-left p-2 text-red-500 hover:bg-red-900 rounded-lg"
               >
                 Logout
               </button>
