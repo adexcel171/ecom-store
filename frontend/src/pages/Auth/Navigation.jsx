@@ -54,7 +54,7 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-lg" : "bg-white/95 backdrop-blur-sm"
+        scrolled ? "bg-white shadow-lg" : "bg-white/95 "
       }`}
     >
       {/* Desktop Navigation */}
@@ -192,112 +192,115 @@ const Navigation = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden fixed inset-0 bg-gray-900 z-40 transition-opacity ${
+        className={`md:hidden fixed inset-0 bg-black/75 z-40 transition-opacity ${
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
-          className={`absolute right-0 top-0 h-full w-64 bg-gray-800 transform transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header Section */}
-          <div className="p-4 border-b border-gray-700">
+          <div className="p-4 border-b border-gray-200">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xl font-bold text-white">BIG X</span>
+              <span className="text-xl font-bold text-gray-800">BIG X</span>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-gray-400 hover:text-white"
+                className="p-2 text-gray-600 hover:text-gray-900"
               >
                 <AiOutlineClose />
               </button>
             </div>
             {userInfo ? (
-              <div className="flex items-center space-x-2 text-gray-400">
-                <AiOutlineUser />
-                <span className="text-purple-600">{userInfo.username}</span>
+              <div className="flex items-center space-x-2 text-gray-700">
+                <AiOutlineUser className="text-gray-600" />
+                <span className="text-blue-600 font-medium">
+                  {userInfo.username}
+                </span>
               </div>
             ) : (
-              <div className="flex space-x-2">
+              <div className="flex gap-2">
                 <Link
                   to="/login"
-                  className="flex-1 text-center px-4 py-2 text-white hover:bg-gray-700 rounded-lg"
+                  className="flex-1 text-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="flex-1 text-center px-4 py-2 text-white hover:bg-gray-700 rounded-lg"
+                  className="flex-1 text-center px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors"
                 >
                   Register
                 </Link>
               </div>
             )}
           </div>
-
           {/* Navigation Items */}
-          <nav className="p-4 space-y-2 bg-gray-800">
-            {" "}
-            {/* Ensure this has a dark background */}
-            <Link
-              to="/"
-              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-            >
-              Shop
-            </Link>
-            <Link
-              to="/favorite"
-              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-            >
-              Favorites
-            </Link>
-            <Link
-              to="/cart"
-              className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-            >
-              Cart ({cartItems.reduce((a, c) => a + c.qty, 0)})
-            </Link>
-            {userInfo?.isAdmin && (
-              <div className="pt-4 border-t border-gray-700">
-                <div className="text-sm text-gray-400 px-2 text-black py-1">
-                  Admin
-                </div>
-                <Link
-                  to="/admin/dashboard"
-                  className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/admin/productlist"
-                  className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-                >
-                  Products
-                </Link>
-                <Link
-                  to="/admin/orderlist"
-                  className="block p-2 text-white hover:bg-gray-700 rounded-lg"
-                >
-                  Orders
-                </Link>
-              </div>
-            )}
-            {userInfo && (
-              <button
-                onClick={logoutHandler}
-                className="w-full text-left p-2 text-red-500 hover:bg-red-900 rounded-lg"
+          <nav className="p-4 space-y-2">
+            <div className="flex flex-col justify-end h-full">
+              <Link
+                to="/"
+                className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                Logout
-              </button>
-            )}
+                Home
+              </Link>
+              <Link
+                to="/shop"
+                className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                Shop
+              </Link>
+              <Link
+                to="/favorite"
+                className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                Favorites
+              </Link>
+              <Link
+                to="/cart"
+                className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                Cart ({cartItems.reduce((a, c) => a + c.qty, 0)})
+              </Link>
+
+              {userInfo?.isAdmin && (
+                <div className="pt-4 mt-4 border-t border-gray-200">
+                  <div className="text-sm font-medium text-gray-600 px-2 py-1 text-right">
+                    Admin
+                  </div>
+                  <Link
+                    to="/admin/dashboard"
+                    className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/admin/productlist"
+                    className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    to="/admin/orderlist"
+                    className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    Orders
+                  </Link>
+                </div>
+              )}
+
+              {userInfo && (
+                <button
+                  onClick={logoutHandler}
+                  className="w-full text-right p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  Logout
+                </button>
+              )}
+            </div>
           </nav>
         </div>
       </div>

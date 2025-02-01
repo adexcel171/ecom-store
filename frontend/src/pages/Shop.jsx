@@ -223,9 +223,12 @@ const Shop = () => {
       </div>
 
       {/* Products Section */}
-      <div className="p-3 mt-5" data-aos="fade-left">
+      <div
+        className="p-3 mt-5 flex flex-col justify-center items-center md:flex "
+        data-aos="fade-left"
+      >
         <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
-        <div className="flex justify-center flex-wrap gap-4">
+        <div className="flex justify-center items-center md:flex flex-wrap gap-4">
           {products.length === 0 ? (
             <Loader />
           ) : (
