@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-
 // Import images
-import headphonesImage from "../assets/bluetooth.png";
+import headphonesImage from "../assets/headphone.png";
 import smartwatchImage from "../assets/Smart Watch.png";
 import sneakersImage from "../assets/designer.png"; // Fixed: Added .jpg extension
 import speakerImage from "../assets/bluetooth.png";
@@ -11,7 +10,6 @@ import leatherjacket from "../assets/jacket.png"; // Fixed: Corrected typo
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
   // Sample data for products
   const popularProducts = [
     {
@@ -30,13 +28,11 @@ const HeroSection = () => {
       image: smartwatchImage, // Use imported image
     },
   ];
-
   const productOfTheMonth = {
     id: 4,
     name: "Designer Sneakers",
     image: sneakersImage, // Use imported image
   };
-
   const featuredProducts = [
     {
       id: 5,
@@ -51,15 +47,16 @@ const HeroSection = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-center 2xl font-semibold">Special Product</h1>
       {/* Hero Grid Container */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
-        {/* Product of the Month (Left Section) */}
-        <div className="md:col-span-5 lg:col-span-4 relative overflow-hidden rounded-xl shadow-lg group">
+      <div className="max-w-5xl mx-auto grid gap-6">
+        {/* Product of the Month (Top Section on Mobile) */}
+        <div className="col-span-12 relative overflow-hidden rounded-xl shadow-lg group">
           <img
             src={productOfTheMonth.image}
             alt={productOfTheMonth.name}
-            className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+            className="w-full hidden md:h-[50vh] object-cover transform transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end p-6">
             <h3 className="text-2xl font-bold text-white">
@@ -69,7 +66,7 @@ const HeroSection = () => {
         </div>
 
         {/* Popular Products Carousel (Middle Section) */}
-        <div className="md:col-span-7 lg:col-span-8 relative rounded-xl shadow-lg overflow-hidden">
+        <div className="col-span-12 relative rounded-xl shadow-lg overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-between z-10 px-4">
             <button
               onClick={() =>
@@ -92,7 +89,7 @@ const HeroSection = () => {
               <FiChevronRight className="w-6 h-6 text-slate-800" />
             </button>
           </div>
-          <div className="relative h-full">
+          <div className="relative h-64 md:h-full">
             {popularProducts.map((product, index) => (
               <div
                 key={product.id}
@@ -116,7 +113,7 @@ const HeroSection = () => {
         </div>
 
         {/* Featured Products (Bottom Section) */}
-        <div className="md:col-span-12 lg:col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {featuredProducts.map((product) => (
             <div
               key={product.id}
