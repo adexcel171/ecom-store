@@ -10,7 +10,7 @@ import {
 } from "../redux/features/shop/shopSlice";
 import Loader from "../components/Loader";
 import ProductCard from "./Products/ProductCard";
-import ShopSkeleton from "./../components/ShoShopSkeletonShopSkeletonpSkeleton";
+import ShopSkeleton from "../SkeletonLoader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -22,6 +22,7 @@ const Shop = () => {
 
   const categoriesQuery = useFetchCategoriesQuery();
   const [priceFilter, setPriceFilter] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredProductsQuery = useGetFilteredProductsQuery({
     checked,
@@ -45,21 +46,35 @@ const Shop = () => {
   }, [categoriesQuery.data, dispatch]);
 
   useEffect(() => {
-    if (!checked.length || !radio.length) {
-      if (!filteredProductsQuery.isLoading) {
-        const filteredProducts = filteredProductsQuery.data.filter(
-          (product) => {
-            return (
-              product.price.toString().includes(priceFilter) ||
-              product.price === parseInt(priceFilter, 10)
-            );
-          }
-        );
+    if (!filteredProductsQuery.isLoading) {
+      let filteredProducts = filteredProductsQuery.data;
 
-        dispatch(setProducts(filteredProducts));
+      // Price filter
+      if (priceFilter) {
+        filteredProducts = filteredProducts.filter(
+          (product) =>
+            product.price.toString().includes(priceFilter) ||
+            product.price === parseInt(priceFilter, 10)
+        );
       }
+
+      // Search by name filter
+      if (searchTerm) {
+        filteredProducts = filteredProducts.filter((product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+
+      dispatch(setProducts(filteredProducts));
     }
-  }, [checked, radio, filteredProductsQuery.data, dispatch, priceFilter]);
+  }, [
+    checked,
+    radio,
+    filteredProductsQuery.data,
+    dispatch,
+    priceFilter,
+    searchTerm,
+  ]);
 
   const handleBrandClick = (brand) => {
     const productsByBrand = filteredProductsQuery.data?.filter(
@@ -89,31 +104,6 @@ const Shop = () => {
     setPriceFilter(e.target.value);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        duration: 0.5,
-      },
-    },
-  };
-
-  const childVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-        duration: 0.5,
-      },
-    },
-  };
-
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -135,6 +125,23 @@ const Shop = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-col md:flex-row gap-6">
+            {/* Search by Name */}
+            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
+              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="w-1 h-4 bg-red-500 rounded-full mr-2"></span>
+                Search by Name
+              </h2>
+              <div className="flex flex-col sm:flex-row gap-3 items-center">
+                <input
+                  type="text"
+                  placeholder="Enter product name"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white transition-all duration-200"
+                />
+              </div>
+            </div>
+
             {/* Categories Filter */}
             <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
               <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
@@ -223,18 +230,17 @@ const Shop = () => {
       </div>
 
       {/* Products Section */}
-      <div
-        className="p-3 mt-5 flex flex-col justify-center items-center md:flex "
-        data-aos="fade-left"
-      >
+      <div className="p-3 mt-5" data-aos="fade-left">
         <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
-        <div className="flex justify-center items-center md:flex flex-wrap gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.length === 0 ? (
-            <Loader />
+            <div className="col-span-full text-center py-8">
+              <Loader />
+            </div>
           ) : (
             products?.map((p, index) => (
               <div
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-3"
+                className="p-3"
                 key={p._id}
                 data-aos="fade-up"
                 data-aos-delay={`${index * 100}`}
