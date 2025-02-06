@@ -87,7 +87,9 @@ const Home = () => {
           <>
             <div className="flex flex-col text-center items-center justify-center p-4 md:p-8">
               {/* Title and Shop link remains same */}{" "}
-              <h1 className="font-semibold 2xl">Featured Products</h1>
+              <h1 className=" text-center font-semibold text-2xl">
+                Featured Products
+              </h1>
             </div>
 
             <div className="flex flex-col items-center p-4 md:p-8">
