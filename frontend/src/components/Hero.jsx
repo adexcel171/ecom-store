@@ -108,13 +108,16 @@ const HeroSection = () => {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-wrap gap-4">
-                      <Link to="/shop">
-                        <button className="bg-white text-gray-900 px-8 cursor-pointer py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-100 transition-colors">
+                      <Link className=" z-50 cursor-pointer " to="/shop">
+                        <button
+                          type="button" // Ensures no form submission behavior if button is inside a form
+                          className="bg-white z-50 w-[200px] text-black px-8 cursor-pointer py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-300 transition-colors"
+                        >
                           <ShoppingBag className="w-5 h-5" />
                           Shop Now
                         </button>
                       </Link>
-                      <button className="border-2 border-white cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                      <button className="border-2  w-[200px]  border-white cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
                         Learn More
                       </button>
                     </div>
