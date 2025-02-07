@@ -37,7 +37,7 @@ const Footer = () => {
           <div className="max-w-2xl mx-auto text-center">
             <div className="mb-6">
               <span className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
-                BiG X
+                SHOPBUGIE
               </span>
             </div>
             <h3 className="text-2xl font-bold mb-4">
@@ -160,7 +160,9 @@ const Footer = () => {
 
           {/* About Section */}
           <div>
-            <h2 className="text-xl font-bold mb-6 text-white">About BiG X</h2>
+            <h2 className="text-xl font-bold mb-6 text-white">
+              About SHOPBUGIE
+            </h2>
             <p className="text-gray-400 mb-4">
               Redefining online shopping with curated collections and
               exceptional service.
@@ -235,7 +237,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
             <p className="text-gray-400">
-              © 2024 BiG X. Crafted with ❤️ for exceptional shopping
+              © 2024 SHOPBUGIE. Crafted with ❤️ for exceptional shopping
             </p>
             <div className="flex items-center gap-4">
               <Link
