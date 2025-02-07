@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
+import { Laptop } from "lucide-react";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -63,9 +64,13 @@ const Navigation = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center space-x-2 text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="flex items-center space-x-2 text-[16px] font-bold group"
           >
-            <span>BIG X</span>
+            <Laptop className="mr-1 text-purple-600" />
+            <span className="text-gray-800">
+              SHOPBUGIE
+              <span className="inline-block w-2 h-2 bg-purple-600 rounded-full ml-1 group-hover:bg-blue-500 transition-colors"></span>
+            </span>
           </Link>
 
           {/* Main Navigation */}
@@ -206,7 +211,7 @@ const Navigation = () => {
           {/* Header Section */}
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xl font-bold text-gray-800">BIG X</span>
+              <span className="text-xl font-bold text-gray-800">SHOPBUGIE</span>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 text-gray-600 hover:text-gray-900"
