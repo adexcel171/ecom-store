@@ -94,7 +94,6 @@ const Navigation = () => {
               className="flex items-center text-gray-600 hover:text-blue-600 relative"
             >
               <FavoritesCount />
-
               <FaHeart className="mr-1" />
             </Link>
             <Link
@@ -182,6 +181,28 @@ const Navigation = () => {
             )}
           </div>
 
+          {/* Mobile Navigation Icons (Add to Cart and Favorites) */}
+          <div className="md:hidden flex items-center space-x-4">
+            <Link
+              to="/favorite"
+              className="flex items-center text-gray-600 hover:text-blue-600 relative"
+            >
+              <FavoritesCount />
+              <FaHeart className="mr-1" />
+            </Link>
+            <Link
+              to="/cart"
+              className="flex items-center text-gray-600 hover:text-blue-600 relative"
+            >
+              <AiOutlineShoppingCart className="mr-1" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
+                  {cartItems.reduce((a, c) => a + c.qty, 0)}
+                </span>
+              )}
+            </Link>
+          </div>
+
           {/* Mobile Menu Button */}
           <button
             onClick={(e) => {
@@ -195,7 +216,7 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Menu */}
       <div
         className={`md:hidden fixed inset-0 bg-black/75 z-40 transition-opacity ${
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"

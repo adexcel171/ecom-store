@@ -56,19 +56,19 @@ const PlaceOrder = () => {
                 Order Items
               </h2>
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full border-collapse">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="p-3 text-left text-sm font-semibold">
+                      <th className="p-3 text-left text-sm font-semibold border">
                         Product
                       </th>
-                      <th className="p-3 text-center text-sm font-semibold">
+                      <th className="p-3 text-center text-sm font-semibold border">
                         Qty
                       </th>
-                      <th className="p-3 text-right text-sm font-semibold">
+                      <th className="p-3 text-right text-sm font-semibold border">
                         Price
                       </th>
-                      <th className="p-3 text-right text-sm font-semibold">
+                      <th className="p-3 text-right text-sm font-semibold border">
                         Total
                       </th>
                     </tr>
@@ -76,7 +76,7 @@ const PlaceOrder = () => {
                   <tbody>
                     {cart.cartItems.map((item, index) => (
                       <tr key={index} className="border-b hover:bg-gray-50">
-                        <td className="p-3">
+                        <td className="p-3 border">
                           <div className="flex items-center">
                             <img
                               src={item.image}
@@ -91,11 +91,11 @@ const PlaceOrder = () => {
                             </Link>
                           </div>
                         </td>
-                        <td className="p-3 text-center">{item.qty}</td>
-                        <td className="p-3 text-right">
+                        <td className="p-3 text-center border">{item.qty}</td>
+                        <td className="p-3 text-right border">
                           ₦{item.price.toLocaleString()}
                         </td>
-                        <td className="p-3 text-right font-medium">
+                        <td className="p-3 text-right font-medium border">
                           ₦{(item.qty * item.price).toLocaleString()}
                         </td>
                       </tr>
@@ -138,25 +138,22 @@ const PlaceOrder = () => {
                   <div className="flex justify-between">
                     <span>Items:</span>
                     <span className="font-medium">
-                      ₦{cart.itemsPrice.toLocaleString()}
+                      ₦{Number(cart.itemsPrice).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping:</span>
                     <span className="font-medium">
-                      ₦{cart.shippingPrice.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Tax:</span>
-                    <span className="font-medium">
-                      ₦{cart.taxPrice.toLocaleString()}
+                      ₦{Number(cart.shippingPrice).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between border-t pt-3">
                     <span className="text-lg font-bold">Total:</span>
                     <span className="text-lg font-bold text-purple-600">
-                      ₦{cart.totalPrice.toLocaleString()}
+                      ₦
+                      {(
+                        Number(cart.itemsPrice) + Number(cart.shippingPrice)
+                      ).toLocaleString()}
                     </span>
                   </div>
                 </div>
