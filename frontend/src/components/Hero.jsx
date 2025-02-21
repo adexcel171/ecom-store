@@ -64,7 +64,7 @@ const HeroSection = () => {
         Special Products
       </h1>
       {/* Main Hero Section */}
-      <div className="relative h-[80vh] w-full">
+      <div className="relative h-[90vh] w-full">
         {/* Carousel */}
         <div className="h-full relative">
           {featuredProducts.map((product, index) => (
