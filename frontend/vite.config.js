@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/": "http://localhost:5000",
+      "/api/": "https://ecom-api-z687.onrender.com",
       "/uploads/": "http://localhost:5000",
     },
   },
