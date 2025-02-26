@@ -7,7 +7,6 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/": "https://ecom-api-z687.onrender.com",
-      "/uploads/": "http://localhost:5000",
     },
   },
 });

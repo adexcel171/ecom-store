@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Featured products data
   const featuredProducts = [
     {
       id: 1,
@@ -36,7 +35,6 @@ const HeroSection = () => {
     },
   ];
 
-  // Auto-slide functionality
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) =>
@@ -46,118 +44,91 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () => {
+  const nextSlide = () =>
     setCurrentSlide((prev) =>
       prev === featuredProducts.length - 1 ? 0 : prev + 1
     );
-  };
-
-  const prevSlide = () => {
+  const prevSlide = () =>
     setCurrentSlide((prev) =>
       prev === 0 ? featuredProducts.length - 1 : prev - 1
     );
-  };
 
   return (
-    <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-      <h1 className="text-center text-2xl font-bold py-[50px]">
-        Special Products
-      </h1>
-      {/* Main Hero Section */}
-      <div className="relative h-[90vh] w-full">
-        {/* Carousel */}
-        <div className="h-full relative">
-          {featuredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              {/* Background Image with Overlay */}
-              <div className="absolute inset-0">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30" />
-              </div>
+    <div className="relative bg-gray-100 py-10">
+      <h1 className="text-center text-3xl font-bold mb-6">Special Products</h1>
+      <div className="relative flex items-center justify-center max-w-7xl mx-auto overflow-hidden h-[80vh] rounded-lg shadow-lg bg-white">
+        {featuredProducts.map((product, index) => (
+          <div
+            key={product.id}
+            className={`absolute inset-0 flex flex-col md:flex-row w-full h-full transition-opacity duration-700 ease-in-out ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {/* Image Section */}
+            <div className="w-full md:w-1/2 h-full">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-              {/* Content */}
-              <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="h-full flex items-center">
-                  <div className="max-w-xl space-y-8">
-                    {/* Category Tag */}
-                    <span className="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
-                      {product.category}
-                    </span>
-
-                    {/* Product Details */}
-                    <div className="space-y-4">
-                      <h1 className="text-5xl sm:text-6xl font-bold text-white">
-                        {product.name}
-                      </h1>
-                      <p className="text-xl text-gray-200">
-                        {product.description}
-                      </p>
-                      <p className="text-3xl font-bold text-white">
-                        {product.price}
-                      </p>
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="flex flex-wrap gap-4">
-                      <Link className=" z-50 cursor-pointer " to="/shop">
-                        <button
-                          type="button" // Ensures no form submission behavior if button is inside a form
-                          className="bg-white z-50 w-[200px] text-black px-8 cursor-pointer py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-300 transition-colors"
-                        >
-                          <ShoppingBag className="w-5 h-5" />
-                          Shop Now
-                        </button>
-                      </Link>
-                      <button className="border-2  w-[200px]  border-white cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            {/* Content Section */}
+            <div className="w-full md:w-1/2 flex flex-col justify-center px-8 space-y-6 bg-white">
+              <span className="text-gray-600 uppercase tracking-wide text-sm font-semibold">
+                {product.category}
+              </span>
+              <h1 className="text-4xl font-bold text-gray-900">
+                {product.name}
+              </h1>
+              <p className="text-lg text-gray-600">{product.description}</p>
+              <p className="text-2xl font-bold text-gray-800">
+                {product.price}
+              </p>
+              <div className="flex gap-4">
+                <Link to="/shop">
+                  <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors">
+                    <ShoppingBag className="w-5 h-5" /> Shop Now
+                  </button>
+                </Link>
+                <button className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition-colors">
+                  Learn More
+                </button>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
-        {/* Navigation Arrows */}
-        <div className="absolute inset-0 flex items-center justify-between p-4">
-          <button
-            onClick={prevSlide}
-            className="p-2 rounded-full bg-white/80 hover:bg-white transition-colors transform hover:scale-105"
-          >
-            <ChevronLeft className=" hidden md:flex w-6 h-6" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="p-2 rounded-full bg-white/80 hover:bg-white transition-colors transform hover:scale-105"
-          >
-            <ChevronRight className="w-6 hidden md:flex h-6" />
-          </button>
-        </div>
+      {/* Navigation Arrows */}
+      <div className="absolute inset-0 flex items-center justify-between px-4">
+        <button
+          onClick={prevSlide}
+          className="p-3 bg-gray-800/70 text-white rounded-full hover:bg-gray-900 transition"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="p-3 bg-gray-800/70 text-white rounded-full hover:bg-gray-900 transition"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      </div>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-          {featuredProducts.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide
-                  ? "w-8 bg-white"
-                  : "bg-white/50 hover:bg-white/75"
-              }`}
-            />
-          ))}
-        </div>
+      {/* Slide Indicators */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {featuredProducts.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide
+                ? "w-6 bg-blue-600"
+                : "bg-gray-400 hover:bg-gray-500"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
