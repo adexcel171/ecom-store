@@ -11,7 +11,7 @@ const HeroSection = () => {
       name: "Premium Headphones",
       description: "Wireless Noise Cancelling",
       price: "₦ 30,000",
-      category: "Electronics",
+      category: "Gadgets",
       image:
         "https://images.unsplash.com/photo-1545127398-14699f92334b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
@@ -101,7 +101,7 @@ const HeroSection = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <div className="absolute inset-0 flex items-center justify-between px-4">
+      {/* <div className="absolute inset-0 flex items-center justify-between px-4">
         <button
           onClick={prevSlide}
           className="p-3 bg-gray-800/70 text-white rounded-full hover:bg-gray-900 transition"
@@ -114,7 +114,7 @@ const HeroSection = () => {
         >
           <ChevronRight className="w-6 h-6" />
         </button>
-      </div>
+      </div> */}
 
       {/* Slide Indicators */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
