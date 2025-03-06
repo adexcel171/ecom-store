@@ -1,5 +1,6 @@
+// Order.jsx
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom"; // Added useNavigate
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -23,6 +24,7 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
 const Order = () => {
   const { id: orderId } = useParams();
+  const navigate = useNavigate(); // Added for redirection
 
   const {
     data: order,
@@ -48,7 +50,6 @@ const Order = () => {
   const [usdAmount, setUsdAmount] = useState(0);
   const [conversionRate, setConversionRate] = useState(0);
   const [loadingConversion, setLoadingConversion] = useState(false);
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   // Function to fetch current NGN to USD conversion rate
   const fetchConversionRate = async () => {
@@ -189,11 +190,8 @@ const Order = () => {
     publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
   };
 
-  const shareLink = `${window.location.origin}/order/${orderId}`;
-
-  const handleShare = () => {
-    navigator.clipboard.writeText(shareLink);
-    toast.success("Link copied to clipboard!");
+  const handlePayForMe = () => {
+    navigate(`/pay-for-me/${orderId}`); // Redirect to PayForMe page
   };
 
   return isLoading ? (
@@ -342,11 +340,11 @@ const Order = () => {
               {!order.isPaid && (
                 <>
                   <button
-                    onClick={() => setIsShareModalOpen(true)}
+                    onClick={handlePayForMe} // Updated to redirect to PayForMe page
                     className="w-full mb-4 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium flex items-center justify-center transition-colors"
                   >
                     <FaShareAlt className="mr-2" />
-                    Pay for Me 💋
+                    Pay for Me
                   </button>
 
                   <div className="space-y-4">
@@ -439,72 +437,6 @@ const Order = () => {
           </div>
         </div>
       </div>
-
-      {/* Share Modal */}
-      {isShareModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md">
-            <h3 className="text-xl font-semibold mb-4">Pay for Me 💋</h3>
-            <div className="mb-4">
-              <p className="text-gray-600">
-                <span className="font-medium">Username:</span>{" "}
-                {order.user.username}
-              </p>
-              <p className="text-gray-600">
-                <span className="font-medium">Items:</span>{" "}
-                {order.orderItems.map((item) => item.name).join(", ")}
-              </p>
-              <p className="text-gray-600">
-                <span className="font-medium">Total:</span> ₦
-                {order.totalPrice.toLocaleString()}
-              </p>
-            </div>
-            <div className="mb-4">
-              <p className="text-sm text-gray-600 mb-2">
-                Share this link with someone to pay for your order:
-              </p>
-              <input
-                type="text"
-                value={shareLink}
-                readOnly
-                className="w-full p-2 border rounded-lg bg-gray-100"
-              />
-            </div>
-            <div className="space-y-4">
-              {order.paymentMethod === "PayPal" && !loadingConversion && (
-                <PayPalButtons
-                  createOrder={createOrder}
-                  onApprove={onApprove}
-                  onError={onError}
-                />
-              )}
-              {order.paymentMethod === "Paystack" && (
-                <PaystackButton
-                  {...paystackConfig}
-                  text="Pay with Paystack"
-                  onSuccess={handlePaystackPayment}
-                  onClose={() => toast.error("Payment cancelled")}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
-                />
-              )}
-            </div>
-            <div className="flex justify-between mt-6">
-              <button
-                onClick={handleShare}
-                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
-              >
-                Copy Link
-              </button>
-              <button
-                onClick={() => setIsShareModalOpen(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

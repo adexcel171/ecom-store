@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 // Auth
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import PayForMe from "./components/payForMe.jsx";
 
 import AdminRoute from "./pages/Admin/AdminRoute";
 import Profile from "./pages/User/Profile";
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Cart />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/hero" element={<HeroSection />} />
+      <Route path="/pay-for-me/:id" element={<PayForMe />} />
       <Route path="*" element={<PageNotFound />} />
 
       {/* Registered users */}
