@@ -17,6 +17,7 @@ import {
   FaInstagram,
   FaFacebookMessenger,
   FaBox,
+  FaShareAlt,
 } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
@@ -47,6 +48,7 @@ const Order = () => {
   const [usdAmount, setUsdAmount] = useState(0);
   const [conversionRate, setConversionRate] = useState(0);
   const [loadingConversion, setLoadingConversion] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   // Function to fetch current NGN to USD conversion rate
   const fetchConversionRate = async () => {
@@ -59,7 +61,6 @@ const Order = () => {
       const rate = data.rates.USD;
       setConversionRate(rate);
 
-      // Convert NGN to USD
       if (order?.totalPrice) {
         const convertedAmount = (order.totalPrice * rate).toFixed(2);
         setUsdAmount(convertedAmount);
@@ -78,7 +79,6 @@ const Order = () => {
     }
   }, [order]);
 
-  // Modified PayPal script loader
   useEffect(() => {
     if (!errorPayPal && !loadingPayPal && paypal.clientId) {
       const loadPayPalScript = async () => {
@@ -100,7 +100,6 @@ const Order = () => {
     }
   }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch]);
 
-  // Modified createOrder function for PayPal
   function createOrder(data, actions) {
     if (!usdAmount || usdAmount <= 0) {
       toast.error("Invalid conversion amount");
@@ -124,7 +123,6 @@ const Order = () => {
       });
   }
 
-  // Modified onApprove function
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -187,9 +185,17 @@ const Order = () => {
   const paystackConfig = {
     reference: new Date().getTime().toString(),
     email: order?.user?.email,
-    amount: order?.totalPrice * 100, // Paystack amount is in kobo
+    amount: order?.totalPrice * 100,
     publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
   };
+
+  const shareLink = `${window.location.origin}/order/${orderId}`;
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(shareLink);
+    toast.success("Link copied to clipboard!");
+  };
+
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -198,7 +204,6 @@ const Order = () => {
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
-          {/* Order Header */}
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
               Order Summary
@@ -207,7 +212,6 @@ const Order = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Order Items */}
             <div className="lg:col-span-2">
               <div className="border-b pb-4 mb-6">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
@@ -268,7 +272,6 @@ const Order = () => {
                 )}
               </div>
 
-              {/* Shipping Details */}
               <div className="bg-gray-50 rounded-xl p-4 mb-6">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
                   <RiMoneyDollarCircleLine className="mr-2 text-blue-500" />
@@ -297,7 +300,6 @@ const Order = () => {
               </div>
             </div>
 
-            {/* Payment Summary */}
             <div className="bg-gray-50 rounded-xl p-6 h-fit">
               <h2 className="text-xl font-semibold mb-4">Payment Summary</h2>
               <div className="space-y-3 mb-6">
@@ -327,7 +329,6 @@ const Order = () => {
                 </div>
               </div>
 
-              {/* Payment Status */}
               <div className="mb-6">
                 {order.isPaid ? (
                   <Message variant="success">
@@ -338,56 +339,64 @@ const Order = () => {
                 )}
               </div>
 
-              {/* Payment Methods */}
               {!order.isPaid && (
-                <div className="space-y-4">
-                  {loadingPay && <Loader />}
-                  {isPending ? (
-                    <Loader />
-                  ) : (
-                    <>
-                      {order.paymentMethod === "PayPal" && (
-                        <div className="bg-white rounded-lg p-4 shadow-sm">
-                          {loadingConversion ? (
-                            <Loader />
-                          ) : (
-                            <>
-                              <div className="text-sm bg-purple-50 p-3 rounded-lg mb-4">
-                                <p className="text-gray-600">
-                                  <span className="font-medium">
-                                    Conversion:
-                                  </span>{" "}
-                                  ₦1 = ${conversionRate}
-                                </p>
-                                <p className="text-gray-600">
-                                  <span className="font-medium">Total:</span> $
-                                  {usdAmount}
-                                </p>
-                              </div>
-                              <PayPalButtons
-                                createOrder={createOrder}
-                                onApprove={onApprove}
-                                onError={onError}
-                              />
-                            </>
-                          )}
-                        </div>
-                      )}
-                      {order.paymentMethod === "Paystack" && (
-                        <PaystackButton
-                          {...paystackConfig}
-                          text="Pay with Paystack"
-                          onSuccess={handlePaystackPayment}
-                          onClose={() => toast.error("Payment cancelled")}
-                          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
-                        />
-                      )}
-                    </>
-                  )}
-                </div>
+                <>
+                  <button
+                    onClick={() => setIsShareModalOpen(true)}
+                    className="w-full mb-4 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium flex items-center justify-center transition-colors"
+                  >
+                    <FaShareAlt className="mr-2" />
+                    Pay for Me 💋
+                  </button>
+
+                  <div className="space-y-4">
+                    {loadingPay && <Loader />}
+                    {isPending ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        {order.paymentMethod === "PayPal" && (
+                          <div className="bg-white rounded-lg p-4 shadow-sm">
+                            {loadingConversion ? (
+                              <Loader />
+                            ) : (
+                              <>
+                                <div className="text-sm bg-purple-50 p-3 rounded-lg mb-4">
+                                  <p className="text-gray-600">
+                                    <span className="font-medium">
+                                      Conversion:
+                                    </span>{" "}
+                                    ₦1 = ${conversionRate}
+                                  </p>
+                                  <p className="text-gray-600">
+                                    <span className="font-medium">Total:</span>{" "}
+                                    ${usdAmount}
+                                  </p>
+                                </div>
+                                <PayPalButtons
+                                  createOrder={createOrder}
+                                  onApprove={onApprove}
+                                  onError={onError}
+                                />
+                              </>
+                            )}
+                          </div>
+                        )}
+                        {order.paymentMethod === "Paystack" && (
+                          <PaystackButton
+                            {...paystackConfig}
+                            text="Pay with Paystack"
+                            onSuccess={handlePaystackPayment}
+                            onClose={() => toast.error("Payment cancelled")}
+                            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
+                          />
+                        )}
+                      </>
+                    )}
+                  </div>
+                </>
               )}
 
-              {/* Social Proof */}
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600 mb-3">
                   Need help with your order? Contact us via:
@@ -414,7 +423,6 @@ const Order = () => {
                 </div>
               </div>
 
-              {/* Admin Delivery */}
               {loadingDeliver && <Loader />}
               {(order.isPaid || orderIsPaid) &&
                 userInfo &&
@@ -431,6 +439,72 @@ const Order = () => {
           </div>
         </div>
       </div>
+
+      {/* Share Modal */}
+      {isShareModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 w-full max-w-md">
+            <h3 className="text-xl font-semibold mb-4">Pay for Me 💋</h3>
+            <div className="mb-4">
+              <p className="text-gray-600">
+                <span className="font-medium">Username:</span>{" "}
+                {order.user.username}
+              </p>
+              <p className="text-gray-600">
+                <span className="font-medium">Items:</span>{" "}
+                {order.orderItems.map((item) => item.name).join(", ")}
+              </p>
+              <p className="text-gray-600">
+                <span className="font-medium">Total:</span> ₦
+                {order.totalPrice.toLocaleString()}
+              </p>
+            </div>
+            <div className="mb-4">
+              <p className="text-sm text-gray-600 mb-2">
+                Share this link with someone to pay for your order:
+              </p>
+              <input
+                type="text"
+                value={shareLink}
+                readOnly
+                className="w-full p-2 border rounded-lg bg-gray-100"
+              />
+            </div>
+            <div className="space-y-4">
+              {order.paymentMethod === "PayPal" && !loadingConversion && (
+                <PayPalButtons
+                  createOrder={createOrder}
+                  onApprove={onApprove}
+                  onError={onError}
+                />
+              )}
+              {order.paymentMethod === "Paystack" && (
+                <PaystackButton
+                  {...paystackConfig}
+                  text="Pay with Paystack"
+                  onSuccess={handlePaystackPayment}
+                  onClose={() => toast.error("Payment cancelled")}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
+                />
+              )}
+            </div>
+            <div className="flex justify-between mt-6">
+              <button
+                onClick={handleShare}
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+              >
+                Copy Link
+              </button>
+              <button
+                onClick={() => setIsShareModalOpen(false)}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
