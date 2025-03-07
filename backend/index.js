@@ -56,8 +56,10 @@ app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
 // Catch-all route for SPA routing
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "frontend/dist/index.html"), (err) => {
+    if (err) console.log("File not found:", err); // Log errors
+  });
 });
 
 // Start server
-app.listen(port, () => console.log(`Server running on port: ${port}`));
+app.listen(port, () => console.log(`Server running on port: ${port}`))
