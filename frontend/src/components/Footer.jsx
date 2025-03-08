@@ -172,8 +172,7 @@ const Footer = () => {
                 <FaMapMarkerAlt className="text-purple-400 mt-1" />
                 <div>
                   <p className="font-medium text-gray-200">Headquarters</p>
-                  <p className="text-gray-400 text-sm">123 Luxury Lane</p>
-                  <p className="text-gray-400 text-sm">Tech City, TX 75001</p>
+                  <p className="text-gray-400 text-sm">Abuja</p>
                 </div>
               </li>
               <li className="flex items-center gap-3">
@@ -182,7 +181,7 @@ const Footer = () => {
                   href="tel:+18888888888"
                   className="text-gray-300 hover:text-purple-400 transition-colors duration-200 text-sm"
                 >
-                  +1 (888) 888-8888
+                  +234 811 922 3162
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -191,7 +190,7 @@ const Footer = () => {
                   href="mailto:hello@bigx.com"
                   className="text-gray-300 hover:text-purple-400 transition-colors duration-200 text-sm"
                 >
-                  hello@bigx.com
+                  godwillokenyi@gmail.com
                 </a>
               </li>
             </ul>
@@ -204,7 +203,8 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} SHOPBUGIE. All rights reserved.
+              © {new Date().getFullYear()} Admire Excellence Tech. All rights
+              reserved.
             </p>
             <div className="flex items-center gap-4">
               {[
