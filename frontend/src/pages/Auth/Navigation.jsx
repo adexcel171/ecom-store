@@ -264,9 +264,10 @@ const Navigation = () => {
               </div>
             )}
           </div>
+
           {/* Navigation Items */}
           <nav className="p-4 space-y-2">
-            <div className="flex flex-col justify-end h-full">
+            <div className="flex flex-col space-y-2">
               <Link
                 to="/"
                 className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
@@ -292,6 +293,17 @@ const Navigation = () => {
                 Cart ({cartItems.reduce((a, c) => a + c.qty, 0)})
               </Link>
 
+              {/* Profile Link for All Users */}
+              {userInfo && (
+                <Link
+                  to="/profile"
+                  className="block p-2 text-right text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  Profile
+                </Link>
+              )}
+
+              {/* Admin Links */}
               {userInfo?.isAdmin && (
                 <div className="pt-4 mt-4 border-t border-gray-200">
                   <div className="text-sm font-medium text-gray-600 px-2 py-1 text-right">
@@ -318,6 +330,7 @@ const Navigation = () => {
                 </div>
               )}
 
+              {/* Logout Button */}
               {userInfo && (
                 <button
                   onClick={logoutHandler}

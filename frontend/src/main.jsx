@@ -3,8 +3,14 @@ import "./index.css";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { Route, RouterProvider, createRoutesFromElements } from "react-router";
+import {
+  Route,
+  RouterProvider,
+  createRoutesFromElements,
+  useLocation,
+} from "react-router";
 import { createBrowserRouter } from "react-router-dom";
+import { useEffect } from "react"; // Added for scroll restoration
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -39,6 +45,18 @@ import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 import PageNotFound from "./components/PageNotFound.jsx";
 import HeroSection from "./components/Hero.jsx";
 
+// ScrollToTop Component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on every route change
+  }, [pathname]);
+
+  return null;
+};
+
+// Define router
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -76,10 +94,13 @@ const router = createBrowserRouter(
   )
 );
 
+// Wrap RouterProvider with ScrollToTop
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PayPalScriptProvider>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+        <ScrollToTop /> {/* Add ScrollToTop here */}
+      </RouterProvider>
     </PayPalScriptProvider>
   </Provider>
 );

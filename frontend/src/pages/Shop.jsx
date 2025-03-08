@@ -117,122 +117,121 @@ const Shop = () => {
   }
 
   return (
-    <div className="mx-3 mt-[50px]">
-      {/* Filters Section */}
-      <div
-        className="w-full bg-white shadow-lg border-b mt-[70px] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-        data-aos="fade-down"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Search by Name */}
-            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
-              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
-                <span className="w-1 h-4 bg-red-500 rounded-full mr-2"></span>
-                Search by Name
-              </h2>
-              <div className="flex flex-col sm:flex-row gap-3 items-center">
+    <div className="mx-3 mt-[50px] flex flex-col lg:flex-row gap-6">
+      {/* Filters Section (Sidebar on Desktop, Inline on Mobile) */}
+      <div className="lg:w-1/4 bg-white lg:bg-gray-50 p-4 lg:p-6 rounded-lg shadow-md lg:shadow-lg">
+        {/* Search by Name */}
+        <div className="mb-4 lg:mb-6" data-aos="fade-right">
+          <h2 className="text-sm font-semibold text-gray-800 mb-2 flex items-center">
+            <span className="w-1 h-4 bg-purple-600 rounded-full mr-2"></span>
+            Search by Name
+          </h2>
+          <input
+            type="text"
+            placeholder="Enter product name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white transition-all duration-200"
+          />
+        </div>
+
+        {/* Categories Filter */}
+        <div
+          className="mb-4 lg:mb-6"
+          data-aos="fade-right"
+          data-aos-delay="100"
+        >
+          <h2 className="text-sm font-semibold text-gray-800 mb-2 flex items-center">
+            <span className="w-1 h-4 bg-purple-600 rounded-full mr-2"></span>
+            Categories
+          </h2>
+          <div className="grid grid-cols-2 gap-2 lg:space-y-2">
+            {categories?.map((c) => (
+              <div
+                key={c._id}
+                className="flex items-center bg-white lg:bg-gray-100 px-2 py-1 lg:px-3 lg:py-2 rounded-md shadow-sm hover:shadow-md transition-all duration-200"
+              >
                 <input
-                  type="text"
-                  placeholder="Enter product name"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white transition-all duration-200"
+                  type="checkbox"
+                  id={c._id}
+                  onChange={(e) => handleCheck(e.target.checked, c._id)}
+                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-2 focus:ring-purple-500 transition-all duration-200"
                 />
-              </div>
-            </div>
-
-            {/* Categories Filter */}
-            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
-              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
-                <span className="w-1 h-4 bg-blue-500 rounded-full mr-2"></span>
-                Categories
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {categories?.map((c, index) => (
-                  <div
-                    key={c._id}
-                    className="flex items-center bg-white px-3 py-2 rounded-md shadow-sm transition-all duration-200 hover:shadow-md"
-                    data-aos="fade-up"
-                    data-aos-delay={`${index * 50}`}
-                  >
-                    <input
-                      type="checkbox"
-                      id={c._id}
-                      onChange={(e) => handleCheck(e.target.checked, c._id)}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
-                    />
-                    <label
-                      htmlFor={c._id}
-                      className="ml-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
-                    >
-                      {c.name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Brands Filter */}
-            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
-              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
-                <span className="w-1 h-4 bg-green-500 rounded-full mr-2"></span>
-                Brands
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {uniqueBrands?.map((brand) => (
-                  <div
-                    key={brand}
-                    className="flex items-center bg-white px-3 py-2 rounded-md shadow-sm transition-all duration-200 hover:shadow-md"
-                  >
-                    <input
-                      type="radio"
-                      id={brand}
-                      name="brand"
-                      onChange={() => handleBrandClick(brand)}
-                      className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200"
-                    />
-                    <label
-                      htmlFor={brand}
-                      className="ml-2 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
-                    >
-                      {brand}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Price Filter */}
-            <div className="flex-1 bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:bg-gray-100">
-              <h2 className="text-sm font-semibold text-gray-800 mb-3 flex items-center">
-                <span className="w-1 h-4 bg-purple-500 rounded-full mr-2"></span>
-                Price
-              </h2>
-              <div className="flex flex-col sm:flex-row gap-3 items-center">
-                <input
-                  type="text"
-                  placeholder="Enter Price"
-                  value={priceFilter}
-                  onChange={handlePriceChange}
-                  className="w-full sm:w-[100px] px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white transition-all duration-200"
-                />
-                <button
-                  onClick={() => window.location.reload()}
-                  className="w-full sm:w-auto px-4 py-2 text-sm text-gray-600 bg-white border rounded-lg hover:bg-gray-50 hover:text-gray-900 active:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                <label
+                  htmlFor={c._id}
+                  className="ml-2 text-xs lg:text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none truncate"
                 >
-                  Reset
-                </button>
+                  {c.name}
+                </label>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Brands Filter */}
+        <div
+          className="mb-4 lg:mb-6"
+          data-aos="fade-right"
+          data-aos-delay="200"
+        >
+          <h2 className="text-sm font-semibold text-gray-800 mb-2 flex items-center">
+            <span className="w-1 h-4 bg-purple-600 rounded-full mr-2"></span>
+            Brands
+          </h2>
+          <div className="grid grid-cols-2 gap-2 lg:space-y-2">
+            {uniqueBrands?.map((brand) => (
+              <div
+                key={brand}
+                className="flex items-center bg-white lg:bg-gray-100 px-2 py-1 lg:px-3 lg:py-2 rounded-md shadow-sm hover:shadow-md transition-all duration-200"
+              >
+                <input
+                  type="radio"
+                  id={brand}
+                  name="brand"
+                  onChange={() => handleBrandClick(brand)}
+                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-purple-500 transition-all duration-200"
+                />
+                <label
+                  htmlFor={brand}
+                  className="ml-2 text-xs lg:text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none truncate"
+                >
+                  {brand}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Price Filter */}
+        <div data-aos="fade-right" data-aos-delay="300">
+          <h2 className="text-sm font-semibold text-gray-800 mb-2 flex items-center">
+            <span className="w-1 h-4 bg-purple-600 rounded-full mr-2"></span>
+            Price
+          </h2>
+          <div className="flex flex-col gap-2">
+            <input
+              type="text"
+              placeholder="Enter Price"
+              value={priceFilter}
+              onChange={handlePriceChange}
+              className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white transition-all duration-200"
+            />
+            <button
+              onClick={() => window.location.reload()}
+              className="w-full px-3 py-2 text-sm text-gray-600 bg-white border rounded-lg hover:bg-purple-50 hover:text-purple-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              Reset
+            </button>
           </div>
         </div>
       </div>
 
       {/* Products Section */}
-      <div className="p-3 mt-5" data-aos="fade-left">
-        <h2 className="h4 text-center mb-2">{products?.length} Products</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="flex-1 p-3 mt-5 lg:mt-0" data-aos="fade-left">
+        <h2 className="text-xl md:text-2xl font-semibold text-center mb-4 text-gray-900">
+          {products?.length} Products
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {products.length === 0 ? (
             <div className="col-span-full text-center py-8">
               <Loader />
@@ -240,7 +239,6 @@ const Shop = () => {
           ) : (
             products?.map((p, index) => (
               <div
-                className="p-3"
                 key={p._id}
                 data-aos="fade-up"
                 data-aos-delay={`${index * 100}`}
