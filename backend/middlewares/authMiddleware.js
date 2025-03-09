@@ -23,10 +23,18 @@ const authenticate = asyncHandler(async (req, res, next) => {
       throw new Error("Not authorized, token failed.");
     }
   } else {
-    console.log("No token found in cookies"); // Debug missing token
+    console.log("No open token found in cookies"); // Debug missing token
     res.status(401);
     throw new Error("Not authorized, no token.");
   }
 });
 
-export { authenticate };
+const authorizeAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).send("Not authorized as an admin.");
+  }
+};
+
+export { authenticate, authorizeAdmin };
