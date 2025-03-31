@@ -157,7 +157,7 @@ const ProductDetails = () => {
                   <select
                     value={qty}
                     onChange={(e) => setQty(e.target.value)}
-                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                    className="w-[150px] p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
                   >
                     {[...Array(product?.countInStock).keys()].map((x) => (
                       <option key={x + 1} value={x + 1}>
