@@ -172,7 +172,7 @@ const ProductDetails = () => {
               <button
                 onClick={addToCartHandler}
                 disabled={product?.countInStock === 0}
-                className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all ${
+                className={`w-[200px] py-4 px-6 rounded-xl font-semibold text-lg transition-all ${
                   product?.countInStock === 0
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white hover:shadow-lg"
