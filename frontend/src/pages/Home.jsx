@@ -43,7 +43,7 @@ const Home = () => {
     if (products.length === 0) return <Message>No products found</Message>;
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 justify-center mt-4 md:mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-2 justify-center mt-4 md:mt-8">
         {products.map((product, index) => (
           <div
             key={product._id}

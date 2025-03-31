@@ -23,7 +23,7 @@ const Product = memo(({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-[350px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[340px] mx-auto bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="w-full max-w-[350px] sm:max-w-[300px] md:max-w-[320px] lg:max-w-[350px] mx-auto bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
       {/* Image Container */}
       <div className="relative aspect-square group">
         <img

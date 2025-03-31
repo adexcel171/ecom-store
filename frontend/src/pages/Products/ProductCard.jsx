@@ -37,11 +37,11 @@ const ProductCard = ({ p }) => {
 
       {/* Product Details Section */}
       <div className="p-4 sm:p-5">
-        <div className="flex justify-between items-center mb-3 sm:mb-4">
-          <h5 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 line-clamp-1">
+        <div className="flex flex-col mb-3 sm:mb-4">
+          <h5 className="text-base sm:text-lg md:text-sm font-semibold text-gray-900">
             {p?.name}
           </h5>
-          <p className="font-semibold text-purple-600 text-sm sm:text-base md:text-lg">
+          <p className="font-semibold text-purple-600 text-xs sm:text-base md:text-lg mt-1">
             {p?.price?.toLocaleString("en-US", {
               style: "currency",
               currency: "NGN",
