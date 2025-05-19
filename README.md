@@ -188,7 +188,7 @@ License
 MIT License
 Contact
 
-GitHub: your-username
-Email: your-email@example.com
+GitHub: adexcel171
+Email: godswillokenyi@gmail.com
 
 
